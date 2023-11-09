@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import christmas.vo.Date;
 
 public class EventController {
 
@@ -14,6 +15,8 @@ public class EventController {
     }
 
     public void run() {
+        Integer day = inputView.inputDay();
+        Date date = new Date(day);
         
     }
 }
