@@ -25,4 +25,8 @@ public enum Menu {
     Menu(Map<String, Integer> food) {
         this.food = food;
     }
+
+    public Map<String, Integer> getFood() {
+        return food;
+    }
 }
