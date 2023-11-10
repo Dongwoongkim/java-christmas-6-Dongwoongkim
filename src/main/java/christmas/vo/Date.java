@@ -1,5 +1,8 @@
 package christmas.vo;
 
+import static christmas.model.EventInfo.END_EVENT_DAY;
+import static christmas.model.EventInfo.START_EVENT_DAY;
+
 import christmas.exception.DayDoesNotExistInCalendarException;
 
 public class Date {
@@ -21,17 +24,26 @@ public class Date {
     }
 
     private boolean isValidDay(Integer day) {
-        if (day >= START_OF_DAY && day <= END_OF_DAY) {
+        if (day >= START_EVENT_DAY.getValue() && day <= END_EVENT_DAY.getValue()) {
             return true;
         }
         return false;
     }
 
     public boolean isSpecialDay() {
-        if (day == 3 || day == 10 || day == 17 || day == 24 || day == 25 || day == 31) {
-            return true;
-        }
-        return false;
+        return isSunday() || isChristmasDay() || isEndDayOfEvent();
+    }
+
+    private boolean isEndDayOfEvent() {
+        return day == END_EVENT_DAY.getValue();
+    }
+
+    private boolean isChristmasDay() {
+        return day == 25;
+    }
+
+    private boolean isSunday() {
+        return day % 7 == 3;
     }
 
     public Integer getDay() {

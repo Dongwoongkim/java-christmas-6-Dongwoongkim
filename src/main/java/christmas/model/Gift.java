@@ -1,5 +1,7 @@
 package christmas.model;
 
+import static christmas.model.EventInfo.GIFT_REQUIREMENT_AMOUNT;
+
 public class Gift {
 
     private final String name;
@@ -9,7 +11,7 @@ public class Gift {
     }
 
     public static Gift createGift(Integer amount) {
-        if (amount >= 120000) {
+        if (amount >= GIFT_REQUIREMENT_AMOUNT.getValue()) {
             return new Gift("샴페인 1개");
         }
         return new Gift("없음");

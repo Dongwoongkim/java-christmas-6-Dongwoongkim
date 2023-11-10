@@ -5,12 +5,25 @@ import static christmas.model.DiscountInfo.PRESENT_DISCOUNT;
 import static christmas.model.DiscountInfo.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountInfo.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountInfo.WEEKEND_DISCOUNT;
+import static christmas.model.EventInfo.CHRISTMAS_DAY;
+import static christmas.model.EventInfo.ONE_DAY_DISCOUNT;
+import static christmas.model.EventInfo.SANTA_BADGE_REQUIREMENT_AMOUNT;
+import static christmas.model.EventInfo.SPECIAL_DISCOUNT_AMOUNT;
+import static christmas.model.EventInfo.START_DAY_DISCOUNT;
+import static christmas.model.EventInfo.STAR_BADGE_REQUIREMENT_AMOUNT;
+import static christmas.model.EventInfo.TREE_BADGE_REQUIREMENT_AMOUNT;
 
+import christmas.vo.Badge;
 import christmas.vo.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Discount {
+
+    private static final String SANTA_BADGE = "산타";
+    private static final String TREE_BADGE = "트리";
+    private static final String STAR_BADGE = "별";
+    private static final String NONE_BADGE = "없음";
 
     private final Map<String, Integer> discountInfo;
 
@@ -30,8 +43,9 @@ public class Discount {
             info.put(WEEKEND_DISCOUNT.getPolicy(), weekendDayDiscount);
         }
 
-        if (date.getDay() <= 25) {
-            info.put(D_DAY_DISCOUNT.getPolicy(), 900 + date.getDay() * 100);
+        if (date.getDay() <= CHRISTMAS_DAY.getValue()) {
+            info.put(D_DAY_DISCOUNT.getPolicy(),
+                    START_DAY_DISCOUNT.getValue() + date.getDay() * ONE_DAY_DISCOUNT.getValue());
         }
 
         if (isGetGift) {
@@ -39,7 +53,7 @@ public class Discount {
         }
 
         if (date.isSpecialDay()) {
-            info.put(SPECIAL_DISCOUNT.getPolicy(), 1000);
+            info.put(SPECIAL_DISCOUNT.getPolicy(), SPECIAL_DISCOUNT_AMOUNT.getValue());
         }
 
         return new Discount(info);
@@ -70,18 +84,18 @@ public class Discount {
                 + getSpecialDayDiscount();
     }
 
-    public String getBadge() {
+    public Badge getBadge() {
         Integer sumOfDiscount = getSumOfDiscount();
-        if (sumOfDiscount >= 20000) {
-            return "산타";
+        if (sumOfDiscount >= SANTA_BADGE_REQUIREMENT_AMOUNT.getValue()) {
+            return new Badge(SANTA_BADGE);
         }
-        if (sumOfDiscount >= 10000) {
-            return "트리";
+        if (sumOfDiscount >= TREE_BADGE_REQUIREMENT_AMOUNT.getValue()) {
+            return new Badge(TREE_BADGE);
         }
-        if (sumOfDiscount >= 5000) {
-            return "별";
+        if (sumOfDiscount >= STAR_BADGE_REQUIREMENT_AMOUNT.getValue()) {
+            return new Badge(STAR_BADGE);
         }
-        return "없음";
+        return new Badge(NONE_BADGE);
     }
 
     public Map<String, Integer> getDiscountInfo() {
