@@ -5,7 +5,6 @@ import christmas.util.Converter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.vo.Date;
-import java.util.List;
 import java.util.Map;
 
 public class EventController {
@@ -23,15 +22,14 @@ public class EventController {
         OrderMenu orderMenu = initOrderMenu();
     }
 
-    private OrderMenu initOrderMenu() {
-        String menu = inputView.inputMenu();
-        List<String> orderMenu = Converter.stringToStringListByDelimiter(menu);
-        Map<String, Integer> order = Converter.ListToMap(orderMenu);
-        return OrderMenu.createOrderMenu(order);
-    }
-
     private Date initDay() {
         Integer day = inputView.inputDay();
         return new Date(day);
+    }
+
+    private OrderMenu initOrderMenu() {
+        String menu = inputView.inputMenu();
+        Map<String, Integer> order = Converter.stringToMap(menu);
+        return OrderMenu.createOrderMenu(order);
     }
 }

@@ -1,7 +1,6 @@
 package christmas.util;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -10,21 +9,32 @@ public class Converter {
     private Converter() {
     }
 
-    public static List<String> stringToStringListByDelimiter(String menu) {
-        return Arrays.stream(menu.split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());
+    public static Map<String, Integer> stringToMap(String menu) {
+        try {
+            return splitAndMapping(menu);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 
-    public static Map<String, Integer> ListToMap(List<String> menu) {
-        return menu.stream()
+    private static Map<String, Integer> splitAndMapping(String menu) {
+        Map<String, Integer> foodMap = Arrays.stream(menu.split(","))
                 .map(item -> item.split("-"))
                 .collect(Collectors.toMap(
                         parts -> parts[0].trim(),
-                        parts -> Integer.parseInt(parts[1].trim()),
+                        parts -> getFoodCount(parts),
                         (existing, replacement) -> {
-                            throw new IllegalStateException("중복된 키가 발생했습니다: " + existing);
+                            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
                         }
                 ));
+        return foodMap;
+    }
+
+    private static int getFoodCount(String[] parts) {
+        try {
+            return Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 }

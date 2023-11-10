@@ -1,5 +1,6 @@
 package christmas.model;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class OrderMenu {
@@ -17,12 +18,39 @@ public class OrderMenu {
 
     private void validateOrderMenu(Map<String, Integer> order) {
         if (isContainZeroQuantity(order)) {
-            throw new IllegalArgumentException("메뉴의 수량에 0은 불가능 합니다.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
         if (isOverMaxQuantity(order)) {
-            throw new IllegalArgumentException("주문 수량의 총 합은 20 이하여야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
-        // TODO : Menu에 있는 음식인지 검증
+        if (!isContainMenu(order)) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (isContainOnlyDrink(order)) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private boolean isContainOnlyDrink(Map<String, Integer> order) {
+        return order.keySet()
+                .stream()
+                .allMatch(this::isDrink);
+    }
+
+    private boolean isDrink(String food) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getFood().containsKey(food)) {
+                return menu == Menu.DRINK;
+            }
+        }
+        return false;
+    }
+
+    private boolean isContainMenu(Map<String, Integer> order) {
+        return order.keySet()
+                .stream()
+                .allMatch(food -> Arrays.stream(Menu.values())
+                        .anyMatch(menu -> menu.getFood().containsKey(food)));
     }
 
     private boolean isOverMaxQuantity(Map<String, Integer> order) {
