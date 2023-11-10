@@ -38,7 +38,8 @@ public class EventController {
         outputView.printTotalBenefit(discount);
 
         // 할인 후 예상 결제 금액
-        outputView.printPayMoneyAfterDiscount();
+        outputView.printPayMoneyAfterDiscount(
+                orderMenu.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
 
         // 12월 이벤트 배지
         outputView.printBadge();

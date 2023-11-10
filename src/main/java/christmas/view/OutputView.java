@@ -40,12 +40,13 @@ public class OutputView {
 
     public void printTotalBenefit(Discount discount) {
         System.out.println("<총혜택 금액>");
-        System.out.println(String.format("-%,d원", discount.sumOfDiscount()));
+        System.out.println(String.format("-%,d원", discount.getSumOfDiscount()));
         System.out.println();
     }
 
-    public void printPayMoneyAfterDiscount() {
+    public void printPayMoneyAfterDiscount(Integer payAmount) {
         System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(String.format("%,d원", payAmount));
         System.out.println();
     }
 

@@ -59,7 +59,7 @@ public class Discount {
         return discountInfo.getOrDefault("증정 이벤트", 0);
     }
 
-    public Integer sumOfDiscount() {
+    public Integer getSumOfDiscount() {
         return getWeekdayDiscount() + getWeekendDayDiscount() + getGiftDiscount() + getDayDiscount()
                 + getSpecialDayDiscount();
     }
