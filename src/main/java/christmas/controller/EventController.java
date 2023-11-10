@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.Gift;
 import christmas.model.OrderMenu;
 import christmas.util.Converter;
 import christmas.view.InputView;
@@ -21,8 +22,29 @@ public class EventController {
         Date date = initDay();
         OrderMenu orderMenu = initOrderMenu();
         outputView.printPreviewEvent();
+
+        showReceipt(orderMenu);
+
+    }
+
+    private void showReceipt(OrderMenu orderMenu) {
         outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
 
+        // 증정메뉴
+        Gift gift = Gift.createGift(orderMenu.sumAmountOfOrder());
+        outputView.printServiceMenu(gift.getName());
+
+        // 혜택내역
+        outputView.printBenefit();
+
+        // 총혜택 금액
+        outputView.printTotalBenefit();
+
+        // 할인 후 예상 결제 금액
+        outputView.printPayMoneyAfterDiscount();
+
+        // 12월 이벤트 배지
+        outputView.printBadge();
     }
 
     private Date initDay() {

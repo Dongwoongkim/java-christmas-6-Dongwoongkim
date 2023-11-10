@@ -17,24 +17,30 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printServiceMenu() {
+    public void printServiceMenu(String giftName) {
         System.out.println("<증정 메뉴>");
+        System.out.println(giftName);
+        System.out.println();
     }
 
     public void printBenefit() {
         System.out.println("<혜택 내역>");
+        System.out.println();
     }
 
     public void printTotalBenefit() {
         System.out.println("<총혜택 금액>");
+        System.out.println();
     }
 
     public void printPayMoneyAfterDiscount() {
         System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println();
     }
 
     public void printBadge() {
         System.out.println("<12월 이벤트 배지>");
+        System.out.println();
     }
 
     public void printMessage(String message) {
