@@ -69,15 +69,16 @@ public class Discount {
         if (sumOfDiscount >= 20000) {
             return "산타";
         }
-
         if (sumOfDiscount >= 10000) {
             return "트리";
         }
-
         if (sumOfDiscount >= 5000) {
             return "별";
         }
-
         return "없음";
+    }
+
+    public Map<String, Integer> getDiscountInfo() {
+        return discountInfo;
     }
 }

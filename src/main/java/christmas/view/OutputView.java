@@ -32,11 +32,27 @@ public class OutputView {
 
     public void printBenefit(Discount discount) {
         System.out.println("<혜택 내역>");
-        System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discount.getDayDiscount()));
-        System.out.println(String.format("평일 할인 : -%,d원", discount.getWeekdayDiscount()));
-        System.out.println(String.format("주말 할인 : -%,d원", discount.getWeekendDayDiscount()));
-        System.out.println(String.format("특별 할인 : -%,d원", discount.getSpecialDayDiscount()));
-        System.out.println(String.format("증정 이벤트 : -%,d원", discount.getGiftDiscount()));
+
+        if (discount.getDayDiscount() != 0) {
+            System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discount.getDayDiscount()));
+        }
+        if (discount.getWeekdayDiscount() != 0) {
+            System.out.println(String.format("평일 할인 : -%,d원", discount.getWeekdayDiscount()));
+        }
+        if (discount.getWeekendDayDiscount() != 0) {
+            System.out.println(String.format("주말 할인 : -%,d원", discount.getWeekendDayDiscount()));
+        }
+        if (discount.getSpecialDayDiscount() != 0) {
+            System.out.println(String.format("특별 할인 : -%,d원", discount.getSpecialDayDiscount()));
+        }
+        if (discount.getGiftDiscount() != 0) {
+            System.out.println(String.format("증정 이벤트 : -%,d원", discount.getGiftDiscount()));
+        }
+
+        if (discount.getDiscountInfo().isEmpty()) {
+            System.out.println("없음");
+        }
+
         System.out.println();
     }
 
