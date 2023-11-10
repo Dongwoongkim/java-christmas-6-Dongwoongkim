@@ -4,6 +4,7 @@ import christmas.exception.AlreadyExistsInOrderException;
 import christmas.exception.InvalidOrderFormatException;
 import christmas.exception.OrderMenuCountNonNumericException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -24,8 +25,10 @@ public class Converter {
     }
 
     private static Map<String, Integer> splitAndMapping(String menu) {
-        Map<String, Integer> foodMap = Arrays.stream(menu.split(MENU_DELIMITER))
-                .map(item -> item.split(QUANTITY_DELIMITER))
+        List<String> foodsAndQuantity = Arrays.stream(menu.split(MENU_DELIMITER)).toList();
+
+        return foodsAndQuantity.stream()
+                .map(food -> food.split(QUANTITY_DELIMITER))
                 .collect(Collectors.toMap(
                         eachMenuAndCount -> getFood(eachMenuAndCount),
                         eachMenuAndCount -> getFoodCount(eachMenuAndCount),
@@ -33,7 +36,6 @@ public class Converter {
                             throw new AlreadyExistsInOrderException();
                         }
                 ));
-        return foodMap;
     }
 
     private static String getFood(String[] parts) {
