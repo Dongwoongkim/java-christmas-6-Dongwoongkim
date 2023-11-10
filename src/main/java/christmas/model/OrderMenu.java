@@ -1,5 +1,10 @@
 package christmas.model;
 
+import static christmas.model.EventInfo.GIFT_REQUIREMENT_AMOUNT;
+import static christmas.model.EventInfo.MAX_ORDER_QUANTITY;
+import static christmas.model.EventInfo.PRESENT_YEAR;
+import static christmas.model.Menu.MAIN;
+
 import christmas.exception.OnlyDrinkOrderException;
 import christmas.exception.OverMaxQuantityOrderException;
 import christmas.exception.ZeroQuantityOrderException;
@@ -59,7 +64,7 @@ public class OrderMenu {
 
     private boolean isOverMaxQuantity(Map<String, Integer> order) {
         int totalQuantity = order.values().stream().mapToInt(Integer::intValue).sum();
-        if (totalQuantity > 20) {
+        if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
             return true;
         }
         return false;
@@ -78,7 +83,7 @@ public class OrderMenu {
     }
 
     public boolean isGetGift() {
-        if (sumAmountOfOrder() >= 120000) {
+        if (sumAmountOfOrder() >= GIFT_REQUIREMENT_AMOUNT.getValue()) {
             return true;
         }
         return false;
@@ -91,7 +96,7 @@ public class OrderMenu {
                     .filter(entry -> Menu.DESSERT.getSalesMenu().containsKey(entry.getKey()))
                     .mapToInt(Map.Entry::getValue)
                     .sum();
-            return dessertCount * 2023;
+            return dessertCount * PRESENT_YEAR.getValue();
         }
         return 0;
     }
@@ -100,17 +105,17 @@ public class OrderMenu {
         Integer day = date.getDay();
         if (!isWeekDay(day)) {
             int mainCount = order.entrySet().stream()
-                    .filter(entry -> Menu.MAIN.getSalesMenu().containsKey(entry.getKey()))
+                    .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey()))
                     .mapToInt(Map.Entry::getValue)
                     .sum();
-            return mainCount * 2023;
+            return mainCount * PRESENT_YEAR.getValue();
         }
         return 0;
     }
 
     private boolean isWeekDay(Integer day) {
         return (day >= 3 && day <= 8) || (day >= 10 && day <= 15) || (day >= 17 && day <= 22) || (day >= 24
-                && day <= 29) || (day == 31);
+                && day <= 29) || day == 31;
     }
 
     public Map<String, Integer> getOrder() {

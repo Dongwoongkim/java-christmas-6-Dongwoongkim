@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.model.Discount;
 import christmas.model.OrderMenu;
 import christmas.util.Converter;
+import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.vo.Date;
@@ -21,6 +22,7 @@ public class EventController {
     public void run() {
         Date date = initDay();
         OrderMenu orderMenu = initOrderMenu();
+
         outputView.printPreviewEvent();
         outputView.printOrderMenu(orderMenu);
         outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
@@ -48,8 +50,9 @@ public class EventController {
     private Date initDay() {
         while (true) {
             try {
-                Integer day = inputView.inputDay();
-                return new Date(day);
+                String day = inputView.inputDay();
+                InputValidator.validateDay(day);
+                return new Date(Integer.valueOf(day));
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }
