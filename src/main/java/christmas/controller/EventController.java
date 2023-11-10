@@ -30,7 +30,7 @@ public class EventController {
         // 혜택내역
         Integer weekDayDiscount = orderMenu.getWeekDayDiscount(date);
         Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(date);
-        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount);
+        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, date.getDay());
         outputView.printBenefit(discount);
 
         // 총혜택 금액

@@ -29,6 +29,9 @@ public class OutputView {
         System.out.println("<혜택 내역>");
         System.out.println(String.format("평일 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("평일 할인", 0)));
         System.out.println(String.format("주말 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("주말 할인", 0)));
+        System.out.println(
+                String.format("크리스마스 디데이 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("크리스마스 디데이 할인", 0)));
+
         System.out.println();
     }
 
