@@ -30,17 +30,16 @@ public class OutputView {
 
     public void printBenefit(Discount discount) {
         System.out.println("<혜택 내역>");
-        System.out.println(String.format("평일 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("평일 할인", 0)));
-        System.out.println(String.format("주말 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("주말 할인", 0)));
-        System.out.println(
-                String.format("크리스마스 디데이 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("크리스마스 디데이 할인", 0)));
-
-        System.out.println(String.format("증정 이벤트 : -%,d원", discount.getDiscountInfo().getOrDefault("증정 이벤트", 0)));
+        System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discount.getDayDiscount()));
+        System.out.println(String.format("평일 할인 : -%,d원", discount.getWeekdayDiscount()));
+        System.out.println(String.format("주말 할인 : -%,d원", discount.getWeekendDayDiscount()));
+        System.out.println(String.format("증정 이벤트 : -%,d원", discount.getGiftDiscount()));
         System.out.println();
     }
 
-    public void printTotalBenefit() {
+    public void printTotalBenefit(Discount discount) {
         System.out.println("<총혜택 금액>");
+        System.out.println(String.format("-%,d원", discount.sumOfDiscount()));
         System.out.println();
     }
 

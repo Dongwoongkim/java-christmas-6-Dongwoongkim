@@ -35,8 +35,8 @@ public class EventController {
         outputView.printBenefit(discount);
 
         // 총혜택 금액
-        outputView.printTotalBenefit();
-
+        outputView.printTotalBenefit(discount);
+        
         // 할인 후 예상 결제 금액
         outputView.printPayMoneyAfterDiscount();
 
