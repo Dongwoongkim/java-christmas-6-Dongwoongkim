@@ -23,13 +23,25 @@ public class EventController {
     }
 
     private Date initDay() {
-        Integer day = inputView.inputDay();
-        return new Date(day);
+        while (true) {
+            try {
+                Integer day = inputView.inputDay();
+                return new Date(day);
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
 
     private OrderMenu initOrderMenu() {
-        String menu = inputView.inputMenu();
-        Map<String, Integer> order = Converter.stringToMap(menu);
-        return OrderMenu.createOrderMenu(order);
+        while (true) {
+            try {
+                String menu = inputView.inputMenu();
+                Map<String, Integer> order = Converter.stringToMap(menu);
+                return OrderMenu.createOrderMenu(order);
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
 }

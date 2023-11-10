@@ -55,7 +55,7 @@ public class OrderMenu {
 
     private boolean isOverMaxQuantity(Map<String, Integer> order) {
         int totalQuantity = order.values().stream().mapToInt(Integer::intValue).sum();
-        if (totalQuantity >= 20) {
+        if (totalQuantity > 20) {
             return true;
         }
         return false;
