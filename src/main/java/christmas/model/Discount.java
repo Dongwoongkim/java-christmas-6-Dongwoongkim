@@ -1,5 +1,11 @@
 package christmas.model;
 
+import static christmas.model.DiscountInfo.D_DAY_DISCOUNT;
+import static christmas.model.DiscountInfo.PRESENT_DISCOUNT;
+import static christmas.model.DiscountInfo.SPECIAL_DISCOUNT;
+import static christmas.model.DiscountInfo.WEEKDAY_DISCOUNT;
+import static christmas.model.DiscountInfo.WEEKEND_DISCOUNT;
+
 import christmas.vo.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,23 +23,23 @@ public class Discount {
         Map<String, Integer> info = new HashMap<>();
 
         if (weekDayDiscount != 0) {
-            info.put("평일 할인", weekDayDiscount);
+            info.put(WEEKDAY_DISCOUNT.getPolicy(), weekDayDiscount);
         }
 
         if (weekendDayDiscount != 0) {
-            info.put("주말 할인", weekendDayDiscount);
+            info.put(WEEKEND_DISCOUNT.getPolicy(), weekendDayDiscount);
         }
 
         if (date.getDay() <= 25) {
-            info.put("크리스마스 디데이 할인", 900 + date.getDay() * 100);
+            info.put(D_DAY_DISCOUNT.getPolicy(), 900 + date.getDay() * 100);
         }
 
         if (isGetGift) {
-            info.put("증정 이벤트", Menu.getChampagnePrice());
+            info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getChampagnePrice());
         }
 
         if (date.isSpecialDay()) {
-            info.put("특별 할인", 1000);
+            info.put(SPECIAL_DISCOUNT.getPolicy(), 1000);
         }
 
         return new Discount(info);

@@ -1,5 +1,7 @@
 package christmas.vo;
 
+import christmas.exception.DayDoesNotExistInCalendarException;
+
 public class Date {
 
     private static final Integer START_OF_DAY = 1;
@@ -14,7 +16,7 @@ public class Date {
 
     private void validate(Integer day) {
         if (!isValidDay(day)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new DayDoesNotExistInCalendarException();
         }
     }
 

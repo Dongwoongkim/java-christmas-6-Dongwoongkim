@@ -48,7 +48,6 @@ public class OutputView {
         if (discount.getGiftDiscount() != 0) {
             System.out.println(String.format("증정 이벤트 : -%,d원", discount.getGiftDiscount()));
         }
-
         if (discount.getDiscountInfo().isEmpty()) {
             System.out.println("없음");
         }

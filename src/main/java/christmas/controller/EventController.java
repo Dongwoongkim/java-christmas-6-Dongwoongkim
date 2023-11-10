@@ -25,7 +25,6 @@ public class EventController {
         outputView.printOrderMenu(orderMenu);
         outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
 
-        // 증정메뉴
         boolean getGift = orderMenu.isGetGift();
         outputView.printServiceMenu(getGift);
 
@@ -44,10 +43,6 @@ public class EventController {
 
         // 12월 이벤트 배지
         outputView.printBadge(discount);
-
-    }
-
-    private void showReceipt(OrderMenu orderMenu, Date date) {
     }
 
     private Date initDay() {

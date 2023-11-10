@@ -1,5 +1,8 @@
 package christmas.model;
 
+import christmas.exception.OnlyDrinkOrderException;
+import christmas.exception.OverMaxQuantityOrderException;
+import christmas.exception.ZeroQuantityOrderException;
 import christmas.vo.Date;
 import java.util.Arrays;
 import java.util.Map;
@@ -19,16 +22,16 @@ public class OrderMenu {
 
     private void validateOrderMenu(Map<String, Integer> order) {
         if (isContainZeroQuantity(order)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new ZeroQuantityOrderException();
         }
         if (isOverMaxQuantity(order)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new OverMaxQuantityOrderException();
         }
         if (!isContainMenu(order)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException();
         }
         if (isContainOnlyDrink(order)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new OnlyDrinkOrderException();
         }
     }
 
