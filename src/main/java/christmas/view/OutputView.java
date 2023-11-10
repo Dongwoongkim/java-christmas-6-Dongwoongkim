@@ -2,6 +2,8 @@ package christmas.view;
 
 import christmas.model.Discount;
 import christmas.model.Menu;
+import christmas.model.OrderMenu;
+import java.util.Map;
 
 public class OutputView {
 
@@ -57,5 +59,14 @@ public class OutputView {
 
     public void printMessage(String message) {
         System.out.println(message);
+    }
+
+    public void printOrderMenu(OrderMenu orderMenu) {
+        System.out.println("<주문 메뉴>");
+        Map<String, Integer> order = orderMenu.getOrder();
+        for (String food : order.keySet()) {
+            System.out.println(food + " " + order.get(food) + "개");
+        }
+        System.out.println();
     }
 }

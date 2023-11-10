@@ -10,9 +10,6 @@ public class OrderMenu {
 
     private OrderMenu(Map<String, Integer> order) {
         validateOrderMenu(order);
-        for (String s : order.keySet()) {
-            System.out.println(s + ":" + order.get(s));
-        }
         this.order = order;
     }
 
@@ -111,5 +108,9 @@ public class OrderMenu {
     private boolean isWeekDay(Integer day) {
         return (day >= 3 && day <= 8) || (day >= 10 && day <= 15) || (day >= 17 && day <= 22) || (day >= 24
                 && day <= 29) || (day == 31);
+    }
+
+    public Map<String, Integer> getOrder() {
+        return order;
     }
 }

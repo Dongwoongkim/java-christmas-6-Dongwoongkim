@@ -22,6 +22,7 @@ public class EventController {
         Date date = initDay();
         OrderMenu orderMenu = initOrderMenu();
         outputView.printPreviewEvent();
+        outputView.printOrderMenu(orderMenu);
         outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
 
         // 증정메뉴
