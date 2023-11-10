@@ -27,13 +27,17 @@ public class Converter {
         Map<String, Integer> foodMap = Arrays.stream(menu.split(MENU_DELIMITER))
                 .map(item -> item.split(QUANTITY_DELIMITER))
                 .collect(Collectors.toMap(
-                        parts -> parts[0].trim(),
-                        parts -> getFoodCount(parts),
+                        eachMenuAndCount -> getFood(eachMenuAndCount),
+                        eachMenuAndCount -> getFoodCount(eachMenuAndCount),
                         (existing, replacement) -> {
                             throw new AlreadyExistsInOrderException();
                         }
                 ));
         return foodMap;
+    }
+
+    private static String getFood(String[] parts) {
+        return parts[0].trim();
     }
 
     private static int getFoodCount(String[] parts) {
