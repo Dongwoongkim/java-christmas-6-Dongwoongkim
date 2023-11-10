@@ -42,7 +42,7 @@ public class EventController {
                 orderMenu.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
 
         // 12월 이벤트 배지
-        outputView.printBadge();
+        outputView.printBadge(discount);
 
     }
 

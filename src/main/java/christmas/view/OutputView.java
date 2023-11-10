@@ -50,9 +50,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printBadge() {
+    public void printBadge(Discount discount) {
         System.out.println("<12월 이벤트 배지>");
-        System.out.println();
+        System.out.println(discount.getBadge());
     }
 
     public void printMessage(String message) {

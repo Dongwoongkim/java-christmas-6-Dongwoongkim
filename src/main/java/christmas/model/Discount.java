@@ -63,4 +63,21 @@ public class Discount {
         return getWeekdayDiscount() + getWeekendDayDiscount() + getGiftDiscount() + getDayDiscount()
                 + getSpecialDayDiscount();
     }
+
+    public String getBadge() {
+        Integer sumOfDiscount = getSumOfDiscount();
+        if (sumOfDiscount >= 20000) {
+            return "산타";
+        }
+
+        if (sumOfDiscount >= 10000) {
+            return "트리";
+        }
+
+        if (sumOfDiscount >= 5000) {
+            return "별";
+        }
+
+        return "없음";
+    }
 }
