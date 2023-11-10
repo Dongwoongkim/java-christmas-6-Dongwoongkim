@@ -77,11 +77,11 @@ public class OrderMenu {
                 .sum();
     }
 
-    public String getGift() {
-        if (sumAmountOfOrder() >= 1200000) {
-            return "샴페인 1개";
+    public boolean isGetGift() {
+        if (sumAmountOfOrder() >= 120000) {
+            return true;
         }
-        return "없음";
+        return false;
     }
 
     public Integer getWeekDayDiscount(Date date) {

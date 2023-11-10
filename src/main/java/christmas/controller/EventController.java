@@ -25,12 +25,13 @@ public class EventController {
         outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
 
         // 증정메뉴
-        outputView.printServiceMenu(orderMenu.getGift());
+        boolean getGift = orderMenu.isGetGift();
+        outputView.printServiceMenu(getGift);
 
         // 혜택내역
         Integer weekDayDiscount = orderMenu.getWeekDayDiscount(date);
         Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(date);
-        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, date.getDay());
+        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, date.getDay(), getGift);
         outputView.printBenefit(discount);
 
         // 총혜택 금액

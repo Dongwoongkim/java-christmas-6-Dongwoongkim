@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.model.Discount;
+import christmas.model.Menu;
 
 public class OutputView {
 
@@ -19,9 +20,11 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printServiceMenu(String giftName) {
+    public void printServiceMenu(boolean isGetGift) {
         System.out.println("<증정 메뉴>");
-        System.out.println(giftName);
+        if (isGetGift) {
+            System.out.println(Menu.getChampagne() + " 1개");
+        }
         System.out.println();
     }
 
@@ -32,6 +35,7 @@ public class OutputView {
         System.out.println(
                 String.format("크리스마스 디데이 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("크리스마스 디데이 할인", 0)));
 
+        System.out.println(String.format("증정 이벤트 : -%,d원", discount.getDiscountInfo().getOrDefault("증정 이벤트", 0)));
         System.out.println();
     }
 

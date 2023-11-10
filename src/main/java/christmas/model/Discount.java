@@ -11,7 +11,8 @@ public class Discount {
         this.discountInfo = discountInfo;
     }
 
-    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, Integer day) {
+    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, Integer day,
+                                          boolean isGetGift) {
         Map<String, Integer> info = new HashMap<>();
         if (weekDayDiscount != 0) {
             info.put("평일 할인", weekDayDiscount);
@@ -23,6 +24,10 @@ public class Discount {
 
         if (day <= 25) {
             info.put("크리스마스 디데이 할인", 900 + day * 100);
+        }
+
+        if (isGetGift) {
+            info.put("증정 이벤트", Menu.getChampagnePrice());
         }
 
         return new Discount(info);

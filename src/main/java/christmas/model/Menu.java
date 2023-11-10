@@ -38,4 +38,12 @@ public enum Menu {
                 .map(menu -> menu.getSalesMenu().get(food))
                 .orElse(0);
     }
+
+    public static String getChampagne() {
+        return "샴페인";
+    }
+
+    public static int getChampagnePrice() {
+        return Menu.DRINK.getSalesMenu().get("샴페인");
+    }
 }
