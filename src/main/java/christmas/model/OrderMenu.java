@@ -1,5 +1,6 @@
 package christmas.model;
 
+import christmas.vo.Date;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -81,5 +82,35 @@ public class OrderMenu {
             return "샴페인 1개";
         }
         return "없음";
+    }
+
+    public Integer getWeekDayDiscount(Date date) {
+        Integer day = date.getDay();
+        if (isWeekDay(day)) {
+            int dessertCount = order.entrySet().stream()
+                    .filter(entry -> Menu.DESSERT.getSalesMenu().containsKey(entry.getKey()))
+                    .mapToInt(Map.Entry::getValue)
+                    .sum();
+            return dessertCount * 2023;
+        }
+        return 0;
+    }
+
+    public Integer getWeekendDayDiscount(Date date) {
+        Integer day = date.getDay();
+        if (!isWeekDay(day)) {
+            int mainCount = order.entrySet().stream()
+                    .filter(entry -> Menu.MAIN.getSalesMenu().containsKey(entry.getKey()))
+                    .mapToInt(Map.Entry::getValue)
+                    .sum();
+            return mainCount * 2023;
+        }
+        return 0;
+    }
+
+
+    private boolean isWeekDay(Integer day) {
+        return (day >= 3 && day <= 8) || (day >= 10 && day <= 15) || (day >= 17 && day <= 22) || (day >= 24
+                && day <= 29) || (day == 31);
     }
 }

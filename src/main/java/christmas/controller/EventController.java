@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.Discount;
 import christmas.model.OrderMenu;
 import christmas.util.Converter;
 import christmas.view.InputView;
@@ -27,8 +28,10 @@ public class EventController {
         outputView.printServiceMenu(orderMenu.getGift());
 
         // 혜택내역
-
-        outputView.printBenefit();
+        Integer weekDayDiscount = orderMenu.getWeekDayDiscount(date);
+        Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(date);
+        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount);
+        outputView.printBenefit(discount);
 
         // 총혜택 금액
         outputView.printTotalBenefit();

@@ -1,5 +1,7 @@
 package christmas.view;
 
+import christmas.model.Discount;
+
 public class OutputView {
 
     public void printMenu() {
@@ -23,8 +25,10 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printBenefit() {
+    public void printBenefit(Discount discount) {
         System.out.println("<혜택 내역>");
+        System.out.println(String.format("평일 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("평일 할인", 0)));
+        System.out.println(String.format("주말 할인 : -%,d원", discount.getDiscountInfo().getOrDefault("주말 할인", 0)));
         System.out.println();
     }
 
