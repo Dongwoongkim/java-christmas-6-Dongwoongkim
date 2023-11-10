@@ -108,7 +108,6 @@ public class OrderMenu {
         return 0;
     }
 
-
     private boolean isWeekDay(Integer day) {
         return (day >= 3 && day <= 8) || (day >= 10 && day <= 15) || (day >= 17 && day <= 22) || (day >= 24
                 && day <= 29) || (day == 31);

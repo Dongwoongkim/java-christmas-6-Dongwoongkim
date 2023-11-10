@@ -1,5 +1,6 @@
 package christmas.model;
 
+import christmas.vo.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class Discount {
         this.discountInfo = discountInfo;
     }
 
-    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, Integer day,
+    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, Date date,
                                           boolean isGetGift) {
         Map<String, Integer> info = new HashMap<>();
 
@@ -23,19 +24,19 @@ public class Discount {
             info.put("주말 할인", weekendDayDiscount);
         }
 
-        if (day <= 25) {
-            info.put("크리스마스 디데이 할인", 900 + day * 100);
+        if (date.getDay() <= 25) {
+            info.put("크리스마스 디데이 할인", 900 + date.getDay() * 100);
         }
 
         if (isGetGift) {
             info.put("증정 이벤트", Menu.getChampagnePrice());
         }
 
-        return new Discount(info);
-    }
+        if (date.isSpecialDay()) {
+            info.put("특별 할인", 1000);
+        }
 
-    public Map<String, Integer> getDiscountInfo() {
-        return discountInfo;
+        return new Discount(info);
     }
 
     public Integer getWeekdayDiscount() {
@@ -44,6 +45,10 @@ public class Discount {
 
     public Integer getWeekendDayDiscount() {
         return discountInfo.getOrDefault("주말 할인", 0);
+    }
+
+    public Integer getSpecialDayDiscount() {
+        return discountInfo.getOrDefault("특별 할인", 0);
     }
 
     public Integer getDayDiscount() {
@@ -55,6 +60,7 @@ public class Discount {
     }
 
     public Integer sumOfDiscount() {
-        return getWeekdayDiscount() + getWeekendDayDiscount() + getGiftDiscount() + getDayDiscount();
+        return getWeekdayDiscount() + getWeekendDayDiscount() + getGiftDiscount() + getDayDiscount()
+                + getSpecialDayDiscount();
     }
 }

@@ -33,6 +33,7 @@ public class OutputView {
         System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discount.getDayDiscount()));
         System.out.println(String.format("평일 할인 : -%,d원", discount.getWeekdayDiscount()));
         System.out.println(String.format("주말 할인 : -%,d원", discount.getWeekendDayDiscount()));
+        System.out.println(String.format("특별 할인 : -%,d원", discount.getSpecialDayDiscount()));
         System.out.println(String.format("증정 이벤트 : -%,d원", discount.getGiftDiscount()));
         System.out.println();
     }
