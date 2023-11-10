@@ -9,6 +9,9 @@ public class OrderMenu {
 
     private OrderMenu(Map<String, Integer> order) {
         validateOrderMenu(order);
+        for (String s : order.keySet()) {
+            System.out.println(s + ":" + order.get(s));
+        }
         this.order = order;
     }
 
@@ -71,5 +74,12 @@ public class OrderMenu {
         return order.keySet().stream()
                 .mapToInt(food -> Menu.getPriceOfFood(food) * order.get(food))
                 .sum();
+    }
+
+    public String getGift() {
+        if (sumAmountOfOrder() >= 1200000) {
+            return "샴페인 1개";
+        }
+        return "없음";
     }
 }
