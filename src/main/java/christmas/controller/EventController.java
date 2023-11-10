@@ -30,21 +30,17 @@ public class EventController {
         boolean getGift = orderMenu.isGetGift();
         outputView.printServiceMenu(getGift);
 
-        // 혜택내역
         Integer weekDayDiscount = orderMenu.getWeekDayDiscount(date);
         Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(date);
         Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, date, getGift);
         outputView.printBenefit(discount);
 
-        // 총혜택 금액
         outputView.printTotalBenefit(discount);
 
-        // 할인 후 예상 결제 금액
         outputView.printPayMoneyAfterDiscount(
                 orderMenu.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
-
-        // 12월 이벤트 배지
-        outputView.printBadge(discount);
+        
+        outputView.printBadge(discount.getBadge());
     }
 
     private Date initDay() {

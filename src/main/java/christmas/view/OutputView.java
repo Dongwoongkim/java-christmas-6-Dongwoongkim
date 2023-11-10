@@ -3,6 +3,7 @@ package christmas.view;
 import christmas.model.Discount;
 import christmas.model.Menu;
 import christmas.model.OrderMenu;
+import christmas.vo.Badge;
 import java.util.Map;
 
 public class OutputView {
@@ -67,9 +68,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printBadge(Discount discount) {
+    public void printBadge(Badge badge) {
         System.out.println("<12월 이벤트 배지>");
-        System.out.println(discount.getBadge());
+        System.out.println(badge.name());
     }
 
     public void printMessage(String message) {
