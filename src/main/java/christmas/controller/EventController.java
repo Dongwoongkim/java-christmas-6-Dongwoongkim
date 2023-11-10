@@ -20,6 +20,9 @@ public class EventController {
     public void run() {
         Date date = initDay();
         OrderMenu orderMenu = initOrderMenu();
+        outputView.printPreviewEvent();
+        outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
+
     }
 
     private Date initDay() {

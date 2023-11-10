@@ -1,5 +1,6 @@
 package christmas.model;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public enum Menu {
@@ -20,13 +21,21 @@ public enum Menu {
             "레드와인", 60000,
             "샴페인", 25000));
 
-    private final Map<String, Integer> food;
+    private final Map<String, Integer> salesMenu;
 
-    Menu(Map<String, Integer> food) {
-        this.food = food;
+    Menu(Map<String, Integer> salesMenu) {
+        this.salesMenu = salesMenu;
     }
 
-    public Map<String, Integer> getFood() {
-        return food;
+    public Map<String, Integer> getSalesMenu() {
+        return salesMenu;
+    }
+
+    public static int getPriceOfFood(String food) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getSalesMenu().containsKey(food))
+                .findFirst()
+                .map(menu -> menu.getSalesMenu().get(food))
+                .orElse(0);
     }
 }

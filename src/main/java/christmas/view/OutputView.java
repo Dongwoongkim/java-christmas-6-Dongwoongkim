@@ -6,8 +6,15 @@ public class OutputView {
         System.out.println("<주문 메뉴>");
     }
 
-    public void printBeforeDiscount() {
+    public void printPreviewEvent() {
+        System.out.println("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        System.out.println();
+    }
+
+    public void printBeforeDiscount(Integer price) {
         System.out.println("<할인 전 총주문 금액>");
+        System.out.println(String.format("%,d원", price));
+        System.out.println();
     }
 
     public void printServiceMenu() {

@@ -39,7 +39,7 @@ public class OrderMenu {
 
     private boolean isDrink(String food) {
         for (Menu menu : Menu.values()) {
-            if (menu.getFood().containsKey(food)) {
+            if (menu.getSalesMenu().containsKey(food)) {
                 return menu == Menu.DRINK;
             }
         }
@@ -50,7 +50,7 @@ public class OrderMenu {
         return order.keySet()
                 .stream()
                 .allMatch(food -> Arrays.stream(Menu.values())
-                        .anyMatch(menu -> menu.getFood().containsKey(food)));
+                        .anyMatch(menu -> menu.getSalesMenu().containsKey(food)));
     }
 
     private boolean isOverMaxQuantity(Map<String, Integer> order) {
@@ -65,5 +65,11 @@ public class OrderMenu {
         return order.values()
                 .stream()
                 .anyMatch(quantity -> quantity == 0);
+    }
+
+    public Integer sumAmountOfOrder() {
+        return order.keySet().stream()
+                .mapToInt(food -> Menu.getPriceOfFood(food) * order.get(food))
+                .sum();
     }
 }
