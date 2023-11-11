@@ -76,10 +76,7 @@ public class Discount {
     }
 
     public Integer getGiftDiscount() {
-        return discountInformation.values()
-                .stream()
-                .mapToInt(DiscountAmount::getAmount)
-                .sum();
+        return discountInformation.get(PRESENT_DISCOUNT).getAmount();
     }
 
     public Integer getSumOfDiscount() {
