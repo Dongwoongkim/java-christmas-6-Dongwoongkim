@@ -1,7 +1,6 @@
 package christmas.view;
 
 import christmas.model.DiscountPolicy;
-import christmas.vo.Badge;
 import christmas.vo.DiscountAmount;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
@@ -64,9 +63,9 @@ public class OutputView {
         printLine();
     }
 
-    public void printBadge(Badge badge) {
+    public void printBadge(String badgeName) {
         printMessage(DECEMBER_EVENT_BADGE_HEADER);
-        printMessage(badge.getName());
+        printMessage(badgeName);
     }
 
     public void printMessage(String message) {

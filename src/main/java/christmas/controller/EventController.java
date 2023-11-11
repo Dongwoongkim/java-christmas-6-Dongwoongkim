@@ -112,6 +112,6 @@ public class EventController {
     }
 
     private void showBadge(Badge badge) {
-        outputView.printBadge(badge);
+        outputView.printBadge(badge.getName());
     }
 }
