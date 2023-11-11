@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.Badge;
 import christmas.model.Discount;
 import christmas.model.DiscountPolicy;
 import christmas.model.Gift;
@@ -8,7 +9,6 @@ import christmas.util.Converter;
 import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import christmas.vo.Badge;
 import christmas.vo.DiscountAmount;
 import christmas.vo.Food;
 import christmas.vo.Quantity;

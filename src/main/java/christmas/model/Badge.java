@@ -1,4 +1,4 @@
-package christmas.vo;
+package christmas.model;
 
 import static christmas.model.EventInfo.SANTA_BADGE_REQUIREMENT_AMOUNT;
 import static christmas.model.EventInfo.STAR_BADGE_REQUIREMENT_AMOUNT;
