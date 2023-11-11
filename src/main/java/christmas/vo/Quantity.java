@@ -13,12 +13,12 @@ public class Quantity {
     }
 
     private void validate(Integer quantity) {
-        if (quantityIsZero(quantity)) {
+        if (isQuantityZero(quantity)) {
             throw new ZeroQuantityOrderException();
         }
     }
 
-    private boolean quantityIsZero(Integer quantity) {
+    private boolean isQuantityZero(Integer quantity) {
         return quantity == ZERO_QUANTITY;
     }
 

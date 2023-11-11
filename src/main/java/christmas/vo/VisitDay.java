@@ -9,6 +9,9 @@ import java.util.List;
 
 public class VisitDay {
 
+    private static final Integer WEEK_LENGTH = 7;
+    private static final Integer SUNDAY_MODULUS = 3;
+
     private static final List<Integer> WEEK_DAY = List.of(3, 4, 5, 6, 7, 8,
             10, 11, 12, 13, 14, 15,
             17, 18, 19, 20, 21, 22,
@@ -52,9 +55,9 @@ public class VisitDay {
     }
 
     private boolean isSunday() {
-        return day % 7 == 3;
+        return day % WEEK_LENGTH == SUNDAY_MODULUS;
     }
-
+    
     public Integer getDay() {
         return day;
     }

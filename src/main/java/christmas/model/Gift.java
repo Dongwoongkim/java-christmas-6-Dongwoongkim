@@ -19,7 +19,7 @@ public class Gift {
         return new Gift(NONE_GIFT);
     }
 
-    public boolean isExist() {
+    public boolean isReceived() {
         return !name.equals(NONE_GIFT);
     }
 

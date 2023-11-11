@@ -25,20 +25,21 @@ public class Discount {
     }
 
     public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount,
-                                          VisitDay visitDay, boolean isGiftGiven) {
+                                          VisitDay visitDay, boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
 
         putWeekDayDiscount(weekDayDiscount, discountInformation);
         putWeekendDayDiscount(weekendDayDiscount, discountInformation);
         putD_DayDiscount(visitDay, discountInformation);
         putSpecialDayDiscount(visitDay, discountInformation);
-        putGiftDiscount(isGiftGiven, discountInformation);
+        putGiftDiscount(isGiftReceived, discountInformation);
 
         return new Discount(discountInformation);
     }
 
-    private static void putGiftDiscount(boolean isGiftGiven, Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (isGiftGiven) {
+    private static void putGiftDiscount(boolean isGiftReceived,
+                                        Map<DiscountPolicy, DiscountAmount> discountInformation) {
+        if (isGiftReceived) {
             DiscountAmount discountAmount = new DiscountAmount(Menu.getGiftPrice());
             discountInformation.put(PRESENT_DISCOUNT, discountAmount);
         }
