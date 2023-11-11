@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.model.Discount;
+import christmas.model.DiscountPolicy;
 import christmas.model.Gift;
 import christmas.model.Order;
 import christmas.util.Converter;
@@ -8,6 +9,7 @@ import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.vo.Badge;
+import christmas.vo.DiscountAmount;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
 import christmas.vo.VisitDay;
@@ -83,23 +85,23 @@ public class EventController {
         outputView.printBeforeDiscount(order.getAmount());
         outputView.printServiceMenu(gift.getName());
 
-        showDiscountDetails(discount.getDiscountInfo());
+        showDiscountDetails(discount.getDiscountInformation());
 
         outputView.printTotalBenefit(discount.getSumOfDiscount());
         outputView.printPayMoneyAfterDiscount(order.getAmount() -
                 discount.getSumOfDiscount() + discount.getGiftDiscount());
     }
 
-    private void showDiscountDetails(Map<String, Integer> discountInfo) {
+    private void showDiscountDetails(Map<DiscountPolicy, DiscountAmount> discountInformation) {
         outputView.printBenefitHeader();
 
-        if (discountInfo.isEmpty()) {
+        if (discountInformation.isEmpty()) {
             outputView.printNone();
             outputView.printLine();
             return;
         }
 
-        discountInfo.forEach(outputView::printBenefit);
+        discountInformation.forEach(outputView::printBenefit);
         outputView.printLine();
     }
 

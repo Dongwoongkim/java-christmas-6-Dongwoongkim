@@ -1,6 +1,8 @@
 package christmas.view;
 
+import christmas.model.DiscountPolicy;
 import christmas.vo.Badge;
+import christmas.vo.DiscountAmount;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
 
@@ -46,8 +48,8 @@ public class OutputView {
         printMessage(BENEFIT_HEADER);
     }
 
-    public void printBenefit(String discountPolicy, Integer discountAmount) {
-        printMessage(String.format("%s : -%,d원", discountPolicy, discountAmount));
+    public void printBenefit(DiscountPolicy discountPolicy, DiscountAmount discountAmount) {
+        printMessage(String.format("%s : -%,d원", discountPolicy.getPolicy(), discountAmount.getAmount()));
     }
 
     public void printTotalBenefit(Integer discountAmount) {

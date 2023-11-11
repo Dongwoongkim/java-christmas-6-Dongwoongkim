@@ -1,6 +1,6 @@
 package christmas.model;
 
-public enum DiscountInfo {
+public enum DiscountPolicy {
 
     WEEKDAY_DISCOUNT("평일 할인"),
     WEEKEND_DISCOUNT("주말 할인"),
@@ -10,7 +10,7 @@ public enum DiscountInfo {
 
     private final String policy;
 
-    DiscountInfo(String policy) {
+    DiscountPolicy(String policy) {
         this.policy = policy;
     }
 

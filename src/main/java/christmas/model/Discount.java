@@ -1,67 +1,95 @@
 package christmas.model;
 
-import static christmas.model.DiscountInfo.D_DAY_DISCOUNT;
-import static christmas.model.DiscountInfo.PRESENT_DISCOUNT;
-import static christmas.model.DiscountInfo.SPECIAL_DISCOUNT;
-import static christmas.model.DiscountInfo.WEEKDAY_DISCOUNT;
-import static christmas.model.DiscountInfo.WEEKEND_DISCOUNT;
+import static christmas.model.DiscountPolicy.D_DAY_DISCOUNT;
+import static christmas.model.DiscountPolicy.PRESENT_DISCOUNT;
+import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
+import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
+import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
 import static christmas.model.EventInfo.CHRISTMAS_DAY;
 import static christmas.model.EventInfo.ONE_DAY_DISCOUNT;
 import static christmas.model.EventInfo.SPECIAL_DISCOUNT_AMOUNT;
 import static christmas.model.EventInfo.START_DAY_DISCOUNT;
 
+import christmas.vo.DiscountAmount;
 import christmas.vo.VisitDay;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Discount {
 
-    private final Map<String, Integer> discountInfo;
+    private final Map<DiscountPolicy, DiscountAmount> discountInformation;
 
-    public Discount(Map<String, Integer> discountInfo) {
-        this.discountInfo = discountInfo;
+    private Discount(Map<DiscountPolicy, DiscountAmount> discountInformation) {
+        this.discountInformation = discountInformation;
     }
 
     public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount,
                                           VisitDay visitDay, boolean isGiftGiven) {
-        Map<String, Integer> info = new HashMap<>();
+        Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
 
-        if (weekDayDiscount != 0) {
-            info.put(WEEKDAY_DISCOUNT.getPolicy(), weekDayDiscount);
-        }
+        putWeekDayDiscount(weekDayDiscount, discountInformation);
+        putWeekendDayDiscount(weekendDayDiscount, discountInformation);
+        putD_DayDiscount(visitDay, discountInformation);
+        putSpecialDayDiscount(visitDay, discountInformation);
+        putGiftDiscount(isGiftGiven, discountInformation);
 
-        if (weekendDayDiscount != 0) {
-            info.put(WEEKEND_DISCOUNT.getPolicy(), weekendDayDiscount);
-        }
+        return new Discount(discountInformation);
+    }
 
-        if (visitDay.getDay() <= CHRISTMAS_DAY.getValue()) {
-            info.put(D_DAY_DISCOUNT.getPolicy(),
-                    START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
-        }
-
-        if (visitDay.isSpecialDay()) {
-            info.put(SPECIAL_DISCOUNT.getPolicy(), SPECIAL_DISCOUNT_AMOUNT.getValue());
-        }
-
+    private static void putGiftDiscount(boolean isGiftGiven, Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (isGiftGiven) {
-            info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getGiftPrice());
+            DiscountAmount discountAmount = new DiscountAmount(Menu.getGiftPrice());
+            discountInformation.put(PRESENT_DISCOUNT, discountAmount);
         }
+    }
 
-        return new Discount(info);
+    private static void putSpecialDayDiscount(VisitDay visitDay,
+                                              Map<DiscountPolicy, DiscountAmount> discountInformation) {
+        if (visitDay.isSpecialDay()) {
+            DiscountAmount discountAmount = new DiscountAmount(SPECIAL_DISCOUNT_AMOUNT.getValue());
+            discountInformation.put(SPECIAL_DISCOUNT, discountAmount);
+        }
+    }
+
+    private static void putD_DayDiscount(VisitDay visitDay, Map<DiscountPolicy, DiscountAmount> discountInformation) {
+        if (visitDay.getDay() <= CHRISTMAS_DAY.getValue()) {
+            DiscountAmount discountAmount = new DiscountAmount(
+                    START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
+            discountInformation.put(D_DAY_DISCOUNT, discountAmount);
+        }
+    }
+
+    private static void putWeekendDayDiscount(Integer weekendDayDiscount,
+                                              Map<DiscountPolicy, DiscountAmount> discountInformation) {
+        if (weekendDayDiscount != 0) {
+            DiscountAmount discountAmount = new DiscountAmount(weekendDayDiscount);
+            discountInformation.put(WEEKEND_DISCOUNT, discountAmount);
+        }
+    }
+
+    private static void putWeekDayDiscount(Integer weekDayDiscount,
+                                           Map<DiscountPolicy, DiscountAmount> discountInformation) {
+        if (weekDayDiscount != 0) {
+            DiscountAmount discountAmount = new DiscountAmount(weekDayDiscount);
+            discountInformation.put(WEEKDAY_DISCOUNT, discountAmount);
+        }
     }
 
     public Integer getGiftDiscount() {
-        return discountInfo.getOrDefault(PRESENT_DISCOUNT.getPolicy(), 0);
-    }
-
-    public Integer getSumOfDiscount() {
-        return discountInfo.values()
+        return discountInformation.values()
                 .stream()
-                .mapToInt(Integer::intValue)
+                .mapToInt(DiscountAmount::getAmount)
                 .sum();
     }
 
-    public Map<String, Integer> getDiscountInfo() {
-        return discountInfo;
+    public Integer getSumOfDiscount() {
+        return discountInformation.values()
+                .stream()
+                .mapToInt(DiscountAmount::getAmount)
+                .sum();
+    }
+
+    public Map<DiscountPolicy, DiscountAmount> getDiscountInformation() {
+        return discountInformation;
     }
 }
