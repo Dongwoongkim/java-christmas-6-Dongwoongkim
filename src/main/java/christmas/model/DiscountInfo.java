@@ -17,4 +17,9 @@ public enum DiscountInfo {
     public String getPolicy() {
         return policy;
     }
+
+    @Override
+    public String toString() {
+        return policy;
+    }
 }

@@ -48,40 +48,18 @@ public class Discount {
                     START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
         }
 
-        if (isGetGift) {
-            info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getChampagnePrice());
-        }
-
         if (visitDay.isSpecialDay()) {
             info.put(SPECIAL_DISCOUNT.getPolicy(), SPECIAL_DISCOUNT_AMOUNT.getValue());
         }
 
+        if (isGetGift) {
+            info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getChampagnePrice());
+        }
         return new Discount(info);
     }
 
-    public Integer getWeekdayDiscount() {
-        return discountInfo.getOrDefault("평일 할인", 0);
-    }
-
-    public Integer getWeekendDayDiscount() {
-        return discountInfo.getOrDefault("주말 할인", 0);
-    }
-
-    public Integer getSpecialDayDiscount() {
-        return discountInfo.getOrDefault("특별 할인", 0);
-    }
-
-    public Integer getDayDiscount() {
-        return discountInfo.getOrDefault("크리스마스 디데이 할인", 0);
-    }
-
-    public Integer getGiftDiscount() {
-        return discountInfo.getOrDefault("증정 이벤트", 0);
-    }
-
     public Integer getSumOfDiscount() {
-        return getWeekdayDiscount() + getWeekendDayDiscount() + getGiftDiscount() + getDayDiscount()
-                + getSpecialDayDiscount();
+        return discountInfo.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public Badge getBadge() {

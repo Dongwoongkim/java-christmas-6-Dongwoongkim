@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import christmas.dto.DiscountDto;
+import christmas.dto.OrderDto;
 import christmas.model.Discount;
 import christmas.model.Order;
 import christmas.util.Converter;
@@ -24,24 +26,31 @@ public class EventController {
     public void run() {
         VisitDay visitDay = initDay();
         Order order = initOrderMenu();
-        boolean getGift = order.isGetGift();
-        Integer weekDayDiscount = order.getWeekDayDiscount(visitDay);
-        Integer weekendDayDiscount = order.getWeekendDayDiscount(visitDay);
-        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, visitDay, getGift);
 
-        showReceipt(order, discount, getGift);
+        boolean getGift = order.isGetGift();
+
+        Integer weekDayDiscountMoney = order.getWeekDayDiscountMoney(visitDay);
+        Integer weekendDayDiscountMoney = order.getWeekendDayDiscountMoney(visitDay);
+
+        Discount discount = Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, getGift);
+
+        OrderDto orderDto = OrderDto.create(order);
+        DiscountDto discountDto = DiscountDto.create(discount);
+
+        showReceipt(order, orderDto, discount, discountDto, getGift);
     }
 
-    private void showReceipt(Order order, Discount discount, boolean getGift) {
+    private void showReceipt(Order order, OrderDto orderDto, Discount discount, DiscountDto discountDto,
+                             boolean getGift) {
         outputView.printPreviewEvent();
-        outputView.printOrderMenu(order);
+        outputView.printOrderMenu(orderDto);
         outputView.printBeforeDiscount(order.sumAmountOfOrder());
         outputView.printServiceMenu(getGift);
-        outputView.printBenefit(discount);
-        outputView.printTotalBenefit(discount);
+        outputView.printBenefit(discountDto);
+        outputView.printTotalBenefit(discount.getSumOfDiscount());
         outputView.printPayMoneyAfterDiscount(
-                order.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
-        outputView.printBadge(discount.getBadge());
+                order.sumAmountOfOrder() - discount.getSumOfDiscount() + discountDto.getGiftDiscount());
+//        outputView.printBadge();
     }
 
     private VisitDay initDay() {

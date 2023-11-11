@@ -93,7 +93,7 @@ public class Order {
         return false;
     }
 
-    public Integer getWeekDayDiscount(VisitDay visitDay) {
+    public Integer getWeekDayDiscountMoney(VisitDay visitDay) {
         if (visitDay.isWeekDay()) {
             int dessertCount = order.entrySet().stream()
                     .filter(entry -> DESSERT.getSalesMenu().containsKey(entry.getKey().getName()))
@@ -104,7 +104,7 @@ public class Order {
         return 0;
     }
 
-    public Integer getWeekendDayDiscount(VisitDay visitDay) {
+    public Integer getWeekendDayDiscountMoney(VisitDay visitDay) {
         if (!visitDay.isWeekDay()) {
             int mainCount = order.entrySet().stream()
                     .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey().getName()))

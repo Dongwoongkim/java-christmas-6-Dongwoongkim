@@ -1,8 +1,8 @@
 package christmas.view;
 
-import christmas.model.Discount;
+import christmas.dto.DiscountDto;
+import christmas.dto.OrderDto;
 import christmas.model.Menu;
-import christmas.model.Order;
 import christmas.vo.Badge;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
@@ -33,34 +33,35 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printBenefit(Discount discount) {
+    public void printBenefit(DiscountDto discountDto) {
         System.out.println("<혜택 내역>");
+        
+        if (discountDto.getDayDiscount() != 0) {
+            System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discountDto.getDayDiscount()));
+        }
+        if (discountDto.getWeekdayDiscount() != 0) {
+            System.out.println(String.format("평일 할인 : -%,d원", discountDto.getWeekdayDiscount()));
+        }
+        if (discountDto.getWeekendDayDiscount() != 0) {
+            System.out.println(String.format("주말 할인 : -%,d원", discountDto.getWeekendDayDiscount()));
+        }
+        if (discountDto.getSpecialDayDiscount() != 0) {
+            System.out.println(String.format("특별 할인 : -%,d원", discountDto.getSpecialDayDiscount()));
+        }
+        if (discountDto.getGiftDiscount() != 0) {
+            System.out.println(String.format("증정 이벤트 : -%,d원", discountDto.getGiftDiscount()));
+        }
 
-        if (discount.getDayDiscount() != 0) {
-            System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discount.getDayDiscount()));
-        }
-        if (discount.getWeekdayDiscount() != 0) {
-            System.out.println(String.format("평일 할인 : -%,d원", discount.getWeekdayDiscount()));
-        }
-        if (discount.getWeekendDayDiscount() != 0) {
-            System.out.println(String.format("주말 할인 : -%,d원", discount.getWeekendDayDiscount()));
-        }
-        if (discount.getSpecialDayDiscount() != 0) {
-            System.out.println(String.format("특별 할인 : -%,d원", discount.getSpecialDayDiscount()));
-        }
-        if (discount.getGiftDiscount() != 0) {
-            System.out.println(String.format("증정 이벤트 : -%,d원", discount.getGiftDiscount()));
-        }
-        if (discount.getDiscountInfo().isEmpty()) {
+        if (discountDto.getDiscountInfo().isEmpty()) {
             System.out.println("없음");
         }
 
         System.out.println();
     }
 
-    public void printTotalBenefit(Discount discount) {
+    public void printTotalBenefit(Integer discountAmount) {
         System.out.println("<총혜택 금액>");
-        System.out.println(String.format("-%,d원", discount.getSumOfDiscount()));
+        System.out.println(String.format("-%,d원", discountAmount));
         System.out.println();
     }
 
@@ -79,9 +80,9 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printOrderMenu(Order orderMenu) {
+    public void printOrderMenu(OrderDto orderDto) {
         System.out.println("<주문 메뉴>");
-        Map<Food, Quantity> order = orderMenu.getOrder();
+        Map<Food, Quantity> order = orderDto.getOrder();
         for (Food food : order.keySet()) {
             System.out.println(food.getName() + " " + order.get(food).getQuantity() + "개");
         }
