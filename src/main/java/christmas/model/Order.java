@@ -38,23 +38,14 @@ public class Order {
     private boolean isContainOnlyDrink(Map<Food, Quantity> foodAndQuantity) {
         return foodAndQuantity.keySet()
                 .stream()
-                .allMatch(this::isDrink);
-    }
-
-    private boolean isDrink(Food food) {
-        for (Menu menu : Menu.values()) {
-            if (menu.getSalesMenu().containsKey(food.getName())) {
-                return menu == Menu.DRINK;
-            }
-        }
-        return false;
+                .allMatch(Food::isDrink);
     }
 
     private boolean isOrderOverMaxQuantity(Map<Food, Quantity> foodAndQuantity) {
         int totalQuantity = foodAndQuantity.values()
                 .stream()
                 .mapToInt(Quantity::getQuantity).sum();
-        
+
         if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
             return true;
         }
