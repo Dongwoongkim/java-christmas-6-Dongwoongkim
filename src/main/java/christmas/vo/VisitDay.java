@@ -2,6 +2,7 @@ package christmas.vo;
 
 import static christmas.model.EventInfo.CHRISTMAS_DAY;
 import static christmas.model.EventInfo.END_EVENT_DAY;
+import static christmas.model.EventInfo.START_EVENT_DAY;
 
 import christmas.exception.DayDoesNotExistInCalendarException;
 import java.util.List;
@@ -13,8 +14,6 @@ public class VisitDay {
             17, 18, 19, 20, 21, 22,
             24, 25, 26, 27, 28, 29,
             31);
-    private static final Integer START_OF_DAY = 1;
-    private static final Integer END_OF_DAY = 31;
 
     private final Integer day;
 
@@ -24,13 +23,13 @@ public class VisitDay {
     }
 
     private void validate(Integer day) {
-        if (!isInDecember(day)) {
+        if (!isInEventDay(day)) {
             throw new DayDoesNotExistInCalendarException();
         }
     }
 
-    private boolean isInDecember(Integer day) {
-        if (day >= START_OF_DAY && day <= END_OF_DAY) {
+    private boolean isInEventDay(Integer day) {
+        if (day >= START_EVENT_DAY.getValue() && day <= END_EVENT_DAY.getValue()) {
             return true;
         }
         return false;
