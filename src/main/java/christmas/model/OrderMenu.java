@@ -6,6 +6,7 @@ import static christmas.model.EventInfo.PRESENT_YEAR;
 import static christmas.model.Menu.MAIN;
 
 import christmas.exception.OnlyDrinkOrderException;
+import christmas.exception.OrderNotInMenuException;
 import christmas.exception.OverMaxQuantityOrderException;
 import christmas.exception.ZeroQuantityOrderException;
 import christmas.vo.Date;
@@ -32,8 +33,8 @@ public class OrderMenu {
         if (isOverMaxQuantity(order)) {
             throw new OverMaxQuantityOrderException();
         }
-        if (!isContainMenu(order)) {
-            throw new IllegalArgumentException();
+        if (!isContainInMenu(order)) {
+            throw new OrderNotInMenuException();
         }
         if (isContainOnlyDrink(order)) {
             throw new OnlyDrinkOrderException();
@@ -55,7 +56,7 @@ public class OrderMenu {
         return false;
     }
 
-    private boolean isContainMenu(Map<String, Integer> order) {
+    private boolean isContainInMenu(Map<String, Integer> order) {
         return order.keySet()
                 .stream()
                 .allMatch(food -> Arrays.stream(Menu.values())
