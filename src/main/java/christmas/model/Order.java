@@ -18,7 +18,7 @@ public class Order {
     private final Map<Food, Quantity> foodAndQuantity;
 
     private Order(Map<Food, Quantity> foodAndQuantity) {
-        validateOrderMenu(foodAndQuantity);
+        validate(foodAndQuantity);
         this.foodAndQuantity = foodAndQuantity;
     }
 
@@ -26,7 +26,7 @@ public class Order {
         return new Order(foodAndQuantity);
     }
 
-    private void validateOrderMenu(Map<Food, Quantity> foodAndQuantity) {
+    private void validate(Map<Food, Quantity> foodAndQuantity) {
         if (isOrderOverMaxQuantity(foodAndQuantity)) {
             throw new OverMaxQuantityOrderException();
         }

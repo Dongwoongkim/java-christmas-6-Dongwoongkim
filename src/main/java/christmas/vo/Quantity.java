@@ -8,11 +8,11 @@ public class Quantity {
     private final Integer quantity;
 
     public Quantity(Integer quantity) {
-        validateQuantity(quantity);
+        validate(quantity);
         this.quantity = quantity;
     }
 
-    private void validateQuantity(Integer quantity) {
+    private void validate(Integer quantity) {
         if (quantityIsZero(quantity)) {
             throw new ZeroQuantityOrderException();
         }

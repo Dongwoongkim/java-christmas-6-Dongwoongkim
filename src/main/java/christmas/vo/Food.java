@@ -11,11 +11,11 @@ public class Food {
     private final String name;
 
     public Food(String name) {
-        validateFood(name);
+        validate(name);
         this.name = name;
     }
 
-    private void validateFood(String name) {
+    private void validate(String name) {
         if (!isContainInMenu(name)) {
             throw new OrderNotInMenuException();
         }
