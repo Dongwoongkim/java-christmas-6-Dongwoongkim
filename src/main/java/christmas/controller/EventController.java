@@ -99,17 +99,13 @@ public class EventController {
             return;
         }
 
-        discountInfo.keySet()
-                .forEach(eachDiscountPolicy ->
-                        outputView.printBenefit(eachDiscountPolicy, discountInfo.get(eachDiscountPolicy)));
+        discountInfo.forEach(outputView::printBenefit);
         outputView.printLine();
     }
 
     private void showOrders(Map<Food, Quantity> foodAndQuantity) {
         outputView.printOrderHeader();
-        foodAndQuantity.keySet()
-                .forEach(eachFood ->
-                        outputView.printOrderMenu(eachFood, foodAndQuantity.get(eachFood)));
+        foodAndQuantity.forEach(outputView::printOrderMenu);
         outputView.printLine();
     }
 
