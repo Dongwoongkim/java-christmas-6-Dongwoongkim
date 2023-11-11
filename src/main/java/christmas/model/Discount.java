@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class Discount {
 
+    private static final Integer NO_DISCOUNT_AMOUNT = 0;
     private final Map<DiscountPolicy, DiscountAmount> discountInformation;
 
     private Discount(Map<DiscountPolicy, DiscountAmount> discountInformation) {
@@ -61,7 +62,7 @@ public class Discount {
 
     private static void putWeekendDayDiscount(Integer weekendDayDiscount,
                                               Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (weekendDayDiscount != 0) {
+        if (weekendDayDiscount != NO_DISCOUNT_AMOUNT) {
             DiscountAmount discountAmount = new DiscountAmount(weekendDayDiscount);
             discountInformation.put(WEEKEND_DISCOUNT, discountAmount);
         }
@@ -69,14 +70,14 @@ public class Discount {
 
     private static void putWeekDayDiscount(Integer weekDayDiscount,
                                            Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (weekDayDiscount != 0) {
+        if (weekDayDiscount != NO_DISCOUNT_AMOUNT) {
             DiscountAmount discountAmount = new DiscountAmount(weekDayDiscount);
             discountInformation.put(WEEKDAY_DISCOUNT, discountAmount);
         }
     }
 
     public Integer getGiftDiscount() {
-        return discountInformation.getOrDefault(PRESENT_DISCOUNT, new DiscountAmount(0)).getAmount();
+        return discountInformation.getOrDefault(PRESENT_DISCOUNT, new DiscountAmount(NO_DISCOUNT_AMOUNT)).getAmount();
     }
 
     public Integer getSumOfDiscount() {

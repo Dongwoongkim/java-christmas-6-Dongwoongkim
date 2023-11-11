@@ -32,25 +32,12 @@ public class EventController {
 
         Integer weekDayDiscountMoney = order.getWeekDayDiscountMoney(visitDay);
         Integer weekendDayDiscountMoney = order.getWeekendDayDiscountMoney(visitDay);
-        Discount discount = initDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, gift.isExist());
 
+        Discount discount = initDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, gift.isExist());
         Badge badge = initBadge(discount);
 
         showReceipt(order, discount, gift);
         showBadge(badge);
-    }
-
-    private Badge initBadge(Discount discount) {
-        return Badge.createBadge(discount.getSumOfDiscount());
-    }
-
-    private Gift initGift(Order order) {
-        return Gift.createGift(order.getAmount());
-    }
-
-    private Discount initDiscount(Integer weekDayDiscountMoney, Integer weekendDayDiscountMoney,
-                                  VisitDay visitDay, boolean isGiftGiven) {
-        return Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, isGiftGiven);
     }
 
     private VisitDay initVisitDay() {
@@ -75,6 +62,19 @@ public class EventController {
                 outputView.printMessage(e.getMessage());
             }
         }
+    }
+
+    private Gift initGift(Order order) {
+        return Gift.createGift(order.getAmount());
+    }
+
+    private Discount initDiscount(Integer weekDayDiscountMoney, Integer weekendDayDiscountMoney,
+                                  VisitDay visitDay, boolean isGiftGiven) {
+        return Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, isGiftGiven);
+    }
+
+    private Badge initBadge(Discount discount) {
+        return Badge.createBadge(discount.getSumOfDiscount());
     }
 
     private void showReceipt(Order order, Discount discount, Gift gift) {

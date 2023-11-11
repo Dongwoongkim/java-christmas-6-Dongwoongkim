@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class Order {
 
+    private static final Integer NO_DISCOUNT_AMOUNT = 0;
     private final Map<Food, Quantity> foodAndQuantity;
 
     private Order(Map<Food, Quantity> foodAndQuantity) {
@@ -65,7 +66,7 @@ public class Order {
                     .sum();
             return dessertQuantity * PRESENT_YEAR.getValue();
         }
-        return 0;
+        return NO_DISCOUNT_AMOUNT;
     }
 
     public Integer getWeekendDayDiscountMoney(VisitDay visitDay) {
@@ -76,7 +77,7 @@ public class Order {
                     .sum();
             return mainCount * PRESENT_YEAR.getValue();
         }
-        return 0;
+        return NO_DISCOUNT_AMOUNT;
     }
 
     public Map<Food, Quantity> getFoodAndQuantity() {
