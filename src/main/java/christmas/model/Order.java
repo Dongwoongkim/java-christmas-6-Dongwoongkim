@@ -1,6 +1,5 @@
 package christmas.model;
 
-import static christmas.model.EventInfo.GIFT_REQUIREMENT_AMOUNT;
 import static christmas.model.EventInfo.MAX_ORDER_QUANTITY;
 import static christmas.model.EventInfo.PRESENT_YEAR;
 import static christmas.model.Menu.DESSERT;
@@ -56,13 +55,6 @@ public class Order {
         return foodAndQuantity.keySet().stream()
                 .mapToInt(food -> Menu.getPriceOfFood(food) * foodAndQuantity.get(food).getQuantity())
                 .sum();
-    }
-
-    public boolean isGetGift() {
-        if (sumAmountOfOrder() >= GIFT_REQUIREMENT_AMOUNT.getValue()) {
-            return true;
-        }
-        return false;
     }
 
     public Integer getWeekDayDiscountMoney(VisitDay visitDay) {

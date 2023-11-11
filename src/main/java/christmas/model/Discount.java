@@ -31,8 +31,8 @@ public class Discount {
         this.discountInfo = discountInfo;
     }
 
-    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, VisitDay visitDay,
-                                          boolean isGetGift) {
+    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount,
+                                          VisitDay visitDay, Gift gift) {
         Map<String, Integer> info = new HashMap<>();
 
         if (weekDayDiscount != 0) {
@@ -52,9 +52,10 @@ public class Discount {
             info.put(SPECIAL_DISCOUNT.getPolicy(), SPECIAL_DISCOUNT_AMOUNT.getValue());
         }
 
-        if (isGetGift) {
+        if (!gift.isExist()) {
             info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getChampagnePrice());
         }
+        
         return new Discount(info);
     }
 
