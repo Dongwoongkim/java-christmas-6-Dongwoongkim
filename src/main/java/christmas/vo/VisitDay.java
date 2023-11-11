@@ -42,6 +42,10 @@ public class VisitDay {
         return WEEK_DAY.contains(day);
     }
 
+    public boolean isBeforeOrEqualsChristmas() {
+        return day <= CHRISTMAS_DAY.getValue();
+    }
+
     public boolean isSpecialDay() {
         return isSunday() || isChristmasDay() || isEndDayOfEvent();
     }
@@ -57,7 +61,7 @@ public class VisitDay {
     private boolean isSunday() {
         return day % WEEK_LENGTH == SUNDAY_MODULUS;
     }
-    
+
     public Integer getDay() {
         return day;
     }

@@ -5,7 +5,6 @@ import static christmas.model.DiscountPolicy.PRESENT_DISCOUNT;
 import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
-import static christmas.model.EventInfo.CHRISTMAS_DAY;
 import static christmas.model.EventInfo.ONE_DAY_DISCOUNT;
 import static christmas.model.EventInfo.SPECIAL_DISCOUNT_AMOUNT;
 import static christmas.model.EventInfo.START_DAY_DISCOUNT;
@@ -54,7 +53,7 @@ public class Discount {
     }
 
     private static void putD_DayDiscount(VisitDay visitDay, Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (visitDay.getDay() <= CHRISTMAS_DAY.getValue()) {
+        if (visitDay.isBeforeOrEqualsChristmas()) {
             DiscountAmount discountAmount = new DiscountAmount(
                     START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
             discountInformation.put(D_DAY_DISCOUNT, discountAmount);
