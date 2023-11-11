@@ -64,7 +64,7 @@ public class OutputView {
 
     public void printBadge(Badge badge) {
         printMessage(DECEMBER_EVENT_BADGE_HEADER);
-        printMessage(badge.name());
+        printMessage(badge.getName());
     }
 
     public void printMessage(String message) {

@@ -16,7 +16,7 @@ public class Badge {
     private Badge(String name) {
         this.name = name;
     }
-    
+
     public static Badge createBadge(Integer sumOfDiscount) {
         if (sumOfDiscount >= SANTA_BADGE_REQUIREMENT_AMOUNT.getValue()) {
             return new Badge(SANTA_BADGE);
@@ -30,7 +30,7 @@ public class Badge {
         return new Badge(NONE_BADGE);
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 }
