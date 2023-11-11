@@ -50,8 +50,15 @@ public class Discount {
         return new Discount(info);
     }
 
+    public Integer getGiftDiscount() {
+        return discountInfo.getOrDefault(PRESENT_DISCOUNT, 0);
+    }
+
     public Integer getSumOfDiscount() {
-        return discountInfo.values().stream().mapToInt(Integer::intValue).sum();
+        return discountInfo.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public Map<String, Integer> getDiscountInfo() {

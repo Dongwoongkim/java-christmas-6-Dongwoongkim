@@ -1,7 +1,5 @@
 package christmas.controller;
 
-import christmas.dto.DiscountDto;
-import christmas.dto.OrderDto;
 import christmas.model.Discount;
 import christmas.model.Gift;
 import christmas.model.Order;
@@ -26,23 +24,34 @@ public class EventController {
     }
 
     public void run() {
-        VisitDay visitDay = initDay();
-        Order order = initOrderMenu();
-        Gift gift = Gift.createGift(order.getAmount());
+        VisitDay visitDay = initVisitDay();
+        Order order = initOrder();
+        Gift gift = initGift(order);
 
         Integer weekDayDiscountMoney = order.getWeekDayDiscountMoney(visitDay);
         Integer weekendDayDiscountMoney = order.getWeekendDayDiscountMoney(visitDay);
-        Discount discount = Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, gift);
+        Discount discount = initDiscount(visitDay, gift, weekDayDiscountMoney, weekendDayDiscountMoney);
 
-        Badge badge = Badge.createBadge(discount.getSumOfDiscount());
+        Badge badge = initBadge(discount);
 
-        OrderDto orderDto = OrderDto.create(order);
-        DiscountDto discountDto = DiscountDto.create(discount);
-        showReceipt(order, orderDto, discount, discountDto, gift);
+        showReceipt(order, discount, gift);
         showBadge(badge);
     }
 
-    private VisitDay initDay() {
+    private Badge initBadge(Discount discount) {
+        return Badge.createBadge(discount.getSumOfDiscount());
+    }
+
+    private Gift initGift(Order order) {
+        return Gift.createGift(order.getAmount());
+    }
+
+    private Discount initDiscount(VisitDay visitDay, Gift gift, Integer weekDayDiscountMoney,
+                                  Integer weekendDayDiscountMoney) {
+        return Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, gift);
+    }
+
+    private VisitDay initVisitDay() {
         while (true) {
             try {
                 String day = inputView.inputDay();
@@ -54,7 +63,7 @@ public class EventController {
         }
     }
 
-    private Order initOrderMenu() {
+    private Order initOrder() {
         while (true) {
             try {
                 String menu = inputView.inputMenu();
@@ -66,20 +75,34 @@ public class EventController {
         }
     }
 
-    private void showReceipt(Order order, OrderDto orderDto, Discount discount, DiscountDto discountDto, Gift gift) {
+    private void showReceipt(Order order, Discount discount, Gift gift) {
         outputView.printPreviewEvent();
-        outputView.printOrderMenu(orderDto);
+
+        showOrders(order);
+
         outputView.printBeforeDiscount(order.getAmount());
         outputView.printServiceMenu(gift);
-        outputView.printBenefit(discountDto);
+
+        showDiscountDetails(discount.getDiscountInfo());
+
         outputView.printTotalBenefit(discount.getSumOfDiscount());
         outputView.printPayMoneyAfterDiscount(
-                order.getAmount() - discount.getSumOfDiscount() + discountDto.getGiftDiscount());
-//        outputView.printBadge();
+                order.getAmount() - discount.getSumOfDiscount() + discount.getGiftDiscount());
+    }
+
+    private void showDiscountDetails(Map<String, Integer> discountInfo) {
+        outputView.printBenefitHeader();
+        discountInfo.keySet()
+                .forEach(eachDiscount -> {
+                    outputView.printBenefit(eachDiscount, discountInfo.get(eachDiscount));
+                });
+    }
+
+    private void showOrders(Order order) {
+        outputView.printOrderMenu(order.getFoodAndQuantity());
     }
 
     private void showBadge(Badge badge) {
         outputView.printBadge(badge);
     }
-
 }

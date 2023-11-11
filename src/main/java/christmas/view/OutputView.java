@@ -1,7 +1,5 @@
 package christmas.view;
 
-import christmas.dto.DiscountDto;
-import christmas.dto.OrderDto;
 import christmas.model.Gift;
 import christmas.vo.Badge;
 import christmas.vo.Food;
@@ -27,30 +25,12 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printBenefit(DiscountDto discountDto) {
+    public void printBenefitHeader() {
         System.out.println("<혜택 내역>");
+    }
 
-        if (discountDto.getDayDiscount() != 0) {
-            System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discountDto.getDayDiscount()));
-        }
-        if (discountDto.getWeekdayDiscount() != 0) {
-            System.out.println(String.format("평일 할인 : -%,d원", discountDto.getWeekdayDiscount()));
-        }
-        if (discountDto.getWeekendDayDiscount() != 0) {
-            System.out.println(String.format("주말 할인 : -%,d원", discountDto.getWeekendDayDiscount()));
-        }
-        if (discountDto.getSpecialDayDiscount() != 0) {
-            System.out.println(String.format("특별 할인 : -%,d원", discountDto.getSpecialDayDiscount()));
-        }
-        if (discountDto.getGiftDiscount() != 0) {
-            System.out.println(String.format("증정 이벤트 : -%,d원", discountDto.getGiftDiscount()));
-        }
-
-        if (discountDto.getDiscountInfo().isEmpty()) {
-            System.out.println("없음");
-        }
-
-        System.out.println();
+    public void printBenefit(String discountPolicy, Integer discountAmount) {
+        System.out.println(String.format("%s : -%,d원", discountPolicy, discountAmount));
     }
 
     public void printTotalBenefit(Integer discountAmount) {
@@ -74,9 +54,8 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printOrderMenu(OrderDto orderDto) {
+    public void printOrderMenu(Map<Food, Quantity> foodAndQuantity) {
         System.out.println("<주문 메뉴>");
-        Map<Food, Quantity> foodAndQuantity = orderDto.getFoodAndQuantity();
         for (Food food : foodAndQuantity.keySet()) {
             System.out.println(food.getName() + " " + foodAndQuantity.get(food).getQuantity() + "개");
         }
