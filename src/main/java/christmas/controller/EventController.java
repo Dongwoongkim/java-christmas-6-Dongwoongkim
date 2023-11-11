@@ -27,7 +27,7 @@ public class EventController {
     public void run() {
         VisitDay visitDay = initDay();
         Order order = initOrderMenu();
-        Gift gift = Gift.createGift(order.sumAmountOfOrder());
+        Gift gift = Gift.createGift(order.getAmount());
 
         Integer weekDayDiscountMoney = order.getWeekDayDiscountMoney(visitDay);
         Integer weekendDayDiscountMoney = order.getWeekendDayDiscountMoney(visitDay);
@@ -41,12 +41,12 @@ public class EventController {
     private void showReceipt(Order order, OrderDto orderDto, Discount discount, DiscountDto discountDto, Gift gift) {
         outputView.printPreviewEvent();
         outputView.printOrderMenu(orderDto);
-        outputView.printBeforeDiscount(order.sumAmountOfOrder());
+        outputView.printBeforeDiscount(order.getAmount());
         outputView.printServiceMenu(gift);
         outputView.printBenefit(discountDto);
         outputView.printTotalBenefit(discount.getSumOfDiscount());
         outputView.printPayMoneyAfterDiscount(
-                order.sumAmountOfOrder() - discount.getSumOfDiscount() + discountDto.getGiftDiscount());
+                order.getAmount() - discount.getSumOfDiscount() + discountDto.getGiftDiscount());
 //        outputView.printBadge();
     }
 

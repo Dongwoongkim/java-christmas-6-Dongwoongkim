@@ -51,7 +51,7 @@ public class Order {
         return false;
     }
 
-    public Integer sumAmountOfOrder() {
+    public Integer getAmount() {
         return foodAndQuantity.keySet().stream()
                 .mapToInt(food -> Menu.getPriceOfFood(food) * foodAndQuantity.get(food).getQuantity())
                 .sum();

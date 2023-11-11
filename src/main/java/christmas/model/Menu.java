@@ -40,11 +40,7 @@ public enum Menu {
                 .orElse(0);
     }
 
-    public static String getChampagne() {
-        return "샴페인";
-    }
-
-    public static int getChampagnePrice() {
+    public static int getGiftPrice() {
         return Menu.DRINK.getSalesMenu().get("샴페인");
     }
 }

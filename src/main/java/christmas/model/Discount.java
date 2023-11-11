@@ -52,10 +52,10 @@ public class Discount {
             info.put(SPECIAL_DISCOUNT.getPolicy(), SPECIAL_DISCOUNT_AMOUNT.getValue());
         }
 
-        if (!gift.isExist()) {
-            info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getChampagnePrice());
+        if (gift.isExist()) {
+            info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getGiftPrice());
         }
-        
+
         return new Discount(info);
     }
 
