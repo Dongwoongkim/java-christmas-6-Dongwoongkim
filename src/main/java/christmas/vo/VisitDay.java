@@ -30,6 +30,11 @@ public class VisitDay {
         return false;
     }
 
+    public boolean isWeekDay() {
+        return (day >= 3 && day <= 8) || (day >= 10 && day <= 15) || (day >= 17 && day <= 22) || (day >= 24
+                && day <= 29) || day == 31;
+    }
+
     public boolean isSpecialDay() {
         return isSunday() || isChristmasDay() || isEndDayOfEvent();
     }

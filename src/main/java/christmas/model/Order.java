@@ -31,19 +31,15 @@ public class Order {
 
     private void validateOrderMenu(Map<Food, Quantity> order) {
         if (isContainZeroQuantity(order)) {
-            System.out.println("0?");
             throw new ZeroQuantityOrderException();
         }
         if (isOverMaxQuantity(order)) {
-            System.out.println("max?");
             throw new OverMaxQuantityOrderException();
         }
         if (!isContainInMenu(order)) {
-            System.out.println("not in menu");
             throw new OrderNotInMenuException();
         }
         if (isContainOnlyDrink(order)) {
-            System.out.println("only drink");
             throw new OnlyDrinkOrderException();
         }
     }
@@ -56,7 +52,7 @@ public class Order {
 
     private boolean isDrink(Food food) {
         for (Menu menu : Menu.values()) {
-            if (menu.getSalesMenu().containsKey(food)) {
+            if (menu.getSalesMenu().containsKey(food.getName())) {
                 return menu == Menu.DRINK;
             }
         }
@@ -98,8 +94,7 @@ public class Order {
     }
 
     public Integer getWeekDayDiscount(VisitDay visitDay) {
-        Integer day = visitDay.getDay();
-        if (isWeekDay(day)) {
+        if (visitDay.isWeekDay()) {
             int dessertCount = order.entrySet().stream()
                     .filter(entry -> DESSERT.getSalesMenu().containsKey(entry.getKey().getName()))
                     .mapToInt(entry -> entry.getValue().getQuantity())
@@ -110,8 +105,7 @@ public class Order {
     }
 
     public Integer getWeekendDayDiscount(VisitDay visitDay) {
-        Integer day = visitDay.getDay();
-        if (!isWeekDay(day)) {
+        if (!visitDay.isWeekDay()) {
             int mainCount = order.entrySet().stream()
                     .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey().getName()))
                     .mapToInt(entry -> entry.getValue().getQuantity())
@@ -119,11 +113,6 @@ public class Order {
             return mainCount * PRESENT_YEAR.getValue();
         }
         return 0;
-    }
-
-    private boolean isWeekDay(Integer day) {
-        return (day >= 3 && day <= 8) || (day >= 10 && day <= 15) || (day >= 17 && day <= 22) || (day >= 24
-                && day <= 29) || day == 31;
     }
 
     public Map<Food, Quantity> getOrder() {
