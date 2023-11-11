@@ -76,7 +76,7 @@ public class Discount {
     }
 
     public Integer getGiftDiscount() {
-        return discountInformation.get(PRESENT_DISCOUNT).getAmount();
+        return discountInformation.getOrDefault(PRESENT_DISCOUNT, new DiscountAmount(0)).getAmount();
     }
 
     public Integer getSumOfDiscount() {
