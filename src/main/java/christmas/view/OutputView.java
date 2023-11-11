@@ -35,7 +35,7 @@ public class OutputView {
 
     public void printBenefit(DiscountDto discountDto) {
         System.out.println("<혜택 내역>");
-        
+
         if (discountDto.getDayDiscount() != 0) {
             System.out.println(String.format("크리스마스 디데이 할인 : -%,d원", discountDto.getDayDiscount()));
         }
@@ -82,9 +82,9 @@ public class OutputView {
 
     public void printOrderMenu(OrderDto orderDto) {
         System.out.println("<주문 메뉴>");
-        Map<Food, Quantity> order = orderDto.getOrder();
-        for (Food food : order.keySet()) {
-            System.out.println(food.getName() + " " + order.get(food).getQuantity() + "개");
+        Map<Food, Quantity> foodAndQuantity = orderDto.getFoodAndQuantity();
+        for (Food food : foodAndQuantity.keySet()) {
+            System.out.println(food.getName() + " " + foodAndQuantity.get(food).getQuantity() + "개");
         }
         System.out.println();
     }

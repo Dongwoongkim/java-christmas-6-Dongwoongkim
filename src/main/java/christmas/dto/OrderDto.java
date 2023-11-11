@@ -7,17 +7,17 @@ import java.util.Map;
 
 public class OrderDto {
 
-    private final Map<Food, Quantity> order;
+    private final Map<Food, Quantity> foodAndQuantity;
 
-    private OrderDto(Map<Food, Quantity> order) {
-        this.order = order;
+    private OrderDto(Map<Food, Quantity> foodAndQuantity) {
+        this.foodAndQuantity = foodAndQuantity;
     }
 
     public static OrderDto create(Order order) {
-        return new OrderDto(order.getOrder());
+        return new OrderDto(order.getFoodAndQuantity());
     }
 
-    public Map<Food, Quantity> getOrder() {
-        return order;
+    public Map<Food, Quantity> getFoodAndQuantity() {
+        return foodAndQuantity;
     }
 }

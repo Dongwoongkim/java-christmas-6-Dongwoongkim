@@ -15,28 +15,28 @@ import java.util.Map;
 
 public class Order {
 
-    private final Map<Food, Quantity> order;
+    private final Map<Food, Quantity> foodAndQuantity;
 
-    private Order(Map<Food, Quantity> order) {
-        validateOrderMenu(order);
-        this.order = order;
+    private Order(Map<Food, Quantity> foodAndQuantity) {
+        validateOrderMenu(foodAndQuantity);
+        this.foodAndQuantity = foodAndQuantity;
     }
 
-    public static Order createOrderMenu(Map<Food, Quantity> order) {
-        return new Order(order);
+    public static Order createOrderMenu(Map<Food, Quantity> foodAndQuantity) {
+        return new Order(foodAndQuantity);
     }
 
-    private void validateOrderMenu(Map<Food, Quantity> order) {
-        if (isOrderOverMaxQuantity(order)) {
+    private void validateOrderMenu(Map<Food, Quantity> foodAndQuantity) {
+        if (isOrderOverMaxQuantity(foodAndQuantity)) {
             throw new OverMaxQuantityOrderException();
         }
-        if (isContainOnlyDrink(order)) {
+        if (isContainOnlyDrink(foodAndQuantity)) {
             throw new OnlyDrinkOrderException();
         }
     }
 
-    private boolean isContainOnlyDrink(Map<Food, Quantity> order) {
-        return order.keySet()
+    private boolean isContainOnlyDrink(Map<Food, Quantity> foodAndQuantity) {
+        return foodAndQuantity.keySet()
                 .stream()
                 .allMatch(this::isDrink);
     }
@@ -50,8 +50,11 @@ public class Order {
         return false;
     }
 
-    private boolean isOrderOverMaxQuantity(Map<Food, Quantity> order) {
-        int totalQuantity = order.values().stream().mapToInt(Quantity::getQuantity).sum();
+    private boolean isOrderOverMaxQuantity(Map<Food, Quantity> foodAndQuantity) {
+        int totalQuantity = foodAndQuantity.values()
+                .stream()
+                .mapToInt(Quantity::getQuantity).sum();
+        
         if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
             return true;
         }
@@ -59,8 +62,8 @@ public class Order {
     }
 
     public Integer sumAmountOfOrder() {
-        return order.keySet().stream()
-                .mapToInt(food -> Menu.getPriceOfFood(food) * order.get(food).getQuantity())
+        return foodAndQuantity.keySet().stream()
+                .mapToInt(food -> Menu.getPriceOfFood(food) * foodAndQuantity.get(food).getQuantity())
                 .sum();
     }
 
@@ -73,18 +76,18 @@ public class Order {
 
     public Integer getWeekDayDiscountMoney(VisitDay visitDay) {
         if (visitDay.isWeekDay()) {
-            int dessertCount = order.entrySet().stream()
+            int dessertQuantity = foodAndQuantity.entrySet().stream()
                     .filter(entry -> DESSERT.getSalesMenu().containsKey(entry.getKey().getName()))
                     .mapToInt(entry -> entry.getValue().getQuantity())
                     .sum();
-            return dessertCount * PRESENT_YEAR.getValue();
+            return dessertQuantity * PRESENT_YEAR.getValue();
         }
         return 0;
     }
 
     public Integer getWeekendDayDiscountMoney(VisitDay visitDay) {
         if (!visitDay.isWeekDay()) {
-            int mainCount = order.entrySet().stream()
+            int mainCount = foodAndQuantity.entrySet().stream()
                     .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey().getName()))
                     .mapToInt(entry -> entry.getValue().getQuantity())
                     .sum();
@@ -93,7 +96,7 @@ public class Order {
         return 0;
     }
 
-    public Map<Food, Quantity> getOrder() {
-        return order;
+    public Map<Food, Quantity> getFoodAndQuantity() {
+        return foodAndQuantity;
     }
 }

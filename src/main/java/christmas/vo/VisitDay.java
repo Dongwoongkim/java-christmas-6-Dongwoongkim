@@ -19,11 +19,11 @@ public class VisitDay {
     private final Integer day;
 
     public VisitDay(Integer day) {
-        validate(day);
+        validateDay(day);
         this.day = day;
     }
 
-    private void validate(Integer day) {
+    private void validateDay(Integer day) {
         if (!isInDecember(day)) {
             throw new DayDoesNotExistInCalendarException();
         }

@@ -20,7 +20,8 @@ public class Food {
     }
 
     private boolean isContainInMenu(String name) {
-        return Arrays.stream(Menu.values()).anyMatch(menu -> menu.getSalesMenu().containsKey(name));
+        return Arrays.stream(Menu.values())
+                .anyMatch(menu -> menu.getSalesMenu().containsKey(name));
     }
 
     public String getName() {
