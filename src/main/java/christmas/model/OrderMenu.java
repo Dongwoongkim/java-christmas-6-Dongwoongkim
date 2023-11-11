@@ -9,7 +9,7 @@ import christmas.exception.OnlyDrinkOrderException;
 import christmas.exception.OrderNotInMenuException;
 import christmas.exception.OverMaxQuantityOrderException;
 import christmas.exception.ZeroQuantityOrderException;
-import christmas.vo.Date;
+import christmas.vo.VisitDay;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -90,8 +90,8 @@ public class OrderMenu {
         return false;
     }
 
-    public Integer getWeekDayDiscount(Date date) {
-        Integer day = date.getDay();
+    public Integer getWeekDayDiscount(VisitDay visitDay) {
+        Integer day = visitDay.getDay();
         if (isWeekDay(day)) {
             int dessertCount = order.entrySet().stream()
                     .filter(entry -> Menu.DESSERT.getSalesMenu().containsKey(entry.getKey()))
@@ -102,8 +102,8 @@ public class OrderMenu {
         return 0;
     }
 
-    public Integer getWeekendDayDiscount(Date date) {
-        Integer day = date.getDay();
+    public Integer getWeekendDayDiscount(VisitDay visitDay) {
+        Integer day = visitDay.getDay();
         if (!isWeekDay(day)) {
             int mainCount = order.entrySet().stream()
                     .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey()))

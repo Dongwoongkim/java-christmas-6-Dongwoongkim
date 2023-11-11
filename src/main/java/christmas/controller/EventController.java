@@ -6,7 +6,7 @@ import christmas.util.Converter;
 import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import christmas.vo.Date;
+import christmas.vo.VisitDay;
 import java.util.Map;
 
 public class EventController {
@@ -20,12 +20,12 @@ public class EventController {
     }
 
     public void run() {
-        Date date = initDay();
+        VisitDay visitDay = initDay();
         OrderMenu orderMenu = initOrderMenu();
         boolean getGift = orderMenu.isGetGift();
-        Integer weekDayDiscount = orderMenu.getWeekDayDiscount(date);
-        Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(date);
-        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, date, getGift);
+        Integer weekDayDiscount = orderMenu.getWeekDayDiscount(visitDay);
+        Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(visitDay);
+        Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, visitDay, getGift);
 
         showReceipt(orderMenu, discount, getGift);
     }
@@ -42,12 +42,12 @@ public class EventController {
         outputView.printBadge(discount.getBadge());
     }
 
-    private Date initDay() {
+    private VisitDay initDay() {
         while (true) {
             try {
                 String day = inputView.inputDay();
                 InputValidator.validateDay(day);
-                return new Date(Integer.valueOf(day));
+                return new VisitDay(Integer.valueOf(day));
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }

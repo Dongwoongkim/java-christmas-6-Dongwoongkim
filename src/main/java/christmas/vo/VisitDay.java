@@ -5,14 +5,14 @@ import static christmas.model.EventInfo.START_EVENT_DAY;
 
 import christmas.exception.DayDoesNotExistInCalendarException;
 
-public class Date {
+public class VisitDay {
 
     private static final Integer START_OF_DAY = 1;
     private static final Integer END_OF_DAY = 31;
 
     private final Integer day;
 
-    public Date(Integer day) {
+    public VisitDay(Integer day) {
         validate(day);
         this.day = day;
     }

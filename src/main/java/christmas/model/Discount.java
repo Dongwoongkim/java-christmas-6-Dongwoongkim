@@ -14,7 +14,7 @@ import static christmas.model.EventInfo.STAR_BADGE_REQUIREMENT_AMOUNT;
 import static christmas.model.EventInfo.TREE_BADGE_REQUIREMENT_AMOUNT;
 
 import christmas.vo.Badge;
-import christmas.vo.Date;
+import christmas.vo.VisitDay;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class Discount {
         this.discountInfo = discountInfo;
     }
 
-    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, Date date,
+    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount, VisitDay visitDay,
                                           boolean isGetGift) {
         Map<String, Integer> info = new HashMap<>();
 
@@ -43,16 +43,16 @@ public class Discount {
             info.put(WEEKEND_DISCOUNT.getPolicy(), weekendDayDiscount);
         }
 
-        if (date.getDay() <= CHRISTMAS_DAY.getValue()) {
+        if (visitDay.getDay() <= CHRISTMAS_DAY.getValue()) {
             info.put(D_DAY_DISCOUNT.getPolicy(),
-                    START_DAY_DISCOUNT.getValue() + date.getDay() * ONE_DAY_DISCOUNT.getValue());
+                    START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
         }
 
         if (isGetGift) {
             info.put(PRESENT_DISCOUNT.getPolicy(), Menu.getChampagnePrice());
         }
 
-        if (date.isSpecialDay()) {
+        if (visitDay.isSpecialDay()) {
             info.put(SPECIAL_DISCOUNT.getPolicy(), SPECIAL_DISCOUNT_AMOUNT.getValue());
         }
 

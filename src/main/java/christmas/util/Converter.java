@@ -25,7 +25,7 @@ public class Converter {
     }
 
     private static Map<String, Integer> splitAndMapping(String menu) {
-        List<String> foodsAndQuantity = Arrays.stream(menu.split(MENU_DELIMITER)).toList();
+        List<String> foodsAndQuantity = stringToListByDelimiter(menu);
 
         return foodsAndQuantity.stream()
                 .map(food -> food.split(QUANTITY_DELIMITER))
@@ -36,6 +36,10 @@ public class Converter {
                             throw new AlreadyExistsInOrderException();
                         }
                 ));
+    }
+
+    private static List<String> stringToListByDelimiter(String menu) {
+        return Arrays.stream(menu.split(MENU_DELIMITER)).toList();
     }
 
     private static String getFood(String[] parts) {
