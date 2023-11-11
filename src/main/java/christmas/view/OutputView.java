@@ -2,8 +2,10 @@ package christmas.view;
 
 import christmas.model.Discount;
 import christmas.model.Menu;
-import christmas.model.OrderMenu;
+import christmas.model.Order;
 import christmas.vo.Badge;
+import christmas.vo.Food;
+import christmas.vo.Quantity;
 import java.util.Map;
 
 public class OutputView {
@@ -77,11 +79,11 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printOrderMenu(OrderMenu orderMenu) {
+    public void printOrderMenu(Order orderMenu) {
         System.out.println("<주문 메뉴>");
-        Map<String, Integer> order = orderMenu.getOrder();
-        for (String food : order.keySet()) {
-            System.out.println(food + " " + order.get(food) + "개");
+        Map<Food, Quantity> order = orderMenu.getOrder();
+        for (Food food : order.keySet()) {
+            System.out.println(food.getName() + " " + order.get(food).getQuantity() + "개");
         }
         System.out.println();
     }

@@ -1,11 +1,13 @@
 package christmas.controller;
 
 import christmas.model.Discount;
-import christmas.model.OrderMenu;
+import christmas.model.Order;
 import christmas.util.Converter;
 import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import christmas.vo.Food;
+import christmas.vo.Quantity;
 import christmas.vo.VisitDay;
 import java.util.Map;
 
@@ -21,24 +23,24 @@ public class EventController {
 
     public void run() {
         VisitDay visitDay = initDay();
-        OrderMenu orderMenu = initOrderMenu();
-        boolean getGift = orderMenu.isGetGift();
-        Integer weekDayDiscount = orderMenu.getWeekDayDiscount(visitDay);
-        Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(visitDay);
+        Order order = initOrderMenu();
+        boolean getGift = order.isGetGift();
+        Integer weekDayDiscount = order.getWeekDayDiscount(visitDay);
+        Integer weekendDayDiscount = order.getWeekendDayDiscount(visitDay);
         Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, visitDay, getGift);
 
-        showReceipt(orderMenu, discount, getGift);
+        showReceipt(order, discount, getGift);
     }
 
-    private void showReceipt(OrderMenu orderMenu, Discount discount, boolean getGift) {
+    private void showReceipt(Order order, Discount discount, boolean getGift) {
         outputView.printPreviewEvent();
-        outputView.printOrderMenu(orderMenu);
-        outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
+        outputView.printOrderMenu(order);
+        outputView.printBeforeDiscount(order.sumAmountOfOrder());
         outputView.printServiceMenu(getGift);
         outputView.printBenefit(discount);
         outputView.printTotalBenefit(discount);
         outputView.printPayMoneyAfterDiscount(
-                orderMenu.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
+                order.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
         outputView.printBadge(discount.getBadge());
     }
 
@@ -54,12 +56,12 @@ public class EventController {
         }
     }
 
-    private OrderMenu initOrderMenu() {
+    private Order initOrderMenu() {
         while (true) {
             try {
                 String menu = inputView.inputMenu();
-                Map<String, Integer> order = Converter.stringToMap(menu);
-                return OrderMenu.createOrderMenu(order);
+                Map<Food, Quantity> order = Converter.stringToMap(menu);
+                return Order.createOrderMenu(order);
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }

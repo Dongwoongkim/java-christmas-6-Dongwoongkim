@@ -3,51 +3,58 @@ package christmas.model;
 import static christmas.model.EventInfo.GIFT_REQUIREMENT_AMOUNT;
 import static christmas.model.EventInfo.MAX_ORDER_QUANTITY;
 import static christmas.model.EventInfo.PRESENT_YEAR;
+import static christmas.model.Menu.DESSERT;
 import static christmas.model.Menu.MAIN;
 
 import christmas.exception.OnlyDrinkOrderException;
 import christmas.exception.OrderNotInMenuException;
 import christmas.exception.OverMaxQuantityOrderException;
 import christmas.exception.ZeroQuantityOrderException;
+import christmas.vo.Food;
+import christmas.vo.Quantity;
 import christmas.vo.VisitDay;
 import java.util.Arrays;
 import java.util.Map;
 
-public class OrderMenu {
+public class Order {
 
-    private final Map<String, Integer> order;
+    private final Map<Food, Quantity> order;
 
-    private OrderMenu(Map<String, Integer> order) {
+    private Order(Map<Food, Quantity> order) {
         validateOrderMenu(order);
         this.order = order;
     }
 
-    public static OrderMenu createOrderMenu(Map<String, Integer> order) {
-        return new OrderMenu(order);
+    public static Order createOrderMenu(Map<Food, Quantity> order) {
+        return new Order(order);
     }
 
-    private void validateOrderMenu(Map<String, Integer> order) {
+    private void validateOrderMenu(Map<Food, Quantity> order) {
         if (isContainZeroQuantity(order)) {
+            System.out.println("0?");
             throw new ZeroQuantityOrderException();
         }
         if (isOverMaxQuantity(order)) {
+            System.out.println("max?");
             throw new OverMaxQuantityOrderException();
         }
         if (!isContainInMenu(order)) {
+            System.out.println("not in menu");
             throw new OrderNotInMenuException();
         }
         if (isContainOnlyDrink(order)) {
+            System.out.println("only drink");
             throw new OnlyDrinkOrderException();
         }
     }
 
-    private boolean isContainOnlyDrink(Map<String, Integer> order) {
+    private boolean isContainOnlyDrink(Map<Food, Quantity> order) {
         return order.keySet()
                 .stream()
                 .allMatch(this::isDrink);
     }
 
-    private boolean isDrink(String food) {
+    private boolean isDrink(Food food) {
         for (Menu menu : Menu.values()) {
             if (menu.getSalesMenu().containsKey(food)) {
                 return menu == Menu.DRINK;
@@ -56,30 +63,30 @@ public class OrderMenu {
         return false;
     }
 
-    private boolean isContainInMenu(Map<String, Integer> order) {
+    private boolean isContainInMenu(Map<Food, Quantity> order) {
         return order.keySet()
                 .stream()
                 .allMatch(food -> Arrays.stream(Menu.values())
-                        .anyMatch(menu -> menu.getSalesMenu().containsKey(food)));
+                        .anyMatch(menu -> menu.getSalesMenu().containsKey(food.getName())));
     }
 
-    private boolean isOverMaxQuantity(Map<String, Integer> order) {
-        int totalQuantity = order.values().stream().mapToInt(Integer::intValue).sum();
+    private boolean isOverMaxQuantity(Map<Food, Quantity> order) {
+        int totalQuantity = order.values().stream().mapToInt(Quantity::getQuantity).sum();
         if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
             return true;
         }
         return false;
     }
 
-    private boolean isContainZeroQuantity(Map<String, Integer> order) {
+    private boolean isContainZeroQuantity(Map<Food, Quantity> order) {
         return order.values()
                 .stream()
-                .anyMatch(quantity -> quantity == 0);
+                .anyMatch(quantity -> quantity.getQuantity() == 0);
     }
 
     public Integer sumAmountOfOrder() {
         return order.keySet().stream()
-                .mapToInt(food -> Menu.getPriceOfFood(food) * order.get(food))
+                .mapToInt(food -> Menu.getPriceOfFood(food) * order.get(food).getQuantity())
                 .sum();
     }
 
@@ -94,8 +101,8 @@ public class OrderMenu {
         Integer day = visitDay.getDay();
         if (isWeekDay(day)) {
             int dessertCount = order.entrySet().stream()
-                    .filter(entry -> Menu.DESSERT.getSalesMenu().containsKey(entry.getKey()))
-                    .mapToInt(Map.Entry::getValue)
+                    .filter(entry -> DESSERT.getSalesMenu().containsKey(entry.getKey().getName()))
+                    .mapToInt(entry -> entry.getValue().getQuantity())
                     .sum();
             return dessertCount * PRESENT_YEAR.getValue();
         }
@@ -106,8 +113,8 @@ public class OrderMenu {
         Integer day = visitDay.getDay();
         if (!isWeekDay(day)) {
             int mainCount = order.entrySet().stream()
-                    .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey()))
-                    .mapToInt(Map.Entry::getValue)
+                    .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey().getName()))
+                    .mapToInt(entry -> entry.getValue().getQuantity())
                     .sum();
             return mainCount * PRESENT_YEAR.getValue();
         }
@@ -119,7 +126,7 @@ public class OrderMenu {
                 && day <= 29) || day == 31;
     }
 
-    public Map<String, Integer> getOrder() {
+    public Map<Food, Quantity> getOrder() {
         return order;
     }
 }
