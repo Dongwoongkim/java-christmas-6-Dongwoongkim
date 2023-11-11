@@ -32,7 +32,7 @@ public class EventController {
 
         Integer weekDayDiscountMoney = order.getWeekDayDiscountMoney(visitDay);
         Integer weekendDayDiscountMoney = order.getWeekendDayDiscountMoney(visitDay);
-        Discount discount = initDiscount(visitDay, gift.isExist(), weekDayDiscountMoney, weekendDayDiscountMoney);
+        Discount discount = initDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, gift.isExist());
 
         Badge badge = initBadge(discount);
 
@@ -48,8 +48,8 @@ public class EventController {
         return Gift.createGift(order.getAmount());
     }
 
-    private Discount initDiscount(VisitDay visitDay, boolean isGiftGiven, Integer weekDayDiscountMoney,
-                                  Integer weekendDayDiscountMoney) {
+    private Discount initDiscount(Integer weekDayDiscountMoney, Integer weekendDayDiscountMoney,
+                                  VisitDay visitDay, boolean isGiftGiven) {
         return Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, isGiftGiven);
     }
 
