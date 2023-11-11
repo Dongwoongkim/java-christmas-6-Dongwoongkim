@@ -4,7 +4,6 @@ import christmas.model.Gift;
 import christmas.vo.Badge;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
-import java.util.Map;
 
 public class OutputView {
 
@@ -27,6 +26,10 @@ public class OutputView {
 
     public void printBenefitHeader() {
         System.out.println("<혜택 내역>");
+    }
+
+    public void printOrderHeader() {
+        System.out.println("<주문 메뉴>");
     }
 
     public void printBenefit(String discountPolicy, Integer discountAmount) {
@@ -54,15 +57,15 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printOrderMenu(Map<Food, Quantity> foodAndQuantity) {
-        System.out.println("<주문 메뉴>");
-        for (Food food : foodAndQuantity.keySet()) {
-            System.out.println(food.getName() + " " + foodAndQuantity.get(food).getQuantity() + "개");
-        }
-        System.out.println();
+    public void printOrderMenu(Food food, Quantity quantity) {
+        System.out.println(food.getName() + " " + quantity.getQuantity() + "개");
     }
 
     public void printLine() {
         System.out.println();
+    }
+
+    public void printNone() {
+        System.out.println("없음");
     }
 }

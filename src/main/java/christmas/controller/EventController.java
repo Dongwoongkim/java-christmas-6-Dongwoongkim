@@ -78,7 +78,7 @@ public class EventController {
     private void showReceipt(Order order, Discount discount, Gift gift) {
         outputView.printPreviewEvent();
 
-        showOrders(order);
+        showOrders(order.getFoodAndQuantity());
 
         outputView.printBeforeDiscount(order.getAmount());
         outputView.printServiceMenu(gift);
@@ -86,21 +86,31 @@ public class EventController {
         showDiscountDetails(discount.getDiscountInfo());
 
         outputView.printTotalBenefit(discount.getSumOfDiscount());
-        outputView.printPayMoneyAfterDiscount(
-                order.getAmount() - discount.getSumOfDiscount() + discount.getGiftDiscount());
+        outputView.printPayMoneyAfterDiscount(order.getAmount() -
+                discount.getSumOfDiscount() + discount.getGiftDiscount());
     }
 
     private void showDiscountDetails(Map<String, Integer> discountInfo) {
         outputView.printBenefitHeader();
+
+        if (discountInfo.isEmpty()) {
+            outputView.printNone();
+            outputView.printLine();
+            return;
+        }
+
         discountInfo.keySet()
-                .forEach(eachDiscountPolicy -> {
-                    outputView.printBenefit(eachDiscountPolicy, discountInfo.get(eachDiscountPolicy));
-                });
+                .forEach(eachDiscountPolicy ->
+                        outputView.printBenefit(eachDiscountPolicy, discountInfo.get(eachDiscountPolicy)));
         outputView.printLine();
     }
 
-    private void showOrders(Order order) {
-        outputView.printOrderMenu(order.getFoodAndQuantity());
+    private void showOrders(Map<Food, Quantity> foodAndQuantity) {
+        outputView.printOrderHeader();
+        foodAndQuantity.keySet()
+                .forEach(eachFood ->
+                        outputView.printOrderMenu(eachFood, foodAndQuantity.get(eachFood)));
+        outputView.printLine();
     }
 
     private void showBadge(Badge badge) {
