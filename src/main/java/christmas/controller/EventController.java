@@ -22,24 +22,23 @@ public class EventController {
     public void run() {
         Date date = initDay();
         OrderMenu orderMenu = initOrderMenu();
-
-        outputView.printPreviewEvent();
-        outputView.printOrderMenu(orderMenu);
-        outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
-
         boolean getGift = orderMenu.isGetGift();
-        outputView.printServiceMenu(getGift);
-
         Integer weekDayDiscount = orderMenu.getWeekDayDiscount(date);
         Integer weekendDayDiscount = orderMenu.getWeekendDayDiscount(date);
         Discount discount = Discount.createDiscount(weekDayDiscount, weekendDayDiscount, date, getGift);
+
+        showReceipt(orderMenu, discount, getGift);
+    }
+
+    private void showReceipt(OrderMenu orderMenu, Discount discount, boolean getGift) {
+        outputView.printPreviewEvent();
+        outputView.printOrderMenu(orderMenu);
+        outputView.printBeforeDiscount(orderMenu.sumAmountOfOrder());
+        outputView.printServiceMenu(getGift);
         outputView.printBenefit(discount);
-
         outputView.printTotalBenefit(discount);
-
         outputView.printPayMoneyAfterDiscount(
                 orderMenu.sumAmountOfOrder() - discount.getSumOfDiscount() + discount.getGiftDiscount());
-        
         outputView.printBadge(discount.getBadge());
     }
 
