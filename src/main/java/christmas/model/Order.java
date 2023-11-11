@@ -7,13 +7,10 @@ import static christmas.model.Menu.DESSERT;
 import static christmas.model.Menu.MAIN;
 
 import christmas.exception.OnlyDrinkOrderException;
-import christmas.exception.OrderNotInMenuException;
 import christmas.exception.OverMaxQuantityOrderException;
-import christmas.exception.ZeroQuantityOrderException;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
 import christmas.vo.VisitDay;
-import java.util.Arrays;
 import java.util.Map;
 
 public class Order {
@@ -30,14 +27,8 @@ public class Order {
     }
 
     private void validateOrderMenu(Map<Food, Quantity> order) {
-        if (isContainZeroQuantity(order)) {
-            throw new ZeroQuantityOrderException();
-        }
-        if (isOverMaxQuantity(order)) {
+        if (isOrderOverMaxQuantity(order)) {
             throw new OverMaxQuantityOrderException();
-        }
-        if (!isContainInMenu(order)) {
-            throw new OrderNotInMenuException();
         }
         if (isContainOnlyDrink(order)) {
             throw new OnlyDrinkOrderException();
@@ -59,25 +50,12 @@ public class Order {
         return false;
     }
 
-    private boolean isContainInMenu(Map<Food, Quantity> order) {
-        return order.keySet()
-                .stream()
-                .allMatch(food -> Arrays.stream(Menu.values())
-                        .anyMatch(menu -> menu.getSalesMenu().containsKey(food.getName())));
-    }
-
-    private boolean isOverMaxQuantity(Map<Food, Quantity> order) {
+    private boolean isOrderOverMaxQuantity(Map<Food, Quantity> order) {
         int totalQuantity = order.values().stream().mapToInt(Quantity::getQuantity).sum();
         if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
             return true;
         }
         return false;
-    }
-
-    private boolean isContainZeroQuantity(Map<Food, Quantity> order) {
-        return order.values()
-                .stream()
-                .anyMatch(quantity -> quantity.getQuantity() == 0);
     }
 
     public Integer sumAmountOfOrder() {
