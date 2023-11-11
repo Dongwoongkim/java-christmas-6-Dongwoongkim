@@ -15,6 +15,7 @@ import java.util.Map;
 public class Order {
 
     private static final Integer NO_DISCOUNT_AMOUNT = 0;
+
     private final Map<Food, Quantity> foodAndQuantity;
 
     private Order(Map<Food, Quantity> foodAndQuantity) {
@@ -60,9 +61,10 @@ public class Order {
 
     public Integer getWeekDayDiscountMoney(VisitDay visitDay) {
         if (visitDay.isWeekDay()) {
-            int dessertQuantity = foodAndQuantity.entrySet().stream()
-                    .filter(entry -> DESSERT.getSalesMenu().containsKey(entry.getKey().getName()))
-                    .mapToInt(entry -> entry.getValue().getQuantity())
+            Integer dessertQuantity = foodAndQuantity.entrySet()
+                    .stream()
+                    .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().getName()))
+                    .mapToInt(order -> order.getValue().getQuantity())
                     .sum();
             return dessertQuantity * PRESENT_YEAR.getValue();
         }
@@ -71,9 +73,10 @@ public class Order {
 
     public Integer getWeekendDayDiscountMoney(VisitDay visitDay) {
         if (!visitDay.isWeekDay()) {
-            int mainCount = foodAndQuantity.entrySet().stream()
-                    .filter(entry -> MAIN.getSalesMenu().containsKey(entry.getKey().getName()))
-                    .mapToInt(entry -> entry.getValue().getQuantity())
+            Integer mainCount = foodAndQuantity.entrySet()
+                    .stream()
+                    .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().getName()))
+                    .mapToInt(order -> order.getValue().getQuantity())
                     .sum();
             return mainCount * PRESENT_YEAR.getValue();
         }
