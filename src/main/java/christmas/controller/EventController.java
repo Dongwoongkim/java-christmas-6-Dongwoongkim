@@ -81,7 +81,7 @@ public class EventController {
         showOrders(order.getFoodAndQuantity());
 
         outputView.printBeforeDiscount(order.getAmount());
-        outputView.printServiceMenu(gift);
+        outputView.printServiceMenu(gift.getName());
 
         showDiscountDetails(discount.getDiscountInfo());
 

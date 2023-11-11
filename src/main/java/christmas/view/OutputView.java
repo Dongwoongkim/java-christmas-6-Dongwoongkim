@@ -1,64 +1,74 @@
 package christmas.view;
 
-import christmas.model.Gift;
 import christmas.vo.Badge;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
 
 public class OutputView {
 
+    private static final String PREVIEW_EVENT_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
+    private static final String BEFORE_DISCOUNT_HEADER = "<할인 전 총주문 금액>";
+    private static final String SERVICE_MENU_HEADER = "<증정 메뉴>";
+    private static final String TOTAL_BENEFIT_HEADER = "<총혜택 금액>";
+    private static final String BENEFIT_HEADER = "<혜택 내역>";
+    private static final String FINAL_PAYMENT_AFTER_DISCOUNT_HEADER = "<할인 후 예상 결제 금액>";
+    private static final String DECEMBER_EVENT_BADGE_HEADER = "<12월 이벤트 배지>";
+    private static final String NONE = "없음";
+
+
     public void printPreviewEvent() {
-        System.out.println("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println();
-    }
-
-    public void printBeforeDiscount(Integer price) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.println(String.format("%,d원", price));
-        System.out.println();
-    }
-
-    public void printServiceMenu(Gift gift) {
-        System.out.println("<증정 메뉴>");
-        System.out.println(gift.getName());
-        System.out.println();
-    }
-
-    public void printBenefitHeader() {
-        System.out.println("<혜택 내역>");
+        printMessage(PREVIEW_EVENT_MESSAGE);
+        printLine();
     }
 
     public void printOrderHeader() {
-        System.out.println("<주문 메뉴>");
+        printMessage(ORDER_MENU_HEADER);
+    }
+
+    public void printOrderMenu(Food food, Quantity quantity) {
+        printMessage(food.getName() + " " + quantity.getQuantity() + "개");
+    }
+
+    public void printBeforeDiscount(Integer price) {
+        printMessage(BEFORE_DISCOUNT_HEADER);
+        printMessage(String.format("%,d원", price));
+        printLine();
+    }
+
+    public void printServiceMenu(String name) {
+        printMessage(SERVICE_MENU_HEADER);
+        printMessage(name);
+        printLine();
+    }
+
+    public void printBenefitHeader() {
+        printMessage(BENEFIT_HEADER);
     }
 
     public void printBenefit(String discountPolicy, Integer discountAmount) {
-        System.out.println(String.format("%s : -%,d원", discountPolicy, discountAmount));
+        printMessage(String.format("%s : -%,d원", discountPolicy, discountAmount));
     }
 
     public void printTotalBenefit(Integer discountAmount) {
-        System.out.println("<총혜택 금액>");
-        System.out.println(String.format("-%,d원", discountAmount));
-        System.out.println();
+        printMessage(TOTAL_BENEFIT_HEADER);
+        printMessage(String.format("-%,d원", discountAmount));
+        printLine();
     }
 
     public void printPayMoneyAfterDiscount(Integer payAmount) {
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(String.format("%,d원", payAmount));
-        System.out.println();
+        printMessage(FINAL_PAYMENT_AFTER_DISCOUNT_HEADER);
+        printMessage(String.format("%,d원", payAmount));
+        printLine();
     }
 
     public void printBadge(Badge badge) {
-        System.out.println("<12월 이벤트 배지>");
-        System.out.println(badge.name());
+        printMessage(DECEMBER_EVENT_BADGE_HEADER);
+        printMessage(badge.name());
     }
 
     public void printMessage(String message) {
         System.out.println(message);
-    }
-
-    public void printOrderMenu(Food food, Quantity quantity) {
-        System.out.println(food.getName() + " " + quantity.getQuantity() + "개");
     }
 
     public void printLine() {
@@ -66,6 +76,6 @@ public class OutputView {
     }
 
     public void printNone() {
-        System.out.println("없음");
+        System.out.println(NONE);
     }
 }
