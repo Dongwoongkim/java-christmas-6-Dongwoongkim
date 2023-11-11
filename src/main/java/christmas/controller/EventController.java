@@ -93,9 +93,10 @@ public class EventController {
     private void showDiscountDetails(Map<String, Integer> discountInfo) {
         outputView.printBenefitHeader();
         discountInfo.keySet()
-                .forEach(eachDiscount -> {
-                    outputView.printBenefit(eachDiscount, discountInfo.get(eachDiscount));
+                .forEach(eachDiscountPolicy -> {
+                    outputView.printBenefit(eachDiscountPolicy, discountInfo.get(eachDiscountPolicy));
                 });
+        outputView.printLine();
     }
 
     private void showOrders(Order order) {

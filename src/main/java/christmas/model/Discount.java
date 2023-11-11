@@ -51,7 +51,7 @@ public class Discount {
     }
 
     public Integer getGiftDiscount() {
-        return discountInfo.getOrDefault(PRESENT_DISCOUNT, 0);
+        return discountInfo.getOrDefault(PRESENT_DISCOUNT.getPolicy(), 0);
     }
 
     public Integer getSumOfDiscount() {

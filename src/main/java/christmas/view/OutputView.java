@@ -61,4 +61,8 @@ public class OutputView {
         }
         System.out.println();
     }
+
+    public void printLine() {
+        System.out.println();
+    }
 }
