@@ -4,29 +4,29 @@ import christmas.exception.ZeroQuantityOrderException;
 
 public class Quantity {
 
-    private static final Integer ZERO_QUANTITY = 0;
-    private final Integer quantity;
+    private static final Integer ZERO_AMOUNT = 0;
+    private final Integer amount;
 
-    public Quantity(final Integer quantity) {
-        validate(quantity);
-        this.quantity = quantity;
+    public Quantity(final Integer amount) {
+        validate(amount);
+        this.amount = amount;
     }
 
-    public static Quantity create(Integer quantity) {
-        return new Quantity(quantity);
+    public static Quantity create(Integer amount) {
+        return new Quantity(amount);
     }
 
-    private void validate(final Integer quantity) {
-        if (isQuantityZero(quantity)) {
+    private void validate(final Integer amount) {
+        if (isAmountZero(amount)) {
             throw new ZeroQuantityOrderException();
         }
     }
 
-    private boolean isQuantityZero(final Integer quantity) {
-        return quantity == ZERO_QUANTITY;
+    private boolean isAmountZero(final Integer amount) {
+        return amount == ZERO_AMOUNT;
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return amount;
     }
 }
