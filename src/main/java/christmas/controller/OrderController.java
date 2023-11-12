@@ -30,10 +30,10 @@ public class OrderController {
         Order order = initOrder();
         Gift gift = initGift(order);
 
-        Integer weekDayDiscountMoney = order.getWeekDayDiscountMoney(visitDay);
-        Integer weekendDayDiscountMoney = order.getWeekendDayDiscountMoney(visitDay);
+        Integer mainQuantity = order.getMainQuantity();
+        Integer dessertQuantity = order.getDessertQuantity();
 
-        Discount discount = initDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, gift.isReceived());
+        Discount discount = initDiscount(mainQuantity, dessertQuantity, visitDay, gift.isReceived());
         Badge badge = initBadge(discount);
 
         showReceipt(order, discount, gift);

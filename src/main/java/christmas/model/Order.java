@@ -1,7 +1,6 @@
 package christmas.model;
 
 import static christmas.model.EventInfo.MAX_ORDER_QUANTITY;
-import static christmas.model.EventInfo.PRESENT_YEAR;
 import static christmas.model.Menu.DESSERT;
 import static christmas.model.Menu.MAIN;
 
@@ -9,7 +8,6 @@ import christmas.exception.OnlyDrinkOrderException;
 import christmas.exception.OverMaxQuantityOrderException;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
-import christmas.vo.VisitDay;
 import java.util.Map;
 
 public class Order {
@@ -59,28 +57,20 @@ public class Order {
                 .sum();
     }
 
-    public Integer getWeekDayDiscountMoney(VisitDay visitDay) {
-        if (visitDay.isWeekDay()) {
-            Integer dessertQuantity = foodAndQuantity.entrySet()
-                    .stream()
-                    .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().getName()))
-                    .mapToInt(order -> order.getValue().getQuantity())
-                    .sum();
-            return dessertQuantity * PRESENT_YEAR.getValue();
-        }
-        return NO_DISCOUNT_AMOUNT;
+    public Integer getDessertQuantity() {
+        return foodAndQuantity.entrySet()
+                .stream()
+                .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().getName()))
+                .mapToInt(order -> order.getValue().getQuantity())
+                .sum();
     }
 
-    public Integer getWeekendDayDiscountMoney(VisitDay visitDay) {
-        if (!visitDay.isWeekDay()) {
-            Integer mainQuantity = foodAndQuantity.entrySet()
-                    .stream()
-                    .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().getName()))
-                    .mapToInt(order -> order.getValue().getQuantity())
-                    .sum();
-            return mainQuantity * PRESENT_YEAR.getValue();
-        }
-        return NO_DISCOUNT_AMOUNT;
+    public Integer getMainQuantity() {
+        return foodAndQuantity.entrySet()
+                .stream()
+                .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().getName()))
+                .mapToInt(order -> order.getValue().getQuantity())
+                .sum();
     }
 
     public Map<Food, Quantity> getFoodAndQuantity() {
