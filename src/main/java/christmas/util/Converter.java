@@ -48,7 +48,7 @@ public class Converter {
     }
 
     private static Food getFood(final List<String> foodAndQuantity) {
-        return new Food(foodAndQuantity.get(FOOD_INDEX).trim());
+        return Food.create(foodAndQuantity.get(FOOD_INDEX).trim());
     }
 
     private static Quantity getQuantity(final List<String> foodAndQuantity) {

@@ -34,9 +34,9 @@ public enum Menu {
 
     public static int getPriceOfFood(final Food food) {
         return Arrays.stream(Menu.values())
-                .filter(menu -> menu.getSalesMenu().containsKey(food.name()))
+                .filter(menu -> menu.getSalesMenu().containsKey(food.getName()))
                 .findFirst()
-                .map(menu -> menu.getSalesMenu().get(food.name()))
+                .map(menu -> menu.getSalesMenu().get(food.getName()))
                 .orElse(0);
     }
 

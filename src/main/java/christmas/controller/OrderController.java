@@ -108,7 +108,7 @@ public class OrderController {
     private void showOrders(final Map<Food, Quantity> foodAndQuantity) {
         outputView.printOrderHeader();
         foodAndQuantity.forEach(
-                (food, quantity) -> outputView.printOrderMenu(food.name(), quantity.getQuantity()));
+                (food, quantity) -> outputView.printOrderMenu(food.getName(), quantity.getQuantity()));
         outputView.printLine();
     }
 
