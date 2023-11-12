@@ -13,6 +13,7 @@ import java.util.Map;
 public class Order {
 
     private static final Integer MAX_ORDER_QUANTITY = 20;
+    
     private final Map<Food, Quantity> foodAndQuantity;
 
     private Order(final Map<Food, Quantity> foodAndQuantity) {
