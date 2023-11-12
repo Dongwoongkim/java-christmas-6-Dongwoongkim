@@ -18,6 +18,7 @@ import java.util.Map;
 public class Discount {
 
     private static final Integer NO_DISCOUNT_AMOUNT = 0;
+    
     private final Map<DiscountPolicy, DiscountAmount> discountInformation;
 
     private Discount(final Map<DiscountPolicy, DiscountAmount> discountInformation) {
