@@ -49,7 +49,7 @@ public class Order {
         return false;
     }
 
-    private int getTotalQuantity(Map<Food, Quantity> foodAndQuantity) {
+    private int getTotalQuantity(final Map<Food, Quantity> foodAndQuantity) {
         return foodAndQuantity.values()
                 .stream()
                 .mapToInt(Quantity::getQuantity)

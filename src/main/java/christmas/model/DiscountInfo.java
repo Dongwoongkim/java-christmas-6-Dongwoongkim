@@ -9,7 +9,7 @@ public enum DiscountInfo {
 
     private final Integer amount;
 
-    DiscountInfo(Integer amount) {
+    DiscountInfo(final Integer amount) {
         this.amount = amount;
     }
 

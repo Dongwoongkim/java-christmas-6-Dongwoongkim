@@ -11,12 +11,12 @@ public class Food {
 
     private final String name;
 
-    private Food(String name) {
+    private Food(final String name) {
         validate(name);
         this.name = name;
     }
 
-    public static Food create(String name) {
+    public static Food create(final String name) {
         return new Food(name);
     }
 
