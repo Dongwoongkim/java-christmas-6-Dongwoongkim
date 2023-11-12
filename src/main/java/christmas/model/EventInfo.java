@@ -17,7 +17,7 @@ public enum EventInfo {
 
     private final Integer value;
 
-    EventInfo(Integer value) {
+    EventInfo(final Integer value) {
         this.value = value;
     }
 

@@ -24,7 +24,7 @@ public enum Menu {
 
     private final Map<String, Integer> salesMenu;
 
-    Menu(Map<String, Integer> salesMenu) {
+    Menu(final Map<String, Integer> salesMenu) {
         this.salesMenu = salesMenu;
     }
 
@@ -32,7 +32,7 @@ public enum Menu {
         return salesMenu;
     }
 
-    public static int getPriceOfFood(Food food) {
+    public static int getPriceOfFood(final Food food) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.getSalesMenu().containsKey(food.getName()))
                 .findFirst()

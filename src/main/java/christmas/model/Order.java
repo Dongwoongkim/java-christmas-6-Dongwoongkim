@@ -73,12 +73,12 @@ public class Order {
 
     public Integer getWeekendDayDiscountMoney(VisitDay visitDay) {
         if (!visitDay.isWeekDay()) {
-            Integer mainCount = foodAndQuantity.entrySet()
+            Integer mainQuantity = foodAndQuantity.entrySet()
                     .stream()
                     .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().getName()))
                     .mapToInt(order -> order.getValue().getQuantity())
                     .sum();
-            return mainCount * PRESENT_YEAR.getValue();
+            return mainQuantity * PRESENT_YEAR.getValue();
         }
         return NO_DISCOUNT_AMOUNT;
     }

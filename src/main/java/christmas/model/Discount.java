@@ -11,6 +11,7 @@ import static christmas.model.EventInfo.START_DAY_DISCOUNT;
 
 import christmas.vo.DiscountAmount;
 import christmas.vo.VisitDay;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,12 +20,12 @@ public class Discount {
     private static final Integer NO_DISCOUNT_AMOUNT = 0;
     private final Map<DiscountPolicy, DiscountAmount> discountInformation;
 
-    private Discount(Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private Discount(final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         this.discountInformation = discountInformation;
     }
 
-    public static Discount createDiscount(Integer weekDayDiscount, Integer weekendDayDiscount,
-                                          VisitDay visitDay, boolean isGiftReceived) {
+    public static Discount createDiscount(final Integer weekDayDiscount, final Integer weekendDayDiscount,
+                                          final VisitDay visitDay, final boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
 
         putWeekDayDiscount(weekDayDiscount, discountInformation);
@@ -36,23 +37,24 @@ public class Discount {
         return new Discount(discountInformation);
     }
 
-    private static void putGiftDiscount(boolean isGiftReceived,
-                                        Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private static void putGiftDiscount(final boolean isGiftReceived,
+                                        final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (isGiftReceived) {
             DiscountAmount discountAmount = new DiscountAmount(Menu.getGiftPrice());
             discountInformation.put(PRESENT_DISCOUNT, discountAmount);
         }
     }
 
-    private static void putSpecialDayDiscount(VisitDay visitDay,
-                                              Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private static void putSpecialDayDiscount(final VisitDay visitDay,
+                                              final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isSpecialDay()) {
             DiscountAmount discountAmount = new DiscountAmount(SPECIAL_DISCOUNT_AMOUNT.getValue());
             discountInformation.put(SPECIAL_DISCOUNT, discountAmount);
         }
     }
 
-    private static void putD_DayDiscount(VisitDay visitDay, Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private static void putD_DayDiscount(final VisitDay visitDay,
+                                         final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isBeforeOrEqualsChristmas()) {
             DiscountAmount discountAmount = new DiscountAmount(
                     START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
@@ -60,16 +62,16 @@ public class Discount {
         }
     }
 
-    private static void putWeekendDayDiscount(Integer weekendDayDiscount,
-                                              Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private static void putWeekendDayDiscount(final Integer weekendDayDiscount,
+                                              final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (weekendDayDiscount != NO_DISCOUNT_AMOUNT) {
             DiscountAmount discountAmount = new DiscountAmount(weekendDayDiscount);
             discountInformation.put(WEEKEND_DISCOUNT, discountAmount);
         }
     }
 
-    private static void putWeekDayDiscount(Integer weekDayDiscount,
-                                           Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private static void putWeekDayDiscount(final Integer weekDayDiscount,
+                                           final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (weekDayDiscount != NO_DISCOUNT_AMOUNT) {
             DiscountAmount discountAmount = new DiscountAmount(weekDayDiscount);
             discountInformation.put(WEEKDAY_DISCOUNT, discountAmount);
@@ -88,6 +90,6 @@ public class Discount {
     }
 
     public Map<DiscountPolicy, DiscountAmount> getDiscountInformation() {
-        return discountInformation;
+        return Collections.unmodifiableMap(discountInformation);
     }
 }

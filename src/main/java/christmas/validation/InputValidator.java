@@ -7,13 +7,13 @@ public class InputValidator {
     private InputValidator() {
     }
 
-    public static void validateDay(String day) {
+    public static void validateDay(final String day) {
         if (!isNumeric(day)) {
             throw new DayContainCharactersException();
         }
     }
 
-    private static boolean isNumeric(String day) {
+    private static boolean isNumeric(final String day) {
         try {
             Integer.valueOf(day);
             return true;

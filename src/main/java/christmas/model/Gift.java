@@ -8,11 +8,11 @@ public class Gift {
     private static final String NONE_GIFT = "없음";
     private final String name;
 
-    private Gift(String name) {
+    private Gift(final String name) {
         this.name = name;
     }
 
-    public static Gift createGift(Integer amount) {
+    public static Gift createGift(final Integer amount) {
         if (amount >= GIFT_REQUIREMENT_AMOUNT.getValue()) {
             return new Gift(ONE_CHAMPAGNE);
         }

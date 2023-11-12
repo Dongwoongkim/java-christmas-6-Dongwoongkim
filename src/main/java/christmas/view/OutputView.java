@@ -27,17 +27,17 @@ public class OutputView {
         printMessage(ORDER_MENU_HEADER);
     }
 
-    public void printOrderMenu(Food food, Quantity quantity) {
+    public void printOrderMenu(final Food food, final Quantity quantity) {
         printMessage(food.getName() + " " + quantity.getQuantity() + "개");
     }
 
-    public void printBeforeDiscount(Integer price) {
+    public void printBeforeDiscount(final Integer price) {
         printMessage(BEFORE_DISCOUNT_HEADER);
         printMessage(String.format("%,d원", price));
         printLine();
     }
 
-    public void printServiceMenu(String name) {
+    public void printServiceMenu(final String name) {
         printMessage(SERVICE_MENU_HEADER);
         printMessage(name);
         printLine();
@@ -47,28 +47,28 @@ public class OutputView {
         printMessage(BENEFIT_HEADER);
     }
 
-    public void printBenefit(DiscountPolicy discountPolicy, DiscountAmount discountAmount) {
+    public void printBenefit(final DiscountPolicy discountPolicy, final DiscountAmount discountAmount) {
         printMessage(String.format("%s : -%,d원", discountPolicy.getPolicy(), discountAmount.getAmount()));
     }
 
-    public void printTotalBenefit(Integer discountAmount) {
+    public void printTotalBenefit(final Integer discountAmount) {
         printMessage(TOTAL_BENEFIT_HEADER);
         printMessage(String.format("-%,d원", discountAmount));
         printLine();
     }
 
-    public void printPayMoneyAfterDiscount(Integer payAmount) {
+    public void printPayMoneyAfterDiscount(final Integer payAmount) {
         printMessage(FINAL_PAYMENT_AFTER_DISCOUNT_HEADER);
         printMessage(String.format("%,d원", payAmount));
         printLine();
     }
 
-    public void printBadge(String badgeName) {
+    public void printBadge(final String badgeName) {
         printMessage(DECEMBER_EVENT_BADGE_HEADER);
         printMessage(badgeName);
     }
 
-    public void printMessage(String message) {
+    public void printMessage(final String message) {
         System.out.println(message);
     }
 

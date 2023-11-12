@@ -13,11 +13,11 @@ public class Badge {
 
     private final String name;
 
-    private Badge(String name) {
+    private Badge(final String name) {
         this.name = name;
     }
 
-    public static Badge createBadge(Integer sumOfDiscount) {
+    public static Badge createBadge(final Integer sumOfDiscount) {
         if (sumOfDiscount >= SANTA_BADGE_REQUIREMENT_AMOUNT.getValue()) {
             return new Badge(SANTA_BADGE);
         }

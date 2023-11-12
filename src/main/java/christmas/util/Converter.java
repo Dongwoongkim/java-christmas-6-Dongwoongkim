@@ -17,7 +17,7 @@ public class Converter {
     private Converter() {
     }
 
-    public static Map<Food, Quantity> stringToMap(String menu) {
+    public static Map<Food, Quantity> stringToMap(final String menu) {
         try {
             return splitAndMapping(menu);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -25,7 +25,7 @@ public class Converter {
         }
     }
 
-    private static Map<Food, Quantity> splitAndMapping(String menu) {
+    private static Map<Food, Quantity> splitAndMapping(final String menu) {
         Map<Food, Quantity> foodMap = Arrays.stream(menu.split(MENU_DELIMITER))
                 .map(item -> item.split(QUANTITY_DELIMITER))
                 .collect(Collectors.toMap(
@@ -39,11 +39,11 @@ public class Converter {
         return foodMap;
     }
 
-    private static Food getFood(String[] parts) {
+    private static Food getFood(final String[] parts) {
         return new Food(parts[0].trim());
     }
 
-    private static Quantity getFoodCount(String[] parts) {
+    private static Quantity getFoodCount(final String[] parts) {
         try {
             return new Quantity(Integer.parseInt(parts[1]));
         } catch (NumberFormatException e) {

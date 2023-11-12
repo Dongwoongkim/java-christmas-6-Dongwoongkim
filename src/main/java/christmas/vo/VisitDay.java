@@ -20,18 +20,18 @@ public class VisitDay {
 
     private final Integer day;
 
-    public VisitDay(Integer day) {
+    public VisitDay(final Integer day) {
         validate(day);
         this.day = day;
     }
 
-    private void validate(Integer day) {
+    private void validate(final Integer day) {
         if (!isInEventDay(day)) {
             throw new DayDoesNotExistInCalendarException();
         }
     }
 
-    private boolean isInEventDay(Integer day) {
+    private boolean isInEventDay(final Integer day) {
         if (day >= START_EVENT_DAY.getValue() && day <= END_EVENT_DAY.getValue()) {
             return true;
         }

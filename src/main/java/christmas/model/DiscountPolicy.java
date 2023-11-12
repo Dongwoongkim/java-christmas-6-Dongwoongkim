@@ -10,7 +10,7 @@ public enum DiscountPolicy {
 
     private final String policy;
 
-    DiscountPolicy(String policy) {
+    DiscountPolicy(final String policy) {
         this.policy = policy;
     }
 

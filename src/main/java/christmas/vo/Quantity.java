@@ -7,18 +7,18 @@ public class Quantity {
     private static final Integer ZERO_QUANTITY = 0;
     private final Integer quantity;
 
-    public Quantity(Integer quantity) {
+    public Quantity(final Integer quantity) {
         validate(quantity);
         this.quantity = quantity;
     }
 
-    private void validate(Integer quantity) {
+    private void validate(final Integer quantity) {
         if (isQuantityZero(quantity)) {
             throw new ZeroQuantityOrderException();
         }
     }
 
-    private boolean isQuantityZero(Integer quantity) {
+    private boolean isQuantityZero(final Integer quantity) {
         return quantity == ZERO_QUANTITY;
     }
 

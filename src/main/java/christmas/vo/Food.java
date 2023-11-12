@@ -10,18 +10,18 @@ public class Food {
 
     private final String name;
 
-    public Food(String name) {
+    public Food(final String name) {
         validate(name);
         this.name = name;
     }
 
-    private void validate(String name) {
+    private void validate(final String name) {
         if (!isContainInMenu(name)) {
             throw new OrderNotInMenuException();
         }
     }
 
-    private boolean isContainInMenu(String name) {
+    private boolean isContainInMenu(final String name) {
         return Arrays.stream(Menu.values())
                 .anyMatch(menu -> menu.getSalesMenu().containsKey(name));
     }

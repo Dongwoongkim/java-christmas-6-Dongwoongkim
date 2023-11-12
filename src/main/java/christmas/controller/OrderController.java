@@ -20,7 +20,7 @@ public class OrderController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public OrderController(InputView inputView, OutputView outputView) {
+    public OrderController(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -64,20 +64,20 @@ public class OrderController {
         }
     }
 
-    private Gift initGift(Order order) {
+    private Gift initGift(final Order order) {
         return Gift.createGift(order.getAmount());
     }
 
-    private Discount initDiscount(Integer weekDayDiscountMoney, Integer weekendDayDiscountMoney,
-                                  VisitDay visitDay, boolean isGiftReceived) {
+    private Discount initDiscount(final Integer weekDayDiscountMoney, final Integer weekendDayDiscountMoney,
+                                  final VisitDay visitDay, final boolean isGiftReceived) {
         return Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, isGiftReceived);
     }
 
-    private Badge initBadge(Discount discount) {
+    private Badge initBadge(final Discount discount) {
         return Badge.createBadge(discount.getSumOfDiscount());
     }
 
-    private void showReceipt(Order order, Discount discount, Gift gift) {
+    private void showReceipt(final Order order, final Discount discount, final Gift gift) {
         outputView.printPreviewEvent();
 
         showOrders(order.getFoodAndQuantity());
@@ -92,7 +92,7 @@ public class OrderController {
                 discount.getSumOfDiscount() + discount.getGiftDiscount());
     }
 
-    private void showDiscountDetails(Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private void showDiscountDetails(final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         outputView.printBenefitHeader();
 
         if (discountInformation.isEmpty()) {
@@ -105,13 +105,13 @@ public class OrderController {
         outputView.printLine();
     }
 
-    private void showOrders(Map<Food, Quantity> foodAndQuantity) {
+    private void showOrders(final Map<Food, Quantity> foodAndQuantity) {
         outputView.printOrderHeader();
         foodAndQuantity.forEach(outputView::printOrderMenu);
         outputView.printLine();
     }
 
-    private void showBadge(Badge badge) {
+    private void showBadge(final Badge badge) {
         outputView.printBadge(badge.getName());
     }
 }
