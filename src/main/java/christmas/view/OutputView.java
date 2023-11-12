@@ -23,7 +23,7 @@ public class OutputView {
     }
 
     public void printOrderMenu(final String foodName, final Integer quantity) {
-        printMessage(foodName + " " + quantity + "개");
+        printMessage(String.format("%s %d개", foodName, quantity));
     }
 
     public void printBeforeDiscountAmount(final Integer price) {
@@ -50,7 +50,7 @@ public class OutputView {
         printMessage(TOTAL_BENEFIT_HEADER);
 
         if (discountAmount == 0) {
-            System.out.println("0원");
+            printMessage("0원");
             printLine();
             return;
         }
