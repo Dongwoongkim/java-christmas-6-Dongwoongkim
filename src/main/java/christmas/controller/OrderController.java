@@ -68,9 +68,9 @@ public class OrderController {
         return Gift.createGift(order.getAmount());
     }
 
-    private Discount initDiscount(final Integer weekDayDiscountMoney, final Integer weekendDayDiscountMoney,
+    private Discount initDiscount(final Integer mainQuantity, final Integer dessertQuantity,
                                   final VisitDay visitDay, final boolean isGiftReceived) {
-        return Discount.createDiscount(weekDayDiscountMoney, weekendDayDiscountMoney, visitDay, isGiftReceived);
+        return Discount.createDiscount(mainQuantity, dessertQuantity, visitDay, isGiftReceived);
     }
 
     private Badge initBadge(final Discount discount) {

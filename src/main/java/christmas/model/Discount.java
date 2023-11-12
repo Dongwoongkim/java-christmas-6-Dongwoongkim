@@ -30,8 +30,8 @@ public class Discount {
                                           final VisitDay visitDay, final boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
 
-        putWeekDayDiscount(mainQuantity, visitDay, discountInformation);
-        putWeekendDayDiscount(dessertQuantity, visitDay, discountInformation);
+        putWeekDayDiscount(dessertQuantity, visitDay, discountInformation);
+        putWeekendDayDiscount(mainQuantity, visitDay, discountInformation);
         putD_DayDiscount(visitDay, discountInformation);
         putSpecialDayDiscount(visitDay, discountInformation);
         putGiftDiscount(isGiftReceived, discountInformation);
