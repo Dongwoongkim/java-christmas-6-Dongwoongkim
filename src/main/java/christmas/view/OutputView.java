@@ -53,6 +53,13 @@ public class OutputView {
 
     public void printTotalBenefit(final Integer discountAmount) {
         printMessage(TOTAL_BENEFIT_HEADER);
+
+        if (discountAmount == 0) {
+            System.out.println("0원");
+            printLine();
+            return;
+        }
+
         printMessage(String.format("-%,d원", discountAmount));
         printLine();
     }
