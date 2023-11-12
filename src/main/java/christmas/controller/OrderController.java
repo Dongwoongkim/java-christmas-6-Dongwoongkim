@@ -95,20 +95,20 @@ public class OrderController {
 
     private void showDiscountDetails(final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         outputView.printBenefitHeader();
-
         if (discountInformation.isEmpty()) {
             outputView.printNone();
             outputView.printLine();
             return;
         }
-
-        discountInformation.forEach(outputView::printBenefit);
+        discountInformation.forEach(
+                (discountPolicy, amount) -> outputView.printBenefit(discountPolicy.getPolicy(), amount.getAmount()));
         outputView.printLine();
     }
 
     private void showOrders(final Map<Food, Quantity> foodAndQuantity) {
         outputView.printOrderHeader();
-        foodAndQuantity.forEach(outputView::printOrderMenu);
+        foodAndQuantity.forEach(
+                (food, quantity) -> outputView.printOrderMenu(food.name(), quantity.getQuantity()));
         outputView.printLine();
     }
 

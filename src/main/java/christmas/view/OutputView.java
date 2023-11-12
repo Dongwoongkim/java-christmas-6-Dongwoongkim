@@ -1,10 +1,5 @@
 package christmas.view;
 
-import christmas.model.DiscountPolicy;
-import christmas.model.vo.DiscountAmount;
-import christmas.model.vo.Food;
-import christmas.model.vo.Quantity;
-
 public class OutputView {
 
     private static final String PREVIEW_EVENT_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
@@ -27,8 +22,8 @@ public class OutputView {
         printMessage(ORDER_MENU_HEADER);
     }
 
-    public void printOrderMenu(final Food food, final Quantity quantity) {
-        printMessage(food.name() + " " + quantity.getQuantity() + "개");
+    public void printOrderMenu(final String foodName, final Integer quantity) {
+        printMessage(foodName + " " + quantity + "개");
     }
 
     public void printBeforeDiscountAmount(final Integer price) {
@@ -47,8 +42,8 @@ public class OutputView {
         printMessage(BENEFIT_HEADER);
     }
 
-    public void printBenefit(final DiscountPolicy discountPolicy, final DiscountAmount discountAmount) {
-        printMessage(String.format("%s : -%,d원", discountPolicy.getPolicy(), discountAmount.getAmount()));
+    public void printBenefit(final String discountPolicy, final Integer discountAmount) {
+        printMessage(String.format("%s : -%,d원", discountPolicy, discountAmount));
     }
 
     public void printTotalBenefit(final Integer discountAmount) {
