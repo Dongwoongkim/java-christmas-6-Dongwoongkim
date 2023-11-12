@@ -1,8 +1,8 @@
 package christmas.model;
 
-import static christmas.model.EventInfo.SANTA_BADGE_REQUIREMENT_AMOUNT;
-import static christmas.model.EventInfo.STAR_BADGE_REQUIREMENT_AMOUNT;
-import static christmas.model.EventInfo.TREE_BADGE_REQUIREMENT_AMOUNT;
+import static christmas.model.EventInfo.SANTA_BADGE_REQUIRE_AMOUNT;
+import static christmas.model.EventInfo.STAR_BADGE_REQUIRE_AMOUNT;
+import static christmas.model.EventInfo.TREE_BADGE_REQUIRE_AMOUNT;
 
 public class Badge {
 
@@ -18,13 +18,13 @@ public class Badge {
     }
 
     public static Badge createBadge(final Integer sumOfDiscount) {
-        if (sumOfDiscount >= SANTA_BADGE_REQUIREMENT_AMOUNT.getValue()) {
+        if (sumOfDiscount >= SANTA_BADGE_REQUIRE_AMOUNT.getValue()) {
             return new Badge(SANTA_BADGE);
         }
-        if (sumOfDiscount >= TREE_BADGE_REQUIREMENT_AMOUNT.getValue()) {
+        if (sumOfDiscount >= TREE_BADGE_REQUIRE_AMOUNT.getValue()) {
             return new Badge(TREE_BADGE);
         }
-        if (sumOfDiscount >= STAR_BADGE_REQUIREMENT_AMOUNT.getValue()) {
+        if (sumOfDiscount >= STAR_BADGE_REQUIRE_AMOUNT.getValue()) {
             return new Badge(STAR_BADGE);
         }
         return new Badge(NONE_BADGE);

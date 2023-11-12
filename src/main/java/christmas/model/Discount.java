@@ -1,14 +1,14 @@
 package christmas.model;
 
 import static christmas.model.DiscountPolicy.D_DAY_DISCOUNT;
-import static christmas.model.DiscountPolicy.PRESENT_DISCOUNT;
+import static christmas.model.DiscountPolicy.GIFT_DISCOUNT;
 import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
-import static christmas.model.EventInfo.ONE_DAY_DISCOUNT;
+import static christmas.model.EventInfo.D_DAY_DISCOUNT_AMOUNT;
 import static christmas.model.EventInfo.PRESENT_YEAR;
 import static christmas.model.EventInfo.SPECIAL_DISCOUNT_AMOUNT;
-import static christmas.model.EventInfo.START_DAY_DISCOUNT;
+import static christmas.model.EventInfo.START_D_DAY_DISCOUNT_AMOUNT;
 
 import christmas.vo.DiscountAmount;
 import christmas.vo.VisitDay;
@@ -43,7 +43,7 @@ public class Discount {
                                         final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (isGiftReceived) {
             DiscountAmount discountAmount = new DiscountAmount(Menu.getGiftPrice());
-            discountInformation.put(PRESENT_DISCOUNT, discountAmount);
+            discountInformation.put(GIFT_DISCOUNT, discountAmount);
         }
     }
 
@@ -59,7 +59,7 @@ public class Discount {
                                          final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isBeforeOrEqualsChristmas()) {
             DiscountAmount discountAmount = new DiscountAmount(
-                    START_DAY_DISCOUNT.getValue() + visitDay.getDay() * ONE_DAY_DISCOUNT.getValue());
+                    START_D_DAY_DISCOUNT_AMOUNT.getValue() + visitDay.getDay() * D_DAY_DISCOUNT_AMOUNT.getValue());
             discountInformation.put(D_DAY_DISCOUNT, discountAmount);
         }
     }
@@ -81,7 +81,7 @@ public class Discount {
     }
 
     public Integer getGiftDiscount() {
-        return discountInformation.getOrDefault(PRESENT_DISCOUNT, new DiscountAmount(NO_DISCOUNT_AMOUNT)).getAmount();
+        return discountInformation.getOrDefault(GIFT_DISCOUNT, new DiscountAmount(NO_DISCOUNT_AMOUNT)).getAmount();
     }
 
     public Integer getSumOfDiscount() {

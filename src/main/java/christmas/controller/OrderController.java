@@ -55,9 +55,9 @@ public class OrderController {
     private Order initOrder() {
         while (true) {
             try {
-                String menu = inputView.inputMenu();
-                Map<Food, Quantity> order = Converter.stringToMap(menu);
-                return Order.createOrderMenu(order);
+                String orderMenu = inputView.inputMenu();
+                Map<Food, Quantity> foodAndQuantity = Converter.stringToMap(orderMenu);
+                return Order.createOrder(foodAndQuantity);
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }
@@ -82,13 +82,13 @@ public class OrderController {
 
         showOrders(order.getFoodAndQuantity());
 
-        outputView.printBeforeDiscount(order.getAmount());
+        outputView.printBeforeDiscountAmount(order.getAmount());
         outputView.printServiceMenu(gift.getName());
 
         showDiscountDetails(discount.getDiscountInformation());
 
         outputView.printTotalBenefit(discount.getSumOfDiscount());
-        outputView.printPayMoneyAfterDiscount(order.getAmount() -
+        outputView.printAfterDiscountAmount(order.getAmount() -
                 discount.getSumOfDiscount() + discount.getGiftDiscount());
     }
 

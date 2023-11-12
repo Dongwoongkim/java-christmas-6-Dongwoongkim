@@ -9,11 +9,11 @@ public class OutputView {
 
     private static final String PREVIEW_EVENT_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
-    private static final String BEFORE_DISCOUNT_HEADER = "<할인 전 총주문 금액>";
+    private static final String BEFORE_DISCOUNT_AMOUNT_HEADER = "<할인 전 총주문 금액>";
     private static final String SERVICE_MENU_HEADER = "<증정 메뉴>";
     private static final String TOTAL_BENEFIT_HEADER = "<총혜택 금액>";
     private static final String BENEFIT_HEADER = "<혜택 내역>";
-    private static final String FINAL_PAYMENT_AFTER_DISCOUNT_HEADER = "<할인 후 예상 결제 금액>";
+    private static final String AFTER_DISCOUNT_AMOUNT_HEADER = "<할인 후 예상 결제 금액>";
     private static final String DECEMBER_EVENT_BADGE_HEADER = "<12월 이벤트 배지>";
     private static final String NONE = "없음";
 
@@ -31,8 +31,8 @@ public class OutputView {
         printMessage(food.getName() + " " + quantity.getQuantity() + "개");
     }
 
-    public void printBeforeDiscount(final Integer price) {
-        printMessage(BEFORE_DISCOUNT_HEADER);
+    public void printBeforeDiscountAmount(final Integer price) {
+        printMessage(BEFORE_DISCOUNT_AMOUNT_HEADER);
         printMessage(String.format("%,d원", price));
         printLine();
     }
@@ -57,8 +57,8 @@ public class OutputView {
         printLine();
     }
 
-    public void printPayMoneyAfterDiscount(final Integer payAmount) {
-        printMessage(FINAL_PAYMENT_AFTER_DISCOUNT_HEADER);
+    public void printAfterDiscountAmount(final Integer payAmount) {
+        printMessage(AFTER_DISCOUNT_AMOUNT_HEADER);
         printMessage(String.format("%,d원", payAmount));
         printLine();
     }

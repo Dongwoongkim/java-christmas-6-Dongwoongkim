@@ -1,6 +1,6 @@
 package christmas.model;
 
-import static christmas.model.EventInfo.GIFT_REQUIREMENT_AMOUNT;
+import static christmas.model.EventInfo.GIFT_REQUIRE_AMOUNT;
 
 public class Gift {
 
@@ -13,7 +13,7 @@ public class Gift {
     }
 
     public static Gift createGift(final Integer amount) {
-        if (amount >= GIFT_REQUIREMENT_AMOUNT.getValue()) {
+        if (amount >= GIFT_REQUIRE_AMOUNT.getValue()) {
             return new Gift(ONE_CHAMPAGNE);
         }
         return new Gift(NONE_GIFT);

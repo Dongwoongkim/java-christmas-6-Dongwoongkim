@@ -20,7 +20,7 @@ public class Order {
         this.foodAndQuantity = foodAndQuantity;
     }
 
-    public static Order createOrderMenu(final Map<Food, Quantity> foodAndQuantity) {
+    public static Order createOrder(final Map<Food, Quantity> foodAndQuantity) {
         return new Order(foodAndQuantity);
     }
 
