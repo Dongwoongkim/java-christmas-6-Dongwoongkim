@@ -7,6 +7,7 @@ import christmas.vo.Food;
 import christmas.vo.Quantity;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -14,41 +15,47 @@ public class Converter {
 
     private static final String MENU_DELIMITER = ",";
     private static final String QUANTITY_DELIMITER = "-";
+    private static final Integer FOOD_INDEX = 0;
+    private static final Integer QUANTITY_INDEX = 1;
 
     private Converter() {
     }
 
     public static Map<Food, Quantity> stringToMap(final String menu) {
         try {
-            Map<Food, Quantity> foodAndQuantity = splitAndMapping(menu);
+            List<String> menuItems = stringToList(menu);
+            Map<Food, Quantity> foodAndQuantity = splitAndMapping(menuItems);
             return Collections.unmodifiableMap(foodAndQuantity);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidOrderFormatException();
         }
     }
 
-    private static Map<Food, Quantity> splitAndMapping(final String menu) {
-        Map<Food, Quantity> foodMap = Arrays.stream(menu.split(MENU_DELIMITER))
+    private static List<String> stringToList(final String menu) {
+        return Arrays.asList(menu.split(MENU_DELIMITER));
+    }
+
+    private static Map<Food, Quantity> splitAndMapping(final List<String> menuItems) {
+        return menuItems.stream()
                 .map(item -> item.split(QUANTITY_DELIMITER))
                 .collect(Collectors.toMap(
-                        eachFoodAndQuantity -> getFood(eachFoodAndQuantity),
-                        eachFoodAndQuantity -> getQuantity(eachFoodAndQuantity),
+                        foodAndQuantity -> getFood(Arrays.asList(foodAndQuantity)),
+                        foodAndQuantity -> getQuantity(Arrays.asList(foodAndQuantity)),
                         (existing, replacement) -> {
                             throw new AlreadyExistsInOrderException();
                         }
                 ));
-
-        return foodMap;
     }
 
-    private static Food getFood(final String[] parts) {
-        return new Food(parts[0].trim());
+    private static Food getFood(final List<String> foodAndQuantity) {
+        return new Food(foodAndQuantity.get(FOOD_INDEX).trim());
     }
 
-    private static Quantity getQuantity(final String[] parts) {
+    private static Quantity getQuantity(final List<String> foodAndQuantity) {
         try {
-            return Quantity.create(Integer.parseInt(parts[1]));
-        } catch (NumberFormatException e) {
+            String quantity = foodAndQuantity.get(QUANTITY_INDEX);
+            return Quantity.create(Integer.valueOf(quantity));
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new OrderMenuCountNonNumericException();
         }
     }
