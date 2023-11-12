@@ -9,6 +9,7 @@ import static christmas.model.DiscountPolicy.GIFT_DISCOUNT;
 import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
+import static christmas.model.GiftInfo.ONE_CHAMPAGNE;
 
 import christmas.model.vo.VisitDay;
 import java.util.Collections;
@@ -45,7 +46,7 @@ public class Discount {
     private static void putGiftDiscount(final boolean isGiftReceived,
                                         final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (isGiftReceived) {
-            DiscountAmount discountAmount = DiscountAmount.create(Menu.getGiftPrice());
+            DiscountAmount discountAmount = DiscountAmount.create(ONE_CHAMPAGNE.getGiftAmount());
             discountInformation.put(GIFT_DISCOUNT, discountAmount);
         }
     }

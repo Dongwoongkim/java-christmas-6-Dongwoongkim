@@ -39,8 +39,4 @@ public enum Menu {
                 .map(menu -> menu.getSalesMenu().get(food.getName()))
                 .orElse(0);
     }
-
-    public static int getGiftPrice() {
-        return Menu.DRINK.getSalesMenu().get("샴페인");
-    }
 }
