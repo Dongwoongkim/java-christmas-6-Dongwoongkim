@@ -8,24 +8,23 @@ import christmas.exception.OnlyDrinkOrderException;
 import christmas.exception.OverMaxQuantityOrderException;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
+import java.util.Collections;
 import java.util.Map;
 
 public class Order {
 
-    private static final Integer NO_DISCOUNT_AMOUNT = 0;
-
     private final Map<Food, Quantity> foodAndQuantity;
 
-    private Order(Map<Food, Quantity> foodAndQuantity) {
+    private Order(final Map<Food, Quantity> foodAndQuantity) {
         validate(foodAndQuantity);
         this.foodAndQuantity = foodAndQuantity;
     }
 
-    public static Order createOrderMenu(Map<Food, Quantity> foodAndQuantity) {
+    public static Order createOrderMenu(final Map<Food, Quantity> foodAndQuantity) {
         return new Order(foodAndQuantity);
     }
 
-    private void validate(Map<Food, Quantity> foodAndQuantity) {
+    private void validate(final Map<Food, Quantity> foodAndQuantity) {
         if (isOrderOverMaxQuantity(foodAndQuantity)) {
             throw new OverMaxQuantityOrderException();
         }
@@ -34,13 +33,13 @@ public class Order {
         }
     }
 
-    private boolean isContainOnlyDrink(Map<Food, Quantity> foodAndQuantity) {
+    private boolean isContainOnlyDrink(final Map<Food, Quantity> foodAndQuantity) {
         return foodAndQuantity.keySet()
                 .stream()
                 .allMatch(Food::isDrink);
     }
 
-    private boolean isOrderOverMaxQuantity(Map<Food, Quantity> foodAndQuantity) {
+    private boolean isOrderOverMaxQuantity(final Map<Food, Quantity> foodAndQuantity) {
         int totalQuantity = foodAndQuantity.values()
                 .stream()
                 .mapToInt(Quantity::getQuantity).sum();
@@ -74,6 +73,6 @@ public class Order {
     }
 
     public Map<Food, Quantity> getFoodAndQuantity() {
-        return foodAndQuantity;
+        return Collections.unmodifiableMap(foodAndQuantity);
     }
 }

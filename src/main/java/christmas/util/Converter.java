@@ -6,6 +6,7 @@ import christmas.exception.OrderMenuCountNonNumericException;
 import christmas.vo.Food;
 import christmas.vo.Quantity;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,8 @@ public class Converter {
 
     public static Map<Food, Quantity> stringToMap(final String menu) {
         try {
-            return splitAndMapping(menu);
+            Map<Food, Quantity> foodAndQuantity = splitAndMapping(menu);
+            return Collections.unmodifiableMap(foodAndQuantity);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidOrderFormatException();
         }
