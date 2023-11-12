@@ -59,7 +59,7 @@ public class Order {
     public Integer getDessertQuantity() {
         return foodAndQuantity.entrySet()
                 .stream()
-                .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().getName()))
+                .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().name()))
                 .mapToInt(order -> order.getValue().getQuantity())
                 .sum();
     }
@@ -67,7 +67,7 @@ public class Order {
     public Integer getMainQuantity() {
         return foodAndQuantity.entrySet()
                 .stream()
-                .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().getName()))
+                .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().name()))
                 .mapToInt(order -> order.getValue().getQuantity())
                 .sum();
     }

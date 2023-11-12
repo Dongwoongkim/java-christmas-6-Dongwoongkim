@@ -42,7 +42,7 @@ public class Converter {
     }
 
     private static Food getFood(final String[] parts) {
-        return Food.create(parts[0].trim());
+        return new Food(parts[0].trim());
     }
 
     private static Quantity getQuantity(final String[] parts) {

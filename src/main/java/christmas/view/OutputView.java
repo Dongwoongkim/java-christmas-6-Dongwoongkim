@@ -28,7 +28,7 @@ public class OutputView {
     }
 
     public void printOrderMenu(final Food food, final Quantity quantity) {
-        printMessage(food.getName() + " " + quantity.getQuantity() + "개");
+        printMessage(food.name() + " " + quantity.getQuantity() + "개");
     }
 
     public void printBeforeDiscountAmount(final Integer price) {

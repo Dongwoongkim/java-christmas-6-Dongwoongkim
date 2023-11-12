@@ -6,17 +6,10 @@ import christmas.exception.OrderNotInMenuException;
 import christmas.model.Menu;
 import java.util.Arrays;
 
-public class Food {
+public record Food(String name) {
 
-    private final String name;
-
-    private Food(final String name) {
+    public Food {
         validate(name);
-        this.name = name;
-    }
-
-    public static Food create(final String name) {
-        return new Food(name);
     }
 
     private void validate(final String name) {
@@ -33,9 +26,5 @@ public class Food {
     public boolean isDrink() {
         return DRINK.getSalesMenu()
                 .containsKey(name);
-    }
-
-    public String getName() {
-        return name;
     }
 }
