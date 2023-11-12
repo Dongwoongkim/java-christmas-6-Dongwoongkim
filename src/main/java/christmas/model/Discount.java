@@ -40,7 +40,7 @@ public class Discount {
         putD_DayDiscount(visitDay, discountInformation);
         putSpecialDayDiscount(visitDay, discountInformation);
         putGiftDiscount(isGiftReceived, discountInformation);
-        
+
         return new Discount(discountInformation);
     }
 
@@ -71,7 +71,7 @@ public class Discount {
 
     private static void putWeekendDayDiscount(final Integer mainQuantity, final VisitDay visitDay,
                                               final Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (!visitDay.isWeekDay() && mainQuantity != 0) {
+        if (visitDay.isWeekend() && mainQuantity != 0) {
             DiscountAmount discountAmount = DiscountAmount.create(mainQuantity * PRESENT_YEAR.getValue());
             discountInformation.put(WEEKEND_DISCOUNT, discountAmount);
         }
@@ -79,7 +79,7 @@ public class Discount {
 
     private static void putWeekDayDiscount(final Integer dessertQuantity, final VisitDay visitDay,
                                            final Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (visitDay.isWeekDay() && dessertQuantity != 0) {
+        if (!visitDay.isWeekend() && dessertQuantity != 0) {
             DiscountAmount discountAmount = DiscountAmount.create(dessertQuantity * PRESENT_YEAR.getValue());
             discountInformation.put(WEEKDAY_DISCOUNT, discountAmount);
         }

@@ -12,12 +12,7 @@ public class VisitDay {
     private static final Integer WEEK_LENGTH = 7;
     private static final Integer SUNDAY_MODULUS = 3;
 
-    private static final List<Integer> WEEK_DAY = List.of(3, 4, 5, 6, 7, 8,
-            10, 11, 12, 13, 14, 15,
-            17, 18, 19, 20, 21, 22,
-            24, 25, 26, 27, 28, 29,
-            31);
-
+    private static final List<Integer> WEEKEND_DAY = List.of(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
     private final Integer day;
 
     private VisitDay(final Integer day) {
@@ -42,8 +37,8 @@ public class VisitDay {
         return false;
     }
 
-    public boolean isWeekDay() {
-        return WEEK_DAY.contains(day);
+    public boolean isWeekend() {
+        return WEEKEND_DAY.contains(day);
     }
 
     public boolean isBeforeOrEqualsChristmas() {
