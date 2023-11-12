@@ -10,7 +10,6 @@ import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
 
-import christmas.model.vo.DiscountAmount;
 import christmas.model.vo.VisitDay;
 import java.util.Collections;
 import java.util.HashMap;

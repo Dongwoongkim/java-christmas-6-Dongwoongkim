@@ -2,10 +2,10 @@ package christmas.controller;
 
 import christmas.model.Badge;
 import christmas.model.Discount;
+import christmas.model.DiscountAmount;
 import christmas.model.DiscountPolicy;
 import christmas.model.Gift;
 import christmas.model.Order;
-import christmas.model.vo.DiscountAmount;
 import christmas.model.vo.Food;
 import christmas.model.vo.Quantity;
 import christmas.model.vo.VisitDay;
