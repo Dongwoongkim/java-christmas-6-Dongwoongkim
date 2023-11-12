@@ -45,7 +45,7 @@ public class OrderController {
             try {
                 String day = inputView.inputDay();
                 InputValidator.validateDay(day);
-                return new VisitDay(Integer.valueOf(day));
+                return VisitDay.create(Integer.valueOf(day));
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }
@@ -57,7 +57,7 @@ public class OrderController {
             try {
                 String orderMenu = inputView.inputMenu();
                 Map<Food, Quantity> foodAndQuantity = Converter.stringToMap(orderMenu);
-                return Order.createOrder(foodAndQuantity);
+                return Order.create(foodAndQuantity);
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }
@@ -65,16 +65,16 @@ public class OrderController {
     }
 
     private Gift initGift(final Order order) {
-        return Gift.createGift(order.getAmount());
+        return Gift.create(order.getAmount());
     }
 
     private Discount initDiscount(final Integer mainQuantity, final Integer dessertQuantity,
                                   final VisitDay visitDay, final boolean isGiftReceived) {
-        return Discount.createDiscount(mainQuantity, dessertQuantity, visitDay, isGiftReceived);
+        return Discount.create(mainQuantity, dessertQuantity, visitDay, isGiftReceived);
     }
 
     private Badge initBadge(final Discount discount) {
-        return Badge.createBadge(discount.getSumOfDiscount());
+        return Badge.create(discount.getSumOfDiscount());
     }
 
     private void showReceipt(final Order order, final Discount discount, final Gift gift) {

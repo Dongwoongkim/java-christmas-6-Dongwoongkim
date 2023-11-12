@@ -26,8 +26,8 @@ public class Discount {
         this.discountInformation = discountInformation;
     }
 
-    public static Discount createDiscount(final Integer mainQuantity, final Integer dessertQuantity,
-                                          final VisitDay visitDay, final boolean isGiftReceived) {
+    public static Discount create(final Integer mainQuantity, final Integer dessertQuantity,
+                                  final VisitDay visitDay, final boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
 
         putWeekDayDiscount(dessertQuantity, visitDay, discountInformation);
@@ -42,7 +42,7 @@ public class Discount {
     private static void putGiftDiscount(final boolean isGiftReceived,
                                         final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (isGiftReceived) {
-            DiscountAmount discountAmount = new DiscountAmount(Menu.getGiftPrice());
+            DiscountAmount discountAmount = DiscountAmount.create(Menu.getGiftPrice());
             discountInformation.put(GIFT_DISCOUNT, discountAmount);
         }
     }
@@ -50,7 +50,7 @@ public class Discount {
     private static void putSpecialDayDiscount(final VisitDay visitDay,
                                               final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isSpecialDay()) {
-            DiscountAmount discountAmount = new DiscountAmount(SPECIAL_DISCOUNT_AMOUNT.getValue());
+            DiscountAmount discountAmount = DiscountAmount.create(SPECIAL_DISCOUNT_AMOUNT.getValue());
             discountInformation.put(SPECIAL_DISCOUNT, discountAmount);
         }
     }
@@ -58,7 +58,7 @@ public class Discount {
     private static void putD_DayDiscount(final VisitDay visitDay,
                                          final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isBeforeOrEqualsChristmas()) {
-            DiscountAmount discountAmount = new DiscountAmount(
+            DiscountAmount discountAmount = DiscountAmount.create(
                     START_D_DAY_DISCOUNT_AMOUNT.getValue() + visitDay.getDay() * D_DAY_DISCOUNT_AMOUNT.getValue());
             discountInformation.put(D_DAY_DISCOUNT, discountAmount);
         }
@@ -67,7 +67,7 @@ public class Discount {
     private static void putWeekendDayDiscount(final Integer mainQuantity, final VisitDay visitDay,
                                               final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (!visitDay.isWeekDay() && mainQuantity != 0) {
-            DiscountAmount discountAmount = new DiscountAmount(mainQuantity * PRESENT_YEAR.getValue());
+            DiscountAmount discountAmount = DiscountAmount.create(mainQuantity * PRESENT_YEAR.getValue());
             discountInformation.put(WEEKEND_DISCOUNT, discountAmount);
         }
     }
@@ -75,13 +75,13 @@ public class Discount {
     private static void putWeekDayDiscount(final Integer dessertQuantity, final VisitDay visitDay,
                                            final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isWeekDay() && dessertQuantity != 0) {
-            DiscountAmount discountAmount = new DiscountAmount(dessertQuantity * PRESENT_YEAR.getValue());
+            DiscountAmount discountAmount = DiscountAmount.create(dessertQuantity * PRESENT_YEAR.getValue());
             discountInformation.put(WEEKDAY_DISCOUNT, discountAmount);
         }
     }
 
     public Integer getGiftDiscount() {
-        return discountInformation.getOrDefault(GIFT_DISCOUNT, new DiscountAmount(NO_DISCOUNT_AMOUNT)).getAmount();
+        return discountInformation.getOrDefault(GIFT_DISCOUNT, DiscountAmount.create(NO_DISCOUNT_AMOUNT)).getAmount();
     }
 
     public Integer getSumOfDiscount() {

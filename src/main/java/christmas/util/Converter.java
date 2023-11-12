@@ -32,7 +32,7 @@ public class Converter {
                 .map(item -> item.split(QUANTITY_DELIMITER))
                 .collect(Collectors.toMap(
                         eachFoodAndQuantity -> getFood(eachFoodAndQuantity),
-                        eachFoodAndQuantity -> getFoodCount(eachFoodAndQuantity),
+                        eachFoodAndQuantity -> getQuantity(eachFoodAndQuantity),
                         (existing, replacement) -> {
                             throw new AlreadyExistsInOrderException();
                         }
@@ -42,12 +42,12 @@ public class Converter {
     }
 
     private static Food getFood(final String[] parts) {
-        return new Food(parts[0].trim());
+        return Food.create(parts[0].trim());
     }
 
-    private static Quantity getFoodCount(final String[] parts) {
+    private static Quantity getQuantity(final String[] parts) {
         try {
-            return new Quantity(Integer.parseInt(parts[1]));
+            return Quantity.create(Integer.parseInt(parts[1]));
         } catch (NumberFormatException e) {
             throw new OrderMenuCountNonNumericException();
         }

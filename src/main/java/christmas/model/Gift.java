@@ -12,7 +12,7 @@ public class Gift {
         this.name = name;
     }
 
-    public static Gift createGift(final Integer amount) {
+    public static Gift create(final Integer amount) {
         if (amount >= GIFT_REQUIRE_AMOUNT.getValue()) {
             return new Gift(ONE_CHAMPAGNE);
         }

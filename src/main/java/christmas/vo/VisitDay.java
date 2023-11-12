@@ -20,9 +20,13 @@ public class VisitDay {
 
     private final Integer day;
 
-    public VisitDay(final Integer day) {
+    private VisitDay(final Integer day) {
         validate(day);
         this.day = day;
+    }
+
+    public static VisitDay create(Integer day) {
+        return new VisitDay(day);
     }
 
     private void validate(final Integer day) {

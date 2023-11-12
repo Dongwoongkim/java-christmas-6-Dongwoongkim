@@ -10,9 +10,13 @@ public class Food {
 
     private final String name;
 
-    public Food(final String name) {
+    private Food(final String name) {
         validate(name);
         this.name = name;
+    }
+
+    public static Food create(String name) {
+        return new Food(name);
     }
 
     private void validate(final String name) {

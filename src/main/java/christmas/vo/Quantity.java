@@ -12,6 +12,10 @@ public class Quantity {
         this.quantity = quantity;
     }
 
+    public static Quantity create(Integer quantity) {
+        return new Quantity(quantity);
+    }
+
     private void validate(final Integer quantity) {
         if (isQuantityZero(quantity)) {
             throw new ZeroQuantityOrderException();
