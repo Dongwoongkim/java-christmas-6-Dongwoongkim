@@ -2,6 +2,7 @@ package christmas.model;
 
 public enum EventInfo {
 
+    MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT(10000),
     SPECIAL_DISCOUNT_AMOUNT(1000),
     D_DAY_DISCOUNT_AMOUNT(100),
     START_D_DAY_DISCOUNT_AMOUNT(900),

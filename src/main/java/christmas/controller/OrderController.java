@@ -32,8 +32,9 @@ public class OrderController {
 
         Integer mainQuantity = order.getMainQuantity();
         Integer dessertQuantity = order.getDessertQuantity();
+        Integer orderAmount = order.getAmount();
 
-        Discount discount = initDiscount(mainQuantity, dessertQuantity, visitDay, gift.isReceived());
+        Discount discount = initDiscount(orderAmount, mainQuantity, dessertQuantity, visitDay, gift.isReceived());
         Badge badge = initBadge(discount);
 
         showReceipt(order, discount, gift);
@@ -68,9 +69,9 @@ public class OrderController {
         return Gift.create(order.getAmount());
     }
 
-    private Discount initDiscount(final Integer mainQuantity, final Integer dessertQuantity,
+    private Discount initDiscount(final Integer orderAmount, final Integer mainQuantity, final Integer dessertQuantity,
                                   final VisitDay visitDay, final boolean isGiftReceived) {
-        return Discount.create(mainQuantity, dessertQuantity, visitDay, isGiftReceived);
+        return Discount.create(orderAmount, mainQuantity, dessertQuantity, visitDay, isGiftReceived);
     }
 
     private Badge initBadge(final Discount discount) {

@@ -6,6 +6,7 @@ import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
 import static christmas.model.EventInfo.D_DAY_DISCOUNT_AMOUNT;
+import static christmas.model.EventInfo.MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT;
 import static christmas.model.EventInfo.PRESENT_YEAR;
 import static christmas.model.EventInfo.SPECIAL_DISCOUNT_AMOUNT;
 import static christmas.model.EventInfo.START_D_DAY_DISCOUNT_AMOUNT;
@@ -26,16 +27,20 @@ public class Discount {
         this.discountInformation = discountInformation;
     }
 
-    public static Discount create(final Integer mainQuantity, final Integer dessertQuantity,
+    public static Discount create(final Integer orderAmount, final Integer mainQuantity, final Integer dessertQuantity,
                                   final VisitDay visitDay, final boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
+
+        if (orderAmount <= MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT.getValue()) {
+            return new Discount(discountInformation);
+        }
 
         putWeekDayDiscount(dessertQuantity, visitDay, discountInformation);
         putWeekendDayDiscount(mainQuantity, visitDay, discountInformation);
         putD_DayDiscount(visitDay, discountInformation);
         putSpecialDayDiscount(visitDay, discountInformation);
         putGiftDiscount(isGiftReceived, discountInformation);
-
+        
         return new Discount(discountInformation);
     }
 
