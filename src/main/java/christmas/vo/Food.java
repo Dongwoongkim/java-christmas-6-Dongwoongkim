@@ -15,7 +15,7 @@ public class Food {
         this.name = name;
     }
 
-    public static Food create(String name) {
+    public static Food create(final String name) {
         return new Food(name);
     }
 

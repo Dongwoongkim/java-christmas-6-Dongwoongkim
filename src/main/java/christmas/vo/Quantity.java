@@ -12,7 +12,7 @@ public class Quantity {
         this.amount = amount;
     }
 
-    public static Quantity create(Integer amount) {
+    public static Quantity create(final Integer amount) {
         return new Quantity(amount);
     }
 

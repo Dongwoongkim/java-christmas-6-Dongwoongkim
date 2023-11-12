@@ -25,7 +25,7 @@ public class VisitDay {
         this.day = day;
     }
 
-    public static VisitDay create(Integer day) {
+    public static VisitDay create(final Integer day) {
         return new VisitDay(day);
     }
 

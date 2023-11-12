@@ -8,7 +8,7 @@ public class DiscountAmount {
         this.amount = amount;
     }
 
-    public static DiscountAmount create(Integer amount) {
+    public static DiscountAmount create(final Integer amount) {
         return new DiscountAmount(amount);
     }
 
