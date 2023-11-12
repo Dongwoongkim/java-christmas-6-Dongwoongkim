@@ -10,7 +10,7 @@ public enum BadgeInfo {
     private final String badgeName;
     private final Integer requireAmount;
 
-    BadgeInfo(String badgeName, Integer requireAmount) {
+    BadgeInfo(final String badgeName, final Integer requireAmount) {
         this.badgeName = badgeName;
         this.requireAmount = requireAmount;
     }

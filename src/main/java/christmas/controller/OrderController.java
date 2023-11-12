@@ -86,21 +86,21 @@ public class OrderController {
         outputView.printBeforeDiscountAmount(order.getAmount());
         outputView.printServiceMenu(gift.getName());
 
-        showDiscountDetails(discount.getDiscountInformation());
+        showDiscountDetails(discount.getDiscountDetails());
 
         outputView.printTotalBenefit(discount.getSumOfDiscount());
         outputView.printAfterDiscountAmount(order.getAmount() -
                 discount.getSumOfDiscount() + discount.getGiftDiscount());
     }
 
-    private void showDiscountDetails(final Map<DiscountPolicy, DiscountAmount> discountInformation) {
+    private void showDiscountDetails(final Map<DiscountPolicy, DiscountAmount> discountDetails) {
         outputView.printBenefitHeader();
-        if (discountInformation.isEmpty()) {
+        if (discountDetails.isEmpty()) {
             outputView.printNone();
             outputView.printLine();
             return;
         }
-        discountInformation.forEach(
+        discountDetails.forEach(
                 (discountPolicy, amount) -> outputView.printBenefit(discountPolicy.getPolicy(), amount.getAmount()));
         outputView.printLine();
     }

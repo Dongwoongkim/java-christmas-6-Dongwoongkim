@@ -9,7 +9,7 @@ public enum GiftInfo {
     private final Integer requireAmount;
     private final Integer giftAmount;
 
-    GiftInfo(String giftName, Integer requireAmount, Integer giftAmount) {
+    GiftInfo(final String giftName, final Integer requireAmount, final Integer giftAmount) {
         this.giftName = giftName;
         this.requireAmount = requireAmount;
         this.giftAmount = giftAmount;
