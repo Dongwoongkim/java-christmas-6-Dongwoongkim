@@ -11,8 +11,8 @@ public class VisitDay {
 
     private static final Integer WEEK_LENGTH = 7;
     private static final Integer SUNDAY_MODULUS = 3;
-
     private static final List<Integer> WEEKEND_DAY = List.of(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
+
     private final Integer day;
 
     private VisitDay(final Integer day) {

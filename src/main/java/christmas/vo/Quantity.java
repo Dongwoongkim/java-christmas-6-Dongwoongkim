@@ -7,7 +7,7 @@ public class Quantity {
     private static final Integer ZERO_AMOUNT = 0;
     private final Integer amount;
 
-    public Quantity(final Integer amount) {
+    private Quantity(final Integer amount) {
         validate(amount);
         this.amount = amount;
     }

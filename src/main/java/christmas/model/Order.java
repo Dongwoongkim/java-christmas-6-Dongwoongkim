@@ -40,14 +40,19 @@ public class Order {
     }
 
     private boolean isOrderOverMaxQuantity(final Map<Food, Quantity> foodAndQuantity) {
-        int totalQuantity = foodAndQuantity.values()
-                .stream()
-                .mapToInt(Quantity::getQuantity).sum();
+        int totalQuantity = getTotalQuantity(foodAndQuantity);
 
         if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
             return true;
         }
         return false;
+    }
+
+    private int getTotalQuantity(Map<Food, Quantity> foodAndQuantity) {
+        return foodAndQuantity.values()
+                .stream()
+                .mapToInt(Quantity::getQuantity)
+                .sum();
     }
 
     public Integer getAmount() {
