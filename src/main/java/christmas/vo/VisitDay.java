@@ -1,14 +1,13 @@
 package christmas.vo;
 
-import static christmas.model.EventInfo.CHRISTMAS_DAY;
-import static christmas.model.EventInfo.END_EVENT_DAY;
-import static christmas.model.EventInfo.START_EVENT_DAY;
-
 import christmas.exception.DayDoesNotExistInCalendarException;
 import java.util.List;
 
 public class VisitDay {
 
+    private static final Integer CHRISTMAS_DAY = 25;
+    private static final Integer START_EVENT_DAY = 1;
+    private static final Integer END_EVENT_DAY = 31;
     private static final Integer WEEK_LENGTH = 7;
     private static final Integer SUNDAY_MODULUS = 3;
     private static final List<Integer> WEEKEND_DAY = List.of(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
@@ -31,7 +30,7 @@ public class VisitDay {
     }
 
     private boolean isInEventDay(final Integer day) {
-        if (day >= START_EVENT_DAY.getValue() && day <= END_EVENT_DAY.getValue()) {
+        if (day >= START_EVENT_DAY && day <= END_EVENT_DAY) {
             return true;
         }
         return false;
@@ -42,7 +41,7 @@ public class VisitDay {
     }
 
     public boolean isBeforeOrEqualsChristmas() {
-        return day <= CHRISTMAS_DAY.getValue();
+        return day <= CHRISTMAS_DAY;
     }
 
     public boolean isSpecialDay() {
@@ -50,11 +49,11 @@ public class VisitDay {
     }
 
     private boolean isEndDayOfEvent() {
-        return day == END_EVENT_DAY.getValue();
+        return day == END_EVENT_DAY;
     }
 
     private boolean isChristmasDay() {
-        return day == CHRISTMAS_DAY.getValue();
+        return day == CHRISTMAS_DAY;
     }
 
     private boolean isSunday() {

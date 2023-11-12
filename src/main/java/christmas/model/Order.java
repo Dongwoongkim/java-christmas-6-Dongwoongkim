@@ -1,6 +1,5 @@
 package christmas.model;
 
-import static christmas.model.EventInfo.MAX_ORDER_QUANTITY;
 import static christmas.model.Menu.DESSERT;
 import static christmas.model.Menu.MAIN;
 
@@ -13,6 +12,7 @@ import java.util.Map;
 
 public class Order {
 
+    private static final Integer MAX_ORDER_QUANTITY = 20;
     private final Map<Food, Quantity> foodAndQuantity;
 
     private Order(final Map<Food, Quantity> foodAndQuantity) {
@@ -42,7 +42,7 @@ public class Order {
     private boolean isOrderOverMaxQuantity(final Map<Food, Quantity> foodAndQuantity) {
         int totalQuantity = getTotalQuantity(foodAndQuantity);
 
-        if (totalQuantity > MAX_ORDER_QUANTITY.getValue()) {
+        if (totalQuantity > MAX_ORDER_QUANTITY) {
             return true;
         }
         return false;

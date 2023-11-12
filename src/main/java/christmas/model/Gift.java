@@ -1,11 +1,10 @@
 package christmas.model;
 
-import static christmas.model.EventInfo.GIFT_REQUIRE_AMOUNT;
+import static christmas.model.GiftInfo.NONE_GIFT;
+import static christmas.model.GiftInfo.ONE_CHAMPAGNE;
 
 public class Gift {
 
-    private static final String ONE_CHAMPAGNE = "샴페인 1개";
-    private static final String NONE_GIFT = "없음";
     private final String name;
 
     private Gift(final String name) {
@@ -13,14 +12,14 @@ public class Gift {
     }
 
     public static Gift create(final Integer amount) {
-        if (amount >= GIFT_REQUIRE_AMOUNT.getValue()) {
-            return new Gift(ONE_CHAMPAGNE);
+        if (amount >= ONE_CHAMPAGNE.getRequireAmount()) {
+            return new Gift(ONE_CHAMPAGNE.getGiftName());
         }
-        return new Gift(NONE_GIFT);
+        return new Gift(NONE_GIFT.getGiftName());
     }
 
     public boolean isReceived() {
-        return !name.equals(NONE_GIFT);
+        return !name.equals(NONE_GIFT.getGiftName());
     }
 
     public String getName() {

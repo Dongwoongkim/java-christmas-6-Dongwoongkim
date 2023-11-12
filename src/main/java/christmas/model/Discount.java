@@ -5,11 +5,6 @@ import static christmas.model.DiscountPolicy.GIFT_DISCOUNT;
 import static christmas.model.DiscountPolicy.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountPolicy.WEEKEND_DISCOUNT;
-import static christmas.model.EventInfo.D_DAY_DISCOUNT_AMOUNT;
-import static christmas.model.EventInfo.MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT;
-import static christmas.model.EventInfo.PRESENT_YEAR;
-import static christmas.model.EventInfo.SPECIAL_DISCOUNT_AMOUNT;
-import static christmas.model.EventInfo.START_D_DAY_DISCOUNT_AMOUNT;
 
 import christmas.vo.DiscountAmount;
 import christmas.vo.VisitDay;
@@ -19,7 +14,12 @@ import java.util.Map;
 
 public class Discount {
 
-    private static final Integer NO_DISCOUNT_AMOUNT = 0;
+    private static final Integer START_D_DAY_DISCOUNT_AMOUNT = 900;
+    private static final Integer D_DAY_DISCOUNT_AMOUNT = 100;
+    private static final Integer PRESENT_YEAR = 2023;
+    private static final Integer MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT = 10000;
+    private static final Integer SPECIAL_DISCOUNT_AMOUNT = 1000;
+    private static final Integer ZERO = 0;
 
     private final Map<DiscountPolicy, DiscountAmount> discountInformation;
 
@@ -31,7 +31,7 @@ public class Discount {
                                   final VisitDay visitDay, final boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountInformation = new HashMap<>();
 
-        if (orderAmount <= MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT.getValue()) {
+        if (orderAmount <= MINIMUM_ORDER_AMOUNT_TO_ATTEND_EVENT) {
             return new Discount(discountInformation);
         }
 
@@ -55,7 +55,7 @@ public class Discount {
     private static void putSpecialDayDiscount(final VisitDay visitDay,
                                               final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isSpecialDay()) {
-            DiscountAmount discountAmount = DiscountAmount.create(SPECIAL_DISCOUNT_AMOUNT.getValue());
+            DiscountAmount discountAmount = DiscountAmount.create(SPECIAL_DISCOUNT_AMOUNT);
             discountInformation.put(SPECIAL_DISCOUNT, discountAmount);
         }
     }
@@ -64,29 +64,29 @@ public class Discount {
                                          final Map<DiscountPolicy, DiscountAmount> discountInformation) {
         if (visitDay.isBeforeOrEqualsChristmas()) {
             DiscountAmount discountAmount = DiscountAmount.create(
-                    START_D_DAY_DISCOUNT_AMOUNT.getValue() + visitDay.getDay() * D_DAY_DISCOUNT_AMOUNT.getValue());
+                    START_D_DAY_DISCOUNT_AMOUNT + visitDay.getDay() * D_DAY_DISCOUNT_AMOUNT);
             discountInformation.put(D_DAY_DISCOUNT, discountAmount);
         }
     }
 
     private static void putWeekendDayDiscount(final Integer mainQuantity, final VisitDay visitDay,
                                               final Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (visitDay.isWeekend() && mainQuantity != 0) {
-            DiscountAmount discountAmount = DiscountAmount.create(mainQuantity * PRESENT_YEAR.getValue());
+        if (visitDay.isWeekend() && mainQuantity != ZERO) {
+            DiscountAmount discountAmount = DiscountAmount.create(mainQuantity * PRESENT_YEAR);
             discountInformation.put(WEEKEND_DISCOUNT, discountAmount);
         }
     }
 
     private static void putWeekDayDiscount(final Integer dessertQuantity, final VisitDay visitDay,
                                            final Map<DiscountPolicy, DiscountAmount> discountInformation) {
-        if (!visitDay.isWeekend() && dessertQuantity != 0) {
-            DiscountAmount discountAmount = DiscountAmount.create(dessertQuantity * PRESENT_YEAR.getValue());
+        if (!visitDay.isWeekend() && dessertQuantity != ZERO) {
+            DiscountAmount discountAmount = DiscountAmount.create(dessertQuantity * PRESENT_YEAR);
             discountInformation.put(WEEKDAY_DISCOUNT, discountAmount);
         }
     }
 
     public Integer getGiftDiscount() {
-        return discountInformation.getOrDefault(GIFT_DISCOUNT, DiscountAmount.create(NO_DISCOUNT_AMOUNT)).getAmount();
+        return discountInformation.getOrDefault(GIFT_DISCOUNT, DiscountAmount.create(ZERO)).getAmount();
     }
 
     public Integer getSumOfDiscount() {
