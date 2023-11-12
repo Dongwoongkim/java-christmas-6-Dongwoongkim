@@ -15,12 +15,12 @@ import christmas.vo.Quantity;
 import christmas.vo.VisitDay;
 import java.util.Map;
 
-public class EventController {
+public class OrderController {
 
     private final InputView inputView;
     private final OutputView outputView;
 
-    public EventController(InputView inputView, OutputView outputView) {
+    public OrderController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
