@@ -1,4 +1,4 @@
-package christmas.vo;
+package christmas.model.vo;
 
 import christmas.exception.DayDoesNotExistInCalendarException;
 import java.util.List;

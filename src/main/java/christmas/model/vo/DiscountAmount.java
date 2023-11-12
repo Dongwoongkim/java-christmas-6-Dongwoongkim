@@ -1,4 +1,4 @@
-package christmas.vo;
+package christmas.model.vo;
 
 public class DiscountAmount {
 

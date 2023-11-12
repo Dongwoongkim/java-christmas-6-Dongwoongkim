@@ -5,14 +5,14 @@ import christmas.model.Discount;
 import christmas.model.DiscountPolicy;
 import christmas.model.Gift;
 import christmas.model.Order;
+import christmas.model.vo.DiscountAmount;
+import christmas.model.vo.Food;
+import christmas.model.vo.Quantity;
+import christmas.model.vo.VisitDay;
 import christmas.util.Converter;
 import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import christmas.vo.DiscountAmount;
-import christmas.vo.Food;
-import christmas.vo.Quantity;
-import christmas.vo.VisitDay;
 import java.util.Map;
 
 public class OrderController {

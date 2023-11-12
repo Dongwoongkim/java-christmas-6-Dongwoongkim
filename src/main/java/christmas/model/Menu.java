@@ -1,6 +1,6 @@
 package christmas.model;
 
-import christmas.vo.Food;
+import christmas.model.vo.Food;
 import java.util.Arrays;
 import java.util.Map;
 

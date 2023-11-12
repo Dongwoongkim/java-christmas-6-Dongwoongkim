@@ -1,9 +1,9 @@
 package christmas.view;
 
 import christmas.model.DiscountPolicy;
-import christmas.vo.DiscountAmount;
-import christmas.vo.Food;
-import christmas.vo.Quantity;
+import christmas.model.vo.DiscountAmount;
+import christmas.model.vo.Food;
+import christmas.model.vo.Quantity;
 
 public class OutputView {
 

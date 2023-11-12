@@ -5,15 +5,15 @@ import static christmas.model.Menu.MAIN;
 
 import christmas.exception.OnlyDrinkOrderException;
 import christmas.exception.OverMaxQuantityOrderException;
-import christmas.vo.Food;
-import christmas.vo.Quantity;
+import christmas.model.vo.Food;
+import christmas.model.vo.Quantity;
 import java.util.Collections;
 import java.util.Map;
 
 public class Order {
 
     private static final Integer MAX_ORDER_QUANTITY = 20;
-    
+
     private final Map<Food, Quantity> foodAndQuantity;
 
     private Order(final Map<Food, Quantity> foodAndQuantity) {
