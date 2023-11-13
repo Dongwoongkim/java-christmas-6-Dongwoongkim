@@ -9,7 +9,7 @@ import christmas.model.Order;
 import christmas.model.vo.Food;
 import christmas.model.vo.Quantity;
 import christmas.model.vo.VisitDay;
-import christmas.util.Converter;
+import christmas.util.InputConverter;
 import christmas.validation.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -57,7 +57,7 @@ public class OrderController {
         while (true) {
             try {
                 String orderMenu = inputView.inputMenu();
-                Map<Food, Quantity> foodAndQuantity = Converter.stringToMap(orderMenu);
+                Map<Food, Quantity> foodAndQuantity = InputConverter.stringToMap(orderMenu);
                 return Order.create(foodAndQuantity);
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());

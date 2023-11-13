@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Converter {
+public class InputConverter {
 
     private static final String MENU_DELIMITER = ",";
     private static final String QUANTITY_DELIMITER = "-";
     private static final Integer FOOD_INDEX = 0;
     private static final Integer QUANTITY_INDEX = 1;
 
-    private Converter() {
+    private InputConverter() {
     }
 
     public static Map<Food, Quantity> stringToMap(final String menu) {
