@@ -71,5 +71,4 @@ class InputConverterTest {
         // when & then
         assertThrows(InvalidOrderFormatException.class, () -> InputConverter.stringToMap(invalidOrder));
     }
-
 }
