@@ -10,7 +10,7 @@ import christmas.model.vo.Food;
 import christmas.model.vo.Quantity;
 import christmas.model.vo.VisitDay;
 import christmas.util.InputConverter;
-import christmas.validation.InputValidator;
+import christmas.util.InputValidator;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package christmas.validation;
+package christmas.util;
 
 import christmas.exception.DayContainCharactersException;
 
