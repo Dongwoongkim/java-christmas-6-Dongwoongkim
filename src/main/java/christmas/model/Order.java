@@ -52,29 +52,29 @@ public class Order {
     private int getTotalQuantity(final Map<Food, Quantity> foodAndQuantity) {
         return foodAndQuantity.values()
                 .stream()
-                .mapToInt(Quantity::getQuantity)
+                .mapToInt(Quantity::amount)
                 .sum();
     }
 
     public Integer getAmount() {
         return foodAndQuantity.keySet().stream()
-                .mapToInt(food -> Menu.getPriceOfFood(food) * foodAndQuantity.get(food).getQuantity())
+                .mapToInt(food -> Menu.getPriceOfFood(food) * foodAndQuantity.get(food).amount())
                 .sum();
     }
 
     public Integer getDessertQuantity() {
         return foodAndQuantity.entrySet()
                 .stream()
-                .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().getName()))
-                .mapToInt(order -> order.getValue().getQuantity())
+                .filter(order -> DESSERT.getSalesMenu().containsKey(order.getKey().name()))
+                .mapToInt(order -> order.getValue().amount())
                 .sum();
     }
 
     public Integer getMainQuantity() {
         return foodAndQuantity.entrySet()
                 .stream()
-                .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().getName()))
-                .mapToInt(order -> order.getValue().getQuantity())
+                .filter(order -> MAIN.getSalesMenu().containsKey(order.getKey().name()))
+                .mapToInt(order -> order.getValue().amount())
                 .sum();
     }
 

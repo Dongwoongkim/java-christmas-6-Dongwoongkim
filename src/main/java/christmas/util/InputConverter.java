@@ -48,13 +48,13 @@ public class InputConverter {
     }
 
     private static Food getFood(final List<String> foodAndQuantity) {
-        return Food.create(foodAndQuantity.get(FOOD_INDEX).trim());
+        return new Food(foodAndQuantity.get(FOOD_INDEX).trim());
     }
 
     private static Quantity getQuantity(final List<String> foodAndQuantity) {
         try {
             String quantity = foodAndQuantity.get(QUANTITY_INDEX);
-            return Quantity.create(Integer.valueOf(quantity));
+            return new Quantity(Integer.valueOf(quantity));
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new OrderMenuCountNonNumericException();
         }

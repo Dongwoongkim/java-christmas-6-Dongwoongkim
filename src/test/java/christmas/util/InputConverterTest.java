@@ -28,10 +28,10 @@ class InputConverterTest {
 
         // then
         assertEquals(4, convertedMap.size());
-        assertEquals(1, convertedMap.get(Food.create("티본스테이크")).getQuantity());
-        assertEquals(1, convertedMap.get(Food.create("바비큐립")).getQuantity());
-        assertEquals(2, convertedMap.get(Food.create("초코케이크")).getQuantity());
-        assertEquals(1, convertedMap.get(Food.create("제로콜라")).getQuantity());
+        assertEquals(1, convertedMap.get(new Food("티본스테이크")).amount());
+        assertEquals(1, convertedMap.get(new Food("바비큐립")).amount());
+        assertEquals(2, convertedMap.get(new Food("초코케이크")).amount());
+        assertEquals(1, convertedMap.get(new Food("제로콜라")).amount());
     }
 
     @DisplayName("주문 메뉴에 중복된 메뉴가 있는 경우 변환 시 예외가 발생한다.")

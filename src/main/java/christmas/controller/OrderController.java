@@ -101,14 +101,14 @@ public class OrderController {
             return;
         }
         discountDetails.forEach(
-                (discountPolicy, amount) -> outputView.printBenefit(discountPolicy.getPolicy(), amount.getAmount()));
+                (policy, amount) -> outputView.printBenefit(policy.getPolicy(), amount.getAmount()));
         outputView.printLine();
     }
 
     private void showOrders(final Map<Food, Quantity> foodAndQuantity) {
         outputView.printOrderHeader();
         foodAndQuantity.forEach(
-                (food, quantity) -> outputView.printOrderMenu(food.getName(), quantity.getQuantity()));
+                (food, quantity) -> outputView.printOrderMenu(food.name(), quantity.amount()));
         outputView.printLine();
     }
 

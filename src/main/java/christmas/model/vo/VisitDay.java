@@ -3,7 +3,7 @@ package christmas.model.vo;
 import christmas.exception.DayDoesNotExistInCalendarException;
 import java.util.List;
 
-public class VisitDay {
+public record VisitDay(Integer day) {
 
     private static final Integer CHRISTMAS_DAY = 25;
     private static final Integer START_DAY_OF_MONTH = 1;
@@ -12,11 +12,8 @@ public class VisitDay {
     private static final Integer SUNDAY_MODULUS = 3;
     private static final List<Integer> WEEKEND_DAY = List.of(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
 
-    private final Integer day;
-
-    private VisitDay(final Integer day) {
+    public VisitDay {
         validate(day);
-        this.day = day;
     }
 
     public static VisitDay create(final Integer day) {
@@ -58,9 +55,5 @@ public class VisitDay {
 
     private boolean isSunday() {
         return day % WEEK_LENGTH == SUNDAY_MODULUS;
-    }
-
-    public Integer getDay() {
-        return day;
     }
 }
