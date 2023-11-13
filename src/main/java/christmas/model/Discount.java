@@ -80,7 +80,7 @@ public class Discount {
 
     private static void putWeekDayDiscount(final Integer dessertQuantity, final VisitDay visitDay,
                                            final Map<DiscountPolicy, DiscountAmount> discountDetails) {
-        if (!visitDay.isWeekend() && dessertQuantity != 0) {
+        if (!visitDay.isWeekend() && dessertQuantity != NO_QUANTITY) {
             DiscountAmount discountAmount = DiscountAmount.create(dessertQuantity * PRESENT_YEAR);
             discountDetails.put(WEEKDAY_DISCOUNT, discountAmount);
         }
