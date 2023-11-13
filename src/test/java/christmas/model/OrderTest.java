@@ -53,7 +53,7 @@ class OrderTest {
         Order order = Order.create(foodAndQuantity);
 
         // then
-        assertEquals(6000 * 2 + 55000 * 1, order.getAmount().intValue());
+        assertEquals(6000 * 2 + 55000 * 1, order.getAmount());
     }
 
     @Test
@@ -70,7 +70,7 @@ class OrderTest {
         Order order = Order.create(foodAndQuantity);
 
         // then
-        assertEquals(3, order.getDessertQuantity().intValue());
+        assertEquals(3, order.getDessertQuantity());
     }
 
     @Test
@@ -86,6 +86,6 @@ class OrderTest {
         Order order = Order.create(foodAndQuantity);
 
         // then
-        assertEquals(3, order.getMainQuantity().intValue());
+        assertEquals(3, order.getMainQuantity());
     }
 }

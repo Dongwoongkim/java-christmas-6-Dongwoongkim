@@ -55,7 +55,7 @@ class FoodTest {
 
     @DisplayName("필드값이 동일한 경우 두 객체는 동등, 동일한 객체로 취급한다.")
     @Test
-    public void equalsAndHashCode_test() {
+    void equalsAndHashCode_test() {
         // given
         String foodName = "티본스테이크";
 
@@ -70,7 +70,7 @@ class FoodTest {
 
     @DisplayName("필드값이 다른 경우 두 객체는 다른 객체로 취급한다.")
     @Test
-    public void not_EqualsAndHashCode_test() {
+    void not_EqualsAndHashCode_test() {
         // when
         Food food1 = new Food("티본스테이크");
         Food food2 = new Food("해산물파스타");
