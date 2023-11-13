@@ -29,13 +29,10 @@ public class OrderController {
         VisitDay visitDay = initVisitDay();
         Order order = initOrder();
 
-        Integer orderAmount = order.getAmount();
-        Integer mainQuantity = order.getMainQuantity();
-        Integer dessertQuantity = order.getDessertQuantity();
+        Gift gift = initGift(order);
+        Discount discount = initDiscount(order, visitDay, gift.isReceived());
 
-        Gift gift = initGift(orderAmount);
-        Discount discount = initDiscount(orderAmount, mainQuantity, dessertQuantity, visitDay, gift.isReceived());
-        showReceipt(order, discount, gift);
+        showReceipt(visitDay, order, discount, gift);
 
         Badge badge = initBadge(discount);
         showBadge(badge);
@@ -65,21 +62,22 @@ public class OrderController {
         }
     }
 
-    private Gift initGift(final Integer orderAmount) {
-        return Gift.create(orderAmount);
+    private Gift initGift(final Order order) {
+        return Gift.create(order.getAmount());
     }
 
-    private Discount initDiscount(final Integer orderAmount, final Integer mainQuantity, final Integer dessertQuantity,
+    private Discount initDiscount(final Order order,
                                   final VisitDay visitDay, final boolean isGiftReceived) {
-        return Discount.create(orderAmount, mainQuantity, dessertQuantity, visitDay, isGiftReceived);
+        return Discount.create(order.getAmount(), order.getMainQuantity(),
+                order.getDessertQuantity(), visitDay, isGiftReceived);
     }
 
     private Badge initBadge(final Discount discount) {
         return Badge.create(discount.getSumOfDiscount());
     }
 
-    private void showReceipt(final Order order, final Discount discount, final Gift gift) {
-        outputView.printPreviewEvent();
+    private void showReceipt(final VisitDay visitDay, final Order order, final Discount discount, final Gift gift) {
+        outputView.printPreviewEvent(visitDay.day());
 
         showOrders(order.getFoodAndQuantity());
 

@@ -2,7 +2,7 @@ package christmas.view;
 
 public class OutputView {
 
-    private static final String PREVIEW_EVENT_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String PREVIEW_EVENT_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
     private static final String BEFORE_DISCOUNT_AMOUNT_HEADER = "<할인 전 총주문 금액>";
     private static final String SERVICE_MENU_HEADER = "<증정 메뉴>";
@@ -13,8 +13,8 @@ public class OutputView {
     private static final String NONE = "없음";
 
 
-    public void printPreviewEvent() {
-        printMessage(PREVIEW_EVENT_MESSAGE);
+    public void printPreviewEvent(final Integer day) {
+        printMessage(String.format(PREVIEW_EVENT_MESSAGE, day));
         printLine();
     }
 
