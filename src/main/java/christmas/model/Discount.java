@@ -18,6 +18,8 @@ import java.util.Map;
 
 public class Discount {
 
+    private static final Integer NO_QUANTITY = 0;
+    private static final Integer NO_DISCOUNT_AMOUNT = 0;
     private static final Integer PRESENT_YEAR = 2023;
 
     private final Map<DiscountPolicy, DiscountAmount> discountDetails;
@@ -70,7 +72,7 @@ public class Discount {
 
     private static void putWeekendDayDiscount(final Integer mainQuantity, final VisitDay visitDay,
                                               final Map<DiscountPolicy, DiscountAmount> discountDetails) {
-        if (visitDay.isWeekend() && mainQuantity != 0) {
+        if (visitDay.isWeekend() && mainQuantity != NO_QUANTITY) {
             DiscountAmount discountAmount = DiscountAmount.create(mainQuantity * PRESENT_YEAR);
             discountDetails.put(WEEKEND_DISCOUNT, discountAmount);
         }
@@ -85,7 +87,7 @@ public class Discount {
     }
 
     public Integer getGiftDiscount() {
-        return discountDetails.getOrDefault(GIFT_DISCOUNT, DiscountAmount.create(0)).getAmount();
+        return discountDetails.getOrDefault(GIFT_DISCOUNT, DiscountAmount.create(NO_DISCOUNT_AMOUNT)).getAmount();
     }
 
     public Integer getSumOfDiscount() {
