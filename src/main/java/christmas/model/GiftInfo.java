@@ -6,12 +6,12 @@ public enum GiftInfo {
     NONE_GIFT("없음", 0, 0);
 
     private final String giftName;
-    private final Integer requireAmount;
+    private final Integer requiredAmount;
     private final Integer giftAmount;
 
-    GiftInfo(final String giftName, final Integer requireAmount, final Integer giftAmount) {
+    GiftInfo(final String giftName, final Integer requiredAmount, final Integer giftAmount) {
         this.giftName = giftName;
-        this.requireAmount = requireAmount;
+        this.requiredAmount = requiredAmount;
         this.giftAmount = giftAmount;
     }
 
@@ -19,8 +19,8 @@ public enum GiftInfo {
         return giftName;
     }
 
-    public Integer getRequireAmount() {
-        return requireAmount;
+    public Integer getRequiredAmount() {
+        return requiredAmount;
     }
 
     public Integer getGiftAmount() {

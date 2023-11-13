@@ -14,13 +14,13 @@ public class Badge {
     }
 
     public static Badge create(final Integer sumOfDiscount) {
-        if (sumOfDiscount >= SANTA_BADGE.getRequireAmount()) {
+        if (sumOfDiscount >= SANTA_BADGE.getRequiredAmount()) {
             return new Badge(SANTA_BADGE.getBadgeName());
         }
-        if (sumOfDiscount >= TREE_BADGE.getRequireAmount()) {
+        if (sumOfDiscount >= TREE_BADGE.getRequiredAmount()) {
             return new Badge(TREE_BADGE.getBadgeName());
         }
-        if (sumOfDiscount >= STAR_BADGE.getRequireAmount()) {
+        if (sumOfDiscount >= STAR_BADGE.getRequiredAmount()) {
             return new Badge(STAR_BADGE.getBadgeName());
         }
         return new Badge(NONE_BADGE.getBadgeName());

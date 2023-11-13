@@ -8,18 +8,18 @@ public enum BadgeInfo {
     NONE_BADGE("없음", 0);
 
     private final String badgeName;
-    private final Integer requireAmount;
+    private final Integer requiredAmount;
 
-    BadgeInfo(final String badgeName, final Integer requireAmount) {
+    BadgeInfo(final String badgeName, final Integer requiredAmount) {
         this.badgeName = badgeName;
-        this.requireAmount = requireAmount;
+        this.requiredAmount = requiredAmount;
     }
 
     public String getBadgeName() {
         return badgeName;
     }
 
-    public Integer getRequireAmount() {
-        return requireAmount;
+    public Integer getRequiredAmount() {
+        return requiredAmount;
     }
 }
