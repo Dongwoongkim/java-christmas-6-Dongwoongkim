@@ -32,7 +32,7 @@ public class Discount {
                                   final VisitDay visitDay, final boolean isGiftReceived) {
         Map<DiscountPolicy, DiscountAmount> discountDetails = new HashMap<>();
 
-        if (orderAmount <= EVENT_ATTEND_MINIMUM_ORDER_AMOUNT.getAmount()) {
+        if (orderAmount < EVENT_ATTEND_MINIMUM_ORDER_AMOUNT.getAmount()) {
             return new Discount(discountDetails);
         }
 
