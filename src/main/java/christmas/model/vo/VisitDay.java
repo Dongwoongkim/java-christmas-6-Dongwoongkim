@@ -6,8 +6,8 @@ import java.util.List;
 public class VisitDay {
 
     private static final Integer CHRISTMAS_DAY = 25;
-    private static final Integer START_EVENT_DAY = 1;
-    private static final Integer END_EVENT_DAY = 31;
+    private static final Integer START_DAY_OF_MONTH = 1;
+    private static final Integer END_DAY_OF_MONTH = 31;
     private static final Integer WEEK_LENGTH = 7;
     private static final Integer SUNDAY_MODULUS = 3;
     private static final List<Integer> WEEKEND_DAY = List.of(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
@@ -24,13 +24,13 @@ public class VisitDay {
     }
 
     private void validate(final Integer day) {
-        if (!isInEventDay(day)) {
+        if (!isInMonth(day)) {
             throw new DayDoesNotExistInCalendarException();
         }
     }
 
-    private boolean isInEventDay(final Integer day) {
-        if (day >= START_EVENT_DAY && day <= END_EVENT_DAY) {
+    private boolean isInMonth(final Integer day) {
+        if (day >= START_DAY_OF_MONTH && day <= END_DAY_OF_MONTH) {
             return true;
         }
         return false;
@@ -45,11 +45,11 @@ public class VisitDay {
     }
 
     public boolean isSpecialDay() {
-        return isSunday() || isChristmasDay() || isEndDayOfEvent();
+        return isSunday() || isChristmasDay() || isEndDayOfMonth();
     }
 
-    private boolean isEndDayOfEvent() {
-        return day == END_EVENT_DAY;
+    private boolean isEndDayOfMonth() {
+        return day == END_DAY_OF_MONTH;
     }
 
     private boolean isChristmasDay() {
