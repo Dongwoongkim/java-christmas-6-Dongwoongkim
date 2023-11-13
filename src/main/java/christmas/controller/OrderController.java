@@ -26,6 +26,8 @@ public class OrderController {
     }
 
     public void run() {
+        showWelcomeMessage();
+
         VisitDay visitDay = initVisitDay();
         Order order = initOrder();
         Gift gift = initGift(order);
@@ -35,6 +37,10 @@ public class OrderController {
 
         Badge badge = initBadge(discount);
         showBadge(badge);
+    }
+
+    private void showWelcomeMessage() {
+        outputView.printWelcomeMessage();
     }
 
     private VisitDay initVisitDay() {
