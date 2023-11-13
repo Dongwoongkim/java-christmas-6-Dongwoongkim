@@ -58,15 +58,21 @@
         - 특별 할인 : 이벤트 달력에 별이 있으면 총 주문 금액에서 1000원 할인
         - 증정 이벤트 : 할인 전 총 주문 금액 >= 120,000원 ▶︎ 샴페인 1개증정
             - 이벤트 기간 : '디데이 할인'을 제외한 모든 이벤트는 12월 1일 ~ 31일까지 적용
+
+
 - 이벤트 배지
     - 5000원 이상 ▶︎ 별
     - 1만원 이상 ▶︎ 트리
     - 2만원 이상 ▶︎ 산타
+
+
 - 주의 사항
     - 총 주문 금액 >= 10,000원 부터 이벤트 적용
     - 음료만 주문 시 주문 불가능.
     - 메뉴는 한 번에 최대 20개까지만 주문 가능.
         - (e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)
+
+
 - 출력
     - "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"
         - 방문할 날짜는 1 이상 31 이하의 숫자
@@ -93,7 +99,7 @@
 
 # 💡 구현 기능 목록
 
-# 🚩 View
+# 🚩 1. View
 
 ## ✍🏻 **입력**
 
@@ -181,7 +187,7 @@
 
 ---
 
-# 🚩 입력 값에 대한 유효성 검증/변환
+# 🚩 2. 입력 값에 대한 유효성 검증/변환
 
 ## 🔎 검증
 
@@ -194,23 +200,24 @@
 
 1. Slicing : “,”을 기점으로 (주문메뉴-주문수량)으로 입력받은 String을 슬라이싱한다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/15d46b1d-5863-4b93-8e94-4dd64d973ba3/85ef73dd-d38f-4705-a68d-e8df2c0c6409/Untitled.png)
+![img_1.png](img_1.png)
 
-1. 슬라이싱한 값들을 List<String> 컬렉션 형태로 저장한다.
+2. 슬라이싱한 값들을 List<String> 컬렉션 형태로 저장한다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/15d46b1d-5863-4b93-8e94-4dd64d973ba3/feac223e-43a7-4bdf-b263-32ef223219af/Untitled.png)
+![img.png](img.png)
 
-1. Mapping : List에 있는 값들을 “-”을 기점으로 나누어 원시값을 포장한 VO 객체로 만든다.
+3. Mapping : List에 있는 값들을 “-”을 기점으로 나누어 원시값을 포장한 VO 객체로 만든다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/15d46b1d-5863-4b93-8e94-4dd64d973ba3/d8ad60fc-1d1f-40c9-a8f4-dac0b26680e8/Untitled.png)
+![img_2.png](img_2.png)
 
-1. Map에 담는다.
+4. Map에 담는다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/15d46b1d-5863-4b93-8e94-4dd64d973ba3/3ce44cd2-ceb2-4317-947a-3fbfb7cc8c63/Untitled.png)
+![img_3.png](img_3.png)
+
 
 ---
 
-# 🚩 Value Object
+# 🚩 3. Value Object
 
 - “사용자가 입력한 값”을 파싱하여 불변 객체로 관리한다.
 - ➡️ 방문 날짜, 주문한 음식, 주문한 음식의 개수
@@ -243,7 +250,7 @@
 
 ---
 
-# 🚩 Model
+# 🚩 4. Model
 
 ## 🔖 메뉴
 
@@ -377,7 +384,7 @@ NONE_BADGE("없음", 0);
 
 ---
 
-# 🚩 커스텀 예외 처리
+# 🚩 5. 커스텀 예외 처리
 
 ### 🚫 IllegalArgumentException을 상속받아 구체적인 예외 처리
 
@@ -394,7 +401,7 @@ NONE_BADGE("없음", 0);
 
 ---
 
-# 🚩 컨트롤러
+# 🚩 6. 컨트롤러
 
 - 뷰와 모델사이의 매개체
 
