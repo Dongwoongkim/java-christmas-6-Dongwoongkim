@@ -2,24 +2,13 @@ package christmas.view;
 
 public class OutputView {
 
-    private static final String PREVIEW_EVENT_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
-    private static final String BEFORE_DISCOUNT_AMOUNT_HEADER = "<할인 전 총주문 금액>";
-    private static final String SERVICE_MENU_HEADER = "<증정 메뉴>";
-    private static final String TOTAL_BENEFIT_HEADER = "<총혜택 금액>";
-    private static final String BENEFIT_HEADER = "<혜택 내역>";
-    private static final String AFTER_DISCOUNT_AMOUNT_HEADER = "<할인 후 예상 결제 금액>";
-    private static final String DECEMBER_EVENT_BADGE_HEADER = "<12월 이벤트 배지>";
-    private static final String NONE = "없음";
-
-
     public void printPreviewEvent(final Integer day) {
-        printMessage(String.format(PREVIEW_EVENT_MESSAGE, day));
+        printMessage(String.format("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", day));
         printLine();
     }
 
     public void printOrderHeader() {
-        printMessage(ORDER_MENU_HEADER);
+        printMessage("<주문 메뉴>");
     }
 
     public void printOrderMenu(final String foodName, final Integer quantity) {
@@ -27,19 +16,19 @@ public class OutputView {
     }
 
     public void printBeforeDiscountAmount(final Integer price) {
-        printMessage(BEFORE_DISCOUNT_AMOUNT_HEADER);
+        printMessage("<할인 전 총주문 금액>");
         printMessage(String.format("%,d원", price));
         printLine();
     }
 
     public void printServiceMenu(final String name) {
-        printMessage(SERVICE_MENU_HEADER);
+        printMessage("<증정 메뉴>");
         printMessage(name);
         printLine();
     }
 
     public void printBenefitHeader() {
-        printMessage(BENEFIT_HEADER);
+        printMessage("<혜택 내역>");
     }
 
     public void printBenefit(final String discountPolicy, final Integer discountAmount) {
@@ -47,7 +36,7 @@ public class OutputView {
     }
 
     public void printTotalBenefit(final Integer discountAmount) {
-        printMessage(TOTAL_BENEFIT_HEADER);
+        printMessage("<총혜택 금액>");
 
         if (discountAmount == 0) {
             printMessage("0원");
@@ -60,13 +49,13 @@ public class OutputView {
     }
 
     public void printAfterDiscountAmount(final Integer payAmount) {
-        printMessage(AFTER_DISCOUNT_AMOUNT_HEADER);
+        printMessage("<할인 후 예상 결제 금액>");
         printMessage(String.format("%,d원", payAmount));
         printLine();
     }
 
     public void printBadge(final String badgeName) {
-        printMessage(DECEMBER_EVENT_BADGE_HEADER);
+        printMessage("<12월 이벤트 배지>");
         printMessage(badgeName);
     }
 
@@ -79,6 +68,6 @@ public class OutputView {
     }
 
     public void printNone() {
-        System.out.println(NONE);
+        System.out.println("없음");
     }
 }
