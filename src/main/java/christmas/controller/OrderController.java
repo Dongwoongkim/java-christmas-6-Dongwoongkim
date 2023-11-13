@@ -46,7 +46,7 @@ public class OrderController {
             try {
                 String day = inputView.inputDay();
                 InputValidator.validateDay(day);
-                return VisitDay.create(Integer.valueOf(day));
+                return new VisitDay(Integer.valueOf(day));
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }

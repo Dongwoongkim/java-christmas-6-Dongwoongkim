@@ -16,10 +16,6 @@ public record VisitDay(Integer day) {
         validate(day);
     }
 
-    public static VisitDay create(final Integer day) {
-        return new VisitDay(day);
-    }
-
     private void validate(final Integer day) {
         if (!isInMonth(day)) {
             throw new DayDoesNotExistInCalendarException();
