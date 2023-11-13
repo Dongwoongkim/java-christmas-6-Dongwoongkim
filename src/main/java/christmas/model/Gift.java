@@ -11,8 +11,8 @@ public class Gift {
         this.name = name;
     }
 
-    public static Gift create(final Integer amount) {
-        if (amount >= ONE_CHAMPAGNE.getRequireAmount()) {
+    public static Gift create(final Integer orderAmount) {
+        if (orderAmount >= ONE_CHAMPAGNE.getRequireAmount()) {
             return new Gift(ONE_CHAMPAGNE.getGiftName());
         }
         return new Gift(NONE_GIFT.getGiftName());
