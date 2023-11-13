@@ -38,15 +38,11 @@ public record VisitDay(Integer day) {
     }
 
     public boolean isSpecialDay() {
-        return isSunday() || isChristmasDay() || isEndDayOfMonth();
-    }
-
-    private boolean isEndDayOfMonth() {
-        return day == END_DAY_OF_MONTH;
+        return isSunday() || isChristmasDay();
     }
 
     private boolean isChristmasDay() {
-        return day == CHRISTMAS_DAY;
+        return day.equals(CHRISTMAS_DAY);
     }
 
     private boolean isSunday() {

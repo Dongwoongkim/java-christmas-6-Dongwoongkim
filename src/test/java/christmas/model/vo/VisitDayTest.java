@@ -76,7 +76,7 @@ class VisitDayTest {
 
     @DisplayName("스페셜 데이인 경우 true를 리턴한다.")
     @ParameterizedTest
-    @ValueSource(ints = {3, 10, 17, 24, 25, 31})
+    @ValueSource(ints = {3, 10, 17, 24, 31, 25})
     void isSpecialDay_test(Integer day) {
         // when
         VisitDay visitDay = new VisitDay(day);
