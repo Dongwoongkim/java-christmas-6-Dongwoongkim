@@ -3,6 +3,7 @@ package christmas.model.vo;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -94,5 +95,32 @@ class VisitDayTest {
 
         // then
         assertFalse(visitDay.isSpecialDay());
+    }
+
+    @DisplayName("필드값이 동일한 경우 두 객체는 동등, 동일한 객체로 취급한다.")
+    @Test
+    void equalsAndHashCode_test() {
+        // given
+        Integer day = 3;
+
+        // when
+        VisitDay visitDay1 = new VisitDay(day);
+        VisitDay visitDay2 = new VisitDay(day);
+
+        // then
+        assertEquals(visitDay1, visitDay2);
+        assertEquals(visitDay1.hashCode(), visitDay2.hashCode());
+    }
+
+    @DisplayName("필드값이 다른 경우 두 객체는 다른 객체로 취급한다.")
+    @Test
+    void not_EqualsAndHashCode_test() {
+        // when
+        VisitDay visitDay1 = new VisitDay(1);
+        VisitDay visitDay2 = new VisitDay(2);
+
+        // then
+        assertNotEquals(visitDay1, visitDay2);
+        assertNotEquals(visitDay1.hashCode(), visitDay2.hashCode());
     }
 }
