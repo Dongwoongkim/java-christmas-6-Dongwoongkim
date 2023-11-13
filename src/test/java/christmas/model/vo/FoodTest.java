@@ -53,7 +53,7 @@ class FoodTest {
         assertFalse(drink.isDrink());
     }
 
-    @DisplayName("필드명이 동일한 경우 두 객체는 동일한 객체로 취급한다.")
+    @DisplayName("필드값이 동일한 경우 두 객체는 동등, 동일한 객체로 취급한다.")
     @Test
     public void equalsAndHashCode_test() {
         // given
@@ -68,14 +68,15 @@ class FoodTest {
         assertEquals(food1.hashCode(), food2.hashCode());
     }
 
-    @DisplayName("필드명이 다른 경우 두 객체는 다른 객체로 취급한다.")
+    @DisplayName("필드값이 다른 경우 두 객체는 다른 객체로 취급한다.")
     @Test
     public void not_EqualsAndHashCode_test() {
+        // when
         Food food1 = new Food("티본스테이크");
         Food food2 = new Food("해산물파스타");
 
+        // then
         assertNotEquals(food1, food2);
         assertNotEquals(food1.hashCode(), food2.hashCode());
     }
-
 }
