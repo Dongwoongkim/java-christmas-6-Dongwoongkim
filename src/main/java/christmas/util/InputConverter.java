@@ -21,7 +21,7 @@ public class InputConverter {
     private InputConverter() {
     }
 
-    public static Map<Food, Quantity> stringToMap(final String menu) {
+    public static Map<Food, Quantity> stringToOrderMap(final String menu) {
         try {
             List<String> menuItems = stringToList(menu);
             Map<Food, Quantity> foodAndQuantity = splitAndMapping(menuItems);

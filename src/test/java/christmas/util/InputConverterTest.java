@@ -24,7 +24,7 @@ class InputConverterTest {
         String validMenuString = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
 
         // when
-        Map<Food, Quantity> convertedMap = InputConverter.stringToMap(validMenuString);
+        Map<Food, Quantity> convertedMap = InputConverter.stringToOrderMap(validMenuString);
 
         // then
         assertEquals(4, convertedMap.size());
@@ -41,7 +41,7 @@ class InputConverterTest {
         String invalidOrder = "티본스테이크-3,티본스테이크-5";
 
         // when & then
-        assertThrows(AlreadyExistsInOrderException.class, () -> InputConverter.stringToMap(invalidOrder));
+        assertThrows(AlreadyExistsInOrderException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
     }
 
     @DisplayName("주문 수량에 문자가 포함된 경우 변환 시 예외가 발생한다.")
@@ -51,7 +51,7 @@ class InputConverterTest {
         String invalidOrder = "티본스테이크-a,제로콜라-1";
 
         // when & then
-        assertThrows(OrderMenuCountNonNumericException.class, () -> InputConverter.stringToMap(invalidOrder));
+        assertThrows(OrderMenuCountNonNumericException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
     }
 
     @DisplayName("주문 수량이 없는 경우 변환 시 예외가 발생한다.")
@@ -61,7 +61,7 @@ class InputConverterTest {
         String invalidOrder = "티본스테이크-,제로콜라-";
 
         // when & then
-        assertThrows(OrderMenuCountNonNumericException.class, () -> InputConverter.stringToMap(invalidOrder));
+        assertThrows(OrderMenuCountNonNumericException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
     }
 
     @DisplayName("주문음식과 주문 수량이 없는 경우 변환 시 예외가 발생한다.")
@@ -69,6 +69,6 @@ class InputConverterTest {
     @ValueSource(strings = {"-,-", "-"})
     void invalid_order_format_stringToMap_exception_test(String invalidOrder) {
         // when & then
-        assertThrows(InvalidOrderFormatException.class, () -> InputConverter.stringToMap(invalidOrder));
+        assertThrows(InvalidOrderFormatException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
     }
 }

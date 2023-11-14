@@ -59,7 +59,7 @@ public class OrderController {
         while (true) {
             try {
                 String orderMenu = inputView.inputMenu();
-                Map<Food, Quantity> foodAndQuantity = InputConverter.stringToMap(orderMenu);
+                Map<Food, Quantity> foodAndQuantity = InputConverter.stringToOrderMap(orderMenu);
                 return Order.create(foodAndQuantity);
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
