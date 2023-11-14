@@ -63,7 +63,7 @@ public class Discount {
 
     private static void putD_DayDiscount(final VisitDay visitDay,
                                          final Map<DiscountPolicy, DiscountAmount> discountDetails) {
-        if (visitDay.isBeforeOrEqualsChristmas()) {
+        if (visitDay.isChristmasD_Day()) {
             DiscountAmount discountAmount = DiscountAmount.create(
                     START_D_DAY_DISCOUNT_AMOUNT.getAmount() + visitDay.day() * D_DAY_DISCOUNT_AMOUNT.getAmount());
             discountDetails.put(D_DAY_DISCOUNT, discountAmount);

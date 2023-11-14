@@ -33,7 +33,7 @@ public record VisitDay(Integer day) {
         return WEEKEND_DAY.contains(day);
     }
 
-    public boolean isBeforeOrEqualsChristmas() {
+    public boolean isChristmasD_Day() {
         return day <= CHRISTMAS_DAY;
     }
 

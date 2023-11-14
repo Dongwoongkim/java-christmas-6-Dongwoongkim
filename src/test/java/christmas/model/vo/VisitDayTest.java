@@ -62,7 +62,7 @@ class VisitDayTest {
         VisitDay visitDay = new VisitDay(20);
 
         // then
-        assertTrue(visitDay.isBeforeOrEqualsChristmas());
+        assertTrue(visitDay.isChristmasD_Day());
     }
 
     @DisplayName("크리스마스 이후인 경우 false를 리턴한다.")
@@ -72,7 +72,7 @@ class VisitDayTest {
         VisitDay visitDay = new VisitDay(26);
 
         // then
-        assertFalse(visitDay.isBeforeOrEqualsChristmas());
+        assertFalse(visitDay.isChristmasD_Day());
     }
 
     @DisplayName("스페셜 데이인 경우 true를 리턴한다.")
