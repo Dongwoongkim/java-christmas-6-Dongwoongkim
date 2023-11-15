@@ -1,6 +1,6 @@
 package christmas.util;
 
-import christmas.exception.DayContainCharactersException;
+import christmas.exception.DayNonNumericException;
 
 public class InputValidator {
 
@@ -9,7 +9,7 @@ public class InputValidator {
 
     public static void validateDay(final String day) {
         if (!isNumeric(day)) {
-            throw new DayContainCharactersException();
+            throw new DayNonNumericException();
         }
     }
 

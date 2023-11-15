@@ -3,7 +3,7 @@ package christmas.util;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import christmas.exception.DayContainCharactersException;
+import christmas.exception.DayNonNumericException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,6 +23,6 @@ class InputValidatorTest {
     @ValueSource(strings = {"a", "-", "!"})
     void invalid_Numeric_Day_exception_test(String day) {
         // then
-        assertThrows(DayContainCharactersException.class, () -> InputValidator.validateDay(day));
+        assertThrows(DayNonNumericException.class, () -> InputValidator.validateDay(day));
     }
 }

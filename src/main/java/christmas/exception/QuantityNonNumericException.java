@@ -2,9 +2,9 @@ package christmas.exception;
 
 import static christmas.exception.message.ErrorMessage.INVALID_INPUT_MENU_ERROR_MESSAGE;
 
-public class OrderMenuCountNonNumericException extends IllegalArgumentException {
+public class QuantityNonNumericException extends IllegalArgumentException {
 
-    public OrderMenuCountNonNumericException() {
+    public QuantityNonNumericException() {
         super(INVALID_INPUT_MENU_ERROR_MESSAGE.getMessage());
     }
 }

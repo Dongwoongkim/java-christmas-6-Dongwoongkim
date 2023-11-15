@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import christmas.exception.AlreadyExistsInOrderException;
 import christmas.exception.InvalidOrderFormatException;
-import christmas.exception.OrderMenuCountNonNumericException;
+import christmas.exception.QuantityNonNumericException;
 import christmas.model.vo.Food;
 import christmas.model.vo.Quantity;
 import java.util.Map;
@@ -51,7 +51,7 @@ class InputConverterTest {
         String invalidOrder = "티본스테이크-a,제로콜라-1";
 
         // when & then
-        assertThrows(OrderMenuCountNonNumericException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
+        assertThrows(QuantityNonNumericException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
     }
 
     @DisplayName("주문 수량이 없는 경우 변환 시 예외가 발생한다.")
@@ -61,7 +61,7 @@ class InputConverterTest {
         String invalidOrder = "티본스테이크-,제로콜라-";
 
         // when & then
-        assertThrows(OrderMenuCountNonNumericException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
+        assertThrows(QuantityNonNumericException.class, () -> InputConverter.stringToOrderMap(invalidOrder));
     }
 
     @DisplayName("주문음식과 주문 수량이 없는 경우 변환 시 예외가 발생한다.")

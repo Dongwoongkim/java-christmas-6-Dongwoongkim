@@ -2,7 +2,7 @@ package christmas.util;
 
 import christmas.exception.AlreadyExistsInOrderException;
 import christmas.exception.InvalidOrderFormatException;
-import christmas.exception.OrderMenuCountNonNumericException;
+import christmas.exception.QuantityNonNumericException;
 import christmas.model.vo.Food;
 import christmas.model.vo.Quantity;
 import java.util.Arrays;
@@ -56,7 +56,7 @@ public class InputConverter {
             String quantity = foodAndQuantity.get(QUANTITY_INDEX);
             return new Quantity(Integer.valueOf(quantity));
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new OrderMenuCountNonNumericException();
+            throw new QuantityNonNumericException();
         }
     }
 }

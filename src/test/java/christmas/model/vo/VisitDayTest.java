@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import christmas.exception.DayDoesNotExistInCalendarException;
+import christmas.exception.InvalidValueOfDayException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +30,7 @@ class VisitDayTest {
     @Test
     void invalidDay_OutMonth_test_() {
         // then
-        assertThrows(DayDoesNotExistInCalendarException.class, () -> new VisitDay(40));
+        assertThrows(InvalidValueOfDayException.class, () -> new VisitDay(40));
     }
 
     @DisplayName("필드값이 주말에 속하는 경우 true를 리턴한다.")

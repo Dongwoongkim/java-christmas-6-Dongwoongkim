@@ -1,6 +1,6 @@
 package christmas.model.vo;
 
-import christmas.exception.DayDoesNotExistInCalendarException;
+import christmas.exception.InvalidValueOfDayException;
 import java.util.List;
 
 public record VisitDay(Integer day) {
@@ -18,7 +18,7 @@ public record VisitDay(Integer day) {
 
     private void validate(final Integer day) {
         if (!isInMonth(day)) {
-            throw new DayDoesNotExistInCalendarException();
+            throw new InvalidValueOfDayException();
         }
     }
 
